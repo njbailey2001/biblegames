@@ -6,7 +6,7 @@ Free Bible games that run in the browser. No sign-up, no install.
 
 | Game | What you do |
 | --- | --- |
-| [Versle](versle.html) | Read a verse and find its book, chapter and verse in five guesses. Daily Verse plus Unlimited (Easy and Hard). |
+| [Daily Verse Quest](daily-verse-quest.html) | Read a verse and find its book, chapter and verse in five guesses. Daily Verse plus Unlimited (Easy and Hard). |
 | [Cross Reference](cross-reference.html) | Find the hidden word from Scripture. Every guess gets a rank; the lower the number, the closer you are. |
 | [Build-a-Figure](build-a-figure.html) | Spin seven biblical figures and draw one attribute from each to fuse the strongest figure you can. Solo or pass-and-play. |
 
