@@ -11,10 +11,9 @@ const state = { enabled: !!(config && config.apiKey), ready: false, user: null, 
 export const account = {
   state,
   onChange(fn) { listeners.add(fn); fn(state); return () => listeners.delete(fn); },
-  signInWithGoogle: () => notReady(),
-  sendEmailLink: () => notReady(),
-  isEmailLink: () => false,
-  finishEmailLink: () => notReady(),
+  createAccount: () => notReady(),
+  signIn: () => notReady(),
+  sendPasswordReset: () => notReady(),
   signOut: () => notReady(),
   deleteAccount: () => notReady(),
   syncNow: () => Promise.resolve()
@@ -44,39 +43,17 @@ async function start() {
   const db = F.getFirestore(app);
   const userDoc = (uid) => F.doc(db, "users", uid);
 
-  account.signInWithGoogle = async () => {
-    const provider = new A.GoogleAuthProvider();
-    try { await A.signInWithPopup(auth, provider); }
-    catch (e) {
-      if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") {
-        await A.signInWithRedirect(auth, provider);
-      } else throw e;
-    }
-  };
-  account.sendEmailLink = async (email) => {
-    await A.sendSignInLinkToEmail(auth, email, { url: location.origin + "/account.html", handleCodeInApp: true });
-    try { localStorage.setItem("bgd-signin-email", email); } catch (e) {}
-  };
-  account.isEmailLink = () => A.isSignInWithEmailLink(auth, location.href);
-  account.savedEmail = () => { try { return localStorage.getItem("bgd-signin-email") || ""; } catch (e) { return ""; } };
-  account.finishEmailLink = async (email) => {
-    await A.signInWithEmailLink(auth, email, location.href);
-    try { localStorage.removeItem("bgd-signin-email"); } catch (e) {}
-    history.replaceState(null, "", location.pathname);
-  };
+  account.createAccount = (email, password) => A.createUserWithEmailAndPassword(auth, email, password);
+  account.signIn = (email, password) => A.signInWithEmailAndPassword(auth, email, password);
+  account.sendPasswordReset = (email) => A.sendPasswordResetEmail(auth, email, { url: location.origin + "/account.html" });
   account.signOut = () => A.signOut(auth);
-  account.deleteAccount = async () => {
+  // Deleting needs the password again, so nobody can delete an account from a device left signed in.
+  account.deleteAccount = async (password) => {
     const u = auth.currentUser;
     if (!u) return;
+    await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(u.email, password));
     await F.deleteDoc(userDoc(u.uid));
-    try { await A.deleteUser(u); }
-    catch (e) {
-      if (e.code === "auth/requires-recent-login") {
-        const err = new Error("For your security, sign in again, then delete your account.");
-        err.code = e.code; await A.signOut(auth); throw err;
-      }
-      throw e;
-    }
+    await A.deleteUser(u);
   };
 
   // ---- syncing ----
@@ -189,7 +166,7 @@ function mountPill() {
   account.onChange((s) => {
     if (!s.ready) { label.textContent = "Account"; return; }
     if (!s.user) { label.textContent = "Sign in to save streaks"; dot.style.background = "#9AA19D"; return; }
-    const who = s.user.name ? s.user.name.split(" ")[0] : "Account";
+    const who = s.user.name ? s.user.name.split(" ")[0] : "Signed in";
     if (s.error) { label.textContent = who + " · not synced"; dot.style.background = "#C38F22"; }
     else if (s.syncing) { label.textContent = who + " · syncing"; dot.style.background = "#C38F22"; }
     else { label.textContent = who + " · synced"; dot.style.background = "#3C7A4C"; }

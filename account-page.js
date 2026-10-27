@@ -1,8 +1,8 @@
-/* Bible Games Daily: the account page (sign in, age check, your stats, delete account). */
+/* Bible Games Daily: the account page (age check, email + password sign-in, your stats, delete account). */
 import { account } from "./account.js";
 
 const $ = (id) => document.getElementById(id);
-const views = ["vOff", "vLoading", "vAge", "vBlocked", "vSignin", "vFinish", "vProfile"];
+const views = ["vOff", "vLoading", "vAge", "vBlocked", "vSignin", "vProfile"];
 function show(id) { for (const v of views) $(v).hidden = v !== id; }
 function msg(id, text, isError) { const el = $(id); el.textContent = text || ""; el.classList.toggle("err", !!isError); }
 
@@ -29,47 +29,91 @@ $("ageForm").addEventListener("submit", (e) => {
   render(account.state);
 });
 
-// ---- sign in ----
-$("googleBtn").addEventListener("click", async () => {
+// ---- sign in / create account / reset password ----
+const forms = { signin: $("signinForm"), create: $("createForm"), reset: $("resetForm") };
+function showForm(name) {
+  for (const [k, f] of Object.entries(forms)) f.hidden = k !== name;
+  $("tabSignin").setAttribute("aria-selected", String(name === "signin"));
+  $("tabCreate").setAttribute("aria-selected", String(name === "create"));
+  document.querySelector("#vSignin .tabs").hidden = name === "reset";
   msg("signinMsg", "");
-  try { await account.signInWithGoogle(); }
-  catch (e) { if (e.code !== "auth/popup-closed-by-user" && e.code !== "auth/cancelled-popup-request") msg("signinMsg", friendly(e), true); }
-});
-$("emailForm").addEventListener("submit", async (e) => {
+}
+$("tabSignin").addEventListener("click", () => showForm("signin"));
+$("tabCreate").addEventListener("click", () => showForm("create"));
+$("forgotBtn").addEventListener("click", () => { $("rsEmail").value = $("siEmail").value; showForm("reset"); $("rsEmail").focus(); });
+$("rsBack").addEventListener("click", () => showForm("signin"));
+$("siShow").addEventListener("change", (e) => { $("siPass").type = e.target.checked ? "text" : "password"; });
+$("crShow").addEventListener("change", (e) => { const t = e.target.checked ? "text" : "password"; $("crPass").type = t; $("crPass2").type = t; });
+
+async function busy(btnId, fn) {
+  const b = $(btnId); b.disabled = true;
+  try { await fn(); } finally { b.disabled = false; }
+}
+
+forms.signin.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = $("emailIn").value.trim();
+  const email = $("siEmail").value.trim(), pass = $("siPass").value;
+  if (!email || !pass) { msg("signinMsg", "Enter your email and password.", true); return; }
+  busy("siBtn", async () => {
+    try { await account.signIn(email, pass); $("siPass").value = ""; }
+    catch (err) { msg("signinMsg", friendly(err), true); }
+  });
+});
+
+forms.create.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = $("crEmail").value.trim(), p1 = $("crPass").value, p2 = $("crPass2").value;
   if (!email) { msg("signinMsg", "Enter your email address.", true); return; }
-  $("emailBtn").disabled = true;
-  try { await account.sendEmailLink(email); msg("signinMsg", "Check your inbox. We sent a sign-in link to " + email + ". Open it on this device."); }
-  catch (err) { msg("signinMsg", friendly(err), true); }
-  $("emailBtn").disabled = false;
+  if (p1.length < 8) { msg("signinMsg", "Choose a password with at least 8 characters.", true); return; }
+  if (p1 !== p2) { msg("signinMsg", "The two passwords don't match.", true); return; }
+  busy("crBtn", async () => {
+    try { await account.createAccount(email, p1); $("crPass").value = ""; $("crPass2").value = ""; }
+    catch (err) { msg("signinMsg", friendly(err), true); }
+  });
 });
-$("finishForm").addEventListener("submit", async (e) => {
+
+forms.reset.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = $("finishEmail").value.trim();
-  if (!email) { msg("finishMsg", "Enter the email address the link was sent to.", true); return; }
-  try { await account.finishEmailLink(email); }
-  catch (err) { msg("finishMsg", friendly(err), true); }
+  const email = $("rsEmail").value.trim();
+  if (!email) { msg("signinMsg", "Enter your email address.", true); return; }
+  busy("rsBtn", async () => {
+    try {
+      await account.sendPasswordReset(email);
+      showForm("signin"); $("siEmail").value = email;
+      msg("signinMsg", "If there's an account for " + email + ", a reset link is on its way. Check your inbox and spam folder.");
+    } catch (err) {
+      if (err.code === "auth/user-not-found") { showForm("signin"); msg("signinMsg", "If there's an account for " + email + ", a reset link is on its way."); }
+      else msg("signinMsg", friendly(err), true);
+    }
+  });
 });
 
 // ---- signed in ----
 $("signOutBtn").addEventListener("click", () => account.signOut());
 $("syncBtn").addEventListener("click", async () => { msg("profileMsg", "Syncing…"); try { await account.syncNow(); msg("profileMsg", "Synced."); renderStats(); } catch (e) { msg("profileMsg", friendly(e), true); } });
-$("deleteBtn").addEventListener("click", () => { $("deleteConfirm").hidden = false; $("deleteBtn").hidden = true; });
-$("deleteCancel").addEventListener("click", () => { $("deleteConfirm").hidden = true; $("deleteBtn").hidden = false; });
+$("deleteBtn").addEventListener("click", () => { $("deleteConfirm").hidden = false; $("deleteBtn").hidden = true; $("delPass").value = ""; $("delPass").focus(); });
+$("deleteCancel").addEventListener("click", () => { $("deleteConfirm").hidden = true; $("deleteBtn").hidden = false; msg("profileMsg", ""); });
 $("deleteYes").addEventListener("click", async () => {
+  const pass = $("delPass").value;
+  if (!pass) { msg("profileMsg", "Enter your password to delete your account.", true); return; }
   $("deleteYes").disabled = true;
-  try { await account.deleteAccount(); ss.set("bgd-age-ok", ""); msg("signinMsg", "Your account and its saved progress were deleted. Progress on this device is still here."); }
-  catch (e) { msg("profileMsg", friendly(e), true); }
-  $("deleteYes").disabled = false; $("deleteConfirm").hidden = true; $("deleteBtn").hidden = false;
+  try {
+    await account.deleteAccount(pass);
+    $("deleteConfirm").hidden = true; $("deleteBtn").hidden = false;
+    msg("signinMsg", "Your account and its saved progress were deleted. Progress on this device is still here.");
+  } catch (e) { msg("profileMsg", friendly(e), true); }
+  $("deleteYes").disabled = false; $("delPass").value = "";
 });
 
 function friendly(e) {
   const c = (e && e.code) || "";
   if (c === "auth/invalid-email") return "That email address doesn't look right.";
-  if (c === "auth/invalid-action-code" || c === "auth/expired-action-code") return "That sign-in link has expired or was already used. Request a new one.";
+  if (c === "auth/invalid-credential" || c === "auth/wrong-password" || c === "auth/user-not-found" || c === "auth/invalid-login-credentials") return "That email and password don't match. Check them, or reset your password.";
+  if (c === "auth/email-already-in-use") return "There's already an account with that email. Sign in instead, or reset your password.";
+  if (c === "auth/weak-password" || c === "auth/password-does-not-meet-requirements") return "Choose a stronger password with at least 8 characters.";
+  if (c === "auth/too-many-requests") return "Too many tries. Wait a few minutes, then try again.";
   if (c === "auth/network-request-failed") return "Couldn't connect. Check your internet connection and try again.";
-  if (c === "auth/unauthorized-domain") return "Sign-in isn't set up for this web address yet.";
+  if (c === "auth/missing-password") return "Enter your password.";
   return (e && e.message) || "Something went wrong. Try again.";
 }
 
@@ -86,8 +130,7 @@ function renderStats() {
     return `<div class="mode"><h4>${name}</h4><div class="stats">${statRow("Current streak", s.streak || 0)}${statRow("Best streak", s.best || 0)}${statRow("Played", s.played || 0)}${statRow("Win rate", pct(s.wins || 0, s.played || 0))}</div></div>`;
   }).join("") + `</section>`);
 
-  let crSolved = 0, crGaveUp = 0, crGuesses = 0;
-  let xwDays = 0;
+  let crSolved = 0, crGaveUp = 0, crGuesses = 0, xwDays = 0;
   for (let i = 0; i < localStorage.length; i++) {
     const k = localStorage.key(i);
     if (/^versle-\d+$/.test(k)) {
@@ -104,7 +147,6 @@ function renderStats() {
 }
 
 // ---- which view to show ----
-let finishing = false;
 function render(s) {
   if (!s.enabled) return show("vOff");
   if (!s.ready) return show("vLoading");
@@ -115,13 +157,6 @@ function render(s) {
     renderStats();
     return show("vProfile");
   }
-  if (account.isEmailLink && account.isEmailLink() && !finishing) {
-    finishing = true;
-    const saved = account.savedEmail ? account.savedEmail() : "";
-    if (saved) { show("vLoading"); account.finishEmailLink(saved).catch((e) => { $("finishEmail").value = saved; show("vFinish"); msg("finishMsg", friendly(e), true); }); return; }
-    return show("vFinish");
-  }
-  if (finishing && !s.user && !$("vFinish").hidden) return;
   if (blockedRecently()) return show("vBlocked");
   if (ss.get("bgd-age-ok") !== "1") return show("vAge");
   return show("vSignin");

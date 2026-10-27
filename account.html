@@ -129,6 +129,14 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
 .btn:focus-visible,.field select:focus-visible,.field input:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
 .btn:disabled{opacity:.5;cursor:default}
 .google{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;padding:4px 0 10px;font:inherit;font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--lapis)}
+.stack{display:flex;flex-direction:column;gap:12px;max-width:26em}
+.check{display:flex;align-items:center;gap:8px;font-size:.95rem;color:var(--muted)}
+.check input{width:18px;height:18px}
+.link{background:none;border:0;padding:0;font:inherit;color:var(--lapis);text-decoration:underline;cursor:pointer;align-self:flex-start}
+.link:focus-visible,.tabs button:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
 .or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.9rem}
 .or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line)}
 .note{color:var(--muted);font-size:.95rem}
@@ -180,28 +188,37 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
     </section>
 
     <section class="panel" id="vSignin" hidden>
-      <h2>Sign in or create an account</h2>
-      <button class="btn google" id="googleBtn" type="button">
-        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
-        Continue with Google
-      </button>
-      <div class="or">or</div>
-      <form id="emailForm" class="row">
-        <div class="field"><label for="emailIn">Email</label><input id="emailIn" type="email" autocomplete="email" placeholder="you@example.com"></div>
-        <button class="btn primary" id="emailBtn" type="submit">Email me a sign-in link</button>
-      </form>
-      <p class="note">No password needed. We'll email you a link that signs you in.</p>
-      <p class="msg" id="signinMsg" role="status"></p>
-    </section>
+      <div class="tabs" role="tablist" aria-label="Sign in or create an account">
+        <button type="button" role="tab" id="tabSignin" aria-selected="true" aria-controls="signinForm">Sign in</button>
+        <button type="button" role="tab" id="tabCreate" aria-selected="false" aria-controls="createForm">Create account</button>
+      </div>
 
-    <section class="panel" id="vFinish" hidden>
-      <h2>Finish signing in</h2>
-      <p>Enter the email address the sign-in link was sent to.</p>
-      <form id="finishForm" class="row">
-        <div class="field"><label for="finishEmail">Email</label><input id="finishEmail" type="email" autocomplete="email"></div>
-        <button class="btn primary" type="submit">Sign in</button>
+      <form id="signinForm" class="stack" novalidate>
+        <div class="field"><label for="siEmail">Email</label><input id="siEmail" type="email" autocomplete="username" required></div>
+        <div class="field"><label for="siPass">Password</label><input id="siPass" type="password" autocomplete="current-password" required></div>
+        <label class="check"><input type="checkbox" id="siShow"> Show password</label>
+        <button class="btn primary" id="siBtn" type="submit">Sign in</button>
+        <button class="link" id="forgotBtn" type="button">Forgot your password?</button>
       </form>
-      <p class="msg" id="finishMsg" role="status"></p>
+
+      <form id="createForm" class="stack" novalidate hidden>
+        <div class="field"><label for="crEmail">Email</label><input id="crEmail" type="email" autocomplete="username" required></div>
+        <div class="field"><label for="crPass">Password</label><input id="crPass" type="password" autocomplete="new-password" minlength="8" required></div>
+        <div class="field"><label for="crPass2">Confirm password</label><input id="crPass2" type="password" autocomplete="new-password" minlength="8" required></div>
+        <label class="check"><input type="checkbox" id="crShow"> Show password</label>
+        <p class="note">At least 8 characters. We'll only email you if you ask to reset your password.</p>
+        <button class="btn primary" id="crBtn" type="submit">Create account</button>
+      </form>
+
+      <form id="resetForm" class="stack" novalidate hidden>
+        <h2>Reset your password</h2>
+        <p>Enter your account's email address and we'll send you a link to choose a new password.</p>
+        <div class="field"><label for="rsEmail">Email</label><input id="rsEmail" type="email" autocomplete="username" required></div>
+        <button class="btn primary" id="rsBtn" type="submit">Send reset link</button>
+        <button class="link" id="rsBack" type="button">Back to sign in</button>
+      </form>
+
+      <p class="msg" id="signinMsg" role="status"></p>
     </section>
 
     <section class="panel" id="vProfile" hidden>
@@ -218,6 +235,7 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
       </div>
       <div id="deleteConfirm" hidden class="panel" style="background:var(--bg)">
         <p><b>Delete your account?</b> This removes your account and the progress saved to it. Progress on this device stays.</p>
+        <div class="field"><label for="delPass">Enter your password to confirm</label><input id="delPass" type="password" autocomplete="current-password"></div>
         <div class="row">
           <button class="btn danger" id="deleteYes" type="button">Yes, delete my account</button>
           <button class="btn" id="deleteCancel" type="button">Cancel</button>
