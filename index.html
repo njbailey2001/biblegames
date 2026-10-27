@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Biblegames.io</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Free Bible games: guess the verse in Versle, find the hidden word in Cross Reference, or fuse a biblical figure in Build-a-Figure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: a short title plate, then the games as a shelf of two tall cards; each card opens with a tiny working preview of its board. */
+:root{
+  --bg:#E9ECEF; --surface:#F7F8F9; --ink:#17202B; --muted:#5A6573; --line:#CBD2DA;
+  --lapis:#27477A; --lapis-ink:#FFFFFF; --gold:#B88A1E;
+  --hit:#3C7A4C; --near:#C38F22; --miss:#9AA19D;
+  --fig-bg:#201a15; --fig-ink:#ece3d2;
+  --display:"Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --ui:"Alegreya Sans", "Gill Sans", "Trebuchet MS", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161D; --surface:#19202A; --ink:#E4E8EE; --muted:#97A2B0; --line:#2A3441;
+  --lapis:#8FAEE3; --lapis-ink:#11161D; --gold:#D4A63A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254;
+  --fig-bg:#0D0A08; --fig-ink:#ece3d2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161D; --surface:#19202A; --ink:#E4E8EE; --muted:#97A2B0; --line:#2A3441;
+  --lapis:#8FAEE3; --lapis-ink:#11161D; --gold:#D4A63A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254;
+  --fig-bg:#0D0A08; --fig-ink:#ece3d2; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 56px;display:flex;flex-direction:column;gap:40px}
+
+.plate{display:flex;flex-direction:column;gap:12px}
+.mark{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,8vw,4.2rem);line-height:.95;margin:0;letter-spacing:.01em;text-wrap:balance}
+.mark .io{color:var(--gold);font-weight:700}
+.mark .initial{color:var(--lapis)}
+.plate p{margin:0;max-width:34em;color:var(--muted);font-size:1.12rem}
+
+.shelf-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:8px;gap:12px;flex-wrap:wrap}
+.shelf-head h2{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.08em;margin:0}
+.shelf-head span{font-size:.9rem;color:var(--muted)}
+
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.game{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .18s ease,border-color .18s ease}
+.game:hover{transform:translateY(-3px);border-color:var(--lapis)}
+.game:focus-visible{outline:2px solid var(--lapis);outline-offset:3px}
+.preview{height:170px;display:flex;align-items:center;justify-content:center;padding:20px;border-bottom:1px solid var(--line)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h3{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:0;line-height:1}
+.body p{margin:0;color:var(--muted);min-width:0}
+.ref{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tags span{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted)}
+.play{margin-top:auto;padding-top:8px;font-weight:700;color:var(--lapis);display:flex;align-items:center;gap:6px}
+.game:hover .play .arr{transform:translateX(3px)}
+.play .arr{transition:transform .18s ease}
+
+/* Versle preview: the guess ledger in miniature */
+.pv-versle{background:var(--bg)}
+.ledger{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:5px;width:100%;max-width:240px}
+.ledger i{height:26px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.74rem;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.hit{background:var(--hit)} .near{background:var(--near)} .miss{background:var(--miss)}
+
+/* Cross Reference preview: ranked guesses, closest on top */
+.pv-cross{background:var(--bg)}
+.ranks{display:flex;flex-direction:column;gap:5px;width:100%;max-width:240px}
+.ranks div{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:5px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line);font-size:.85rem;font-weight:500;position:relative;overflow:hidden}
+.ranks div::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c);opacity:.22}
+.ranks span,.ranks em{position:relative}
+.ranks em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+/* Build-a-Figure preview: the seven attribute bars */
+.pv-figure{background:var(--fig-bg);color:var(--fig-ink)}
+.bars{display:flex;flex-direction:column;gap:6px;width:100%;max-width:240px}
+.bars div{display:grid;grid-template-columns:78px 1fr 16px;gap:8px;align-items:center;font-family:var(--display);font-size:.62rem;letter-spacing:.06em;font-weight:700}
+.bars b{height:5px;border-radius:2px;background:#332b22;position:relative;overflow:hidden}
+.bars b::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c)}
+.bars em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+
+footer{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){.game,.play .arr{transition:none}.game:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <section class="plate">
+    <h1 class="mark"><span class="initial">B</span>iblegames<span class="io">.io</span></h1>
+    <p>Free games for people who know their Bible, or want to. Play solo or pass the phone around the table.</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <div class="shelf-head"><h2>THE GAMES</h2><span>3 games · no sign-up</span></div>
+    <div class="shelf">
+      <a class="game" href="versle.html">
+        <div class="preview pv-versle" aria-hidden="true">
+          <div class="ledger">
+            <i class="near">Romans ↑</i><i class="miss">12 ↓</i><i class="near">20 ↓</i>
+            <i class="hit">John</i><i class="near">5 ↓</i><i class="hit">16</i>
+            <i class="hit">John</i><i class="hit">3</i><i class="hit">16</i>
+          </div>
+        </div>
+        <div class="body">
+          <span class="ref">Name that verse</span>
+          <h3>Versle</h3>
+          <p>Read a verse, then find its book, chapter and verse in five guesses. Play the Daily Verse or keep going in Unlimited.</p>
+          <div class="tags"><span>Daily</span><span>Unlimited</span><span>Easy &amp; Hard</span></div>
+          <span class="play">Play Versle <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <a class="game" href="cross-reference.html">
+        <div class="preview pv-cross" aria-hidden="true">
+          <div class="ranks">
+            <div style="--w:92%;--c:var(--hit)"><span>river</span><em>#4</em></div>
+            <div style="--w:70%;--c:var(--near)"><span>water</span><em>#27</em></div>
+            <div style="--w:45%;--c:var(--near)"><span>prophet</span><em>#118</em></div>
+            <div style="--w:18%;--c:var(--miss)"><span>king</span><em>#1,402</em></div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="ref">Find the secret word</span>
+          <h3>Cross Reference</h3>
+          <p>Guess any word to find the hidden one from Scripture. Each guess gets a rank, and the closer it ties to the answer, the lower the number.</p>
+          <div class="tags"><span>Daily</span><span>Unlimited</span><span>Hints</span></div>
+          <span class="play">Play Cross Reference <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <a class="game" href="build-a-figure.html">
+        <div class="preview pv-figure" aria-hidden="true">
+          <div class="bars">
+            <div>FAITH<b style="--w:100%;--c:#c9a227"></b><em>10</em></div>
+            <div>WISDOM<b style="--w:100%;--c:#4f6f8f"></b><em>10</em></div>
+            <div>COURAGE<b style="--w:100%;--c:#a13d3d"></b><em>10</em></div>
+            <div>LEADERSHIP<b style="--w:100%;--c:#7a5c9e"></b><em>10</em></div>
+            <div>STRENGTH<b style="--w:80%;--c:#b5651d"></b><em>8</em></div>
+            <div>OBEDIENCE<b style="--w:100%;--c:#6f8452"></b><em>10</em></div>
+            <div>COMPASSION<b style="--w:90%;--c:#b3697a"></b><em>9</em></div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="ref">Seven spins · one figure</span>
+          <h3>Build-a-Figure</h3>
+          <p>Spin up figures like Moses, Esther and Paul, and draw one attribute from each to fuse the strongest figure you can.</p>
+          <div class="tags"><span>Solo</span><span>Pass &amp; play</span><span>Easy &amp; Hard</span></div>
+          <span class="play">Play Build-a-Figure <span class="arr">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer><span>Biblegames.io</span><span>More games coming soon</span></footer>
+</div>
+
+</body>
+</html>

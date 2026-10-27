@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build-a-Figure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15110d;
+    --panel:#201a15;
+    --panel-raised:#2a231c;
+    --paper:#ece3d2;
+    --gold:#c9a227;
+    --maroon:#8a3a3a;
+    --faith-color:#c9a227;
+    --wisdom-color:#4f6f8f;
+    --courage-color:#a13d3d;
+    --leader-color:#7a5c9e;
+    --strength-color:#b5651d;
+    --obed-color:#6f8452;
+    --compassion-color:#b3697a;
+    --line:#3a3128;
+  }
+  body.light{
+    --ink:#f4efe4;
+    --panel:#ffffff;
+    --panel-raised:#f2ece0;
+    --paper:#211a11;
+    --line:#ddd2ba;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0) 0 0/20px 20px,
+      var(--ink);
+    color:var(--paper);
+    font-family:'EB Garamond',serif;
+    padding:32px 20px 60px;
+    transition:background-color .2s ease, color .2s ease;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  .theme-toggle-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .theme-toggle{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--paper);
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:10px 16px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .home-link{font-family:'Cinzel',serif;font-weight:700;font-size:12px;letter-spacing:.04em;color:var(--paper);opacity:.75;text-decoration:none}
+  .home-link:hover{color:var(--gold);opacity:1}
+  .theme-toggle:hover{border-color:var(--gold);color:var(--gold);}
+
+  header{margin-bottom:30px;}
+  .kicker{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:.12em;
+    margin:0 0 8px;
+  }
+  h1{
+    font-family:'Cinzel',serif;
+    font-weight:900;
+    font-size:clamp(34px,6vw,54px);
+    line-height:1.05;
+    margin:0 0 14px;
+  }
+  header p{
+    max-width:580px;
+    font-size:18px;
+    line-height:1.6;
+    color:#c9bfab;
+    margin:0;
+  }
+
+  .spin-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:26px;
+    margin-bottom:22px;
+    min-height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:16px;
+  }
+  .spin-idle{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .spin-idle p{margin:0;color:#96897a;font-size:16px;font-style:italic;}
+
+  .hero-reveal{display:flex;flex-direction:column;gap:16px;}
+  .hero-name-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .hero-name{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:clamp(24px,4.5vw,32px);
+  }
+  .hero-name.spinning{color:#7d7364;}
+  .hero-hint{font-size:14px;color:#96897a;font-style:italic;}
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+  }
+  @media (max-width:760px){
+    .stat-strip{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:460px){
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+  }
+  .stat-chip{
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:8px 8px 9px;
+    background:var(--panel-raised);
+  }
+  .stat-chip .lbl{
+    font-family:'Cinzel',serif;
+    font-size:10px;
+    letter-spacing:.04em;
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .stat-chip.faith .lbl{color:var(--faith-color);}
+  .stat-chip.wisdom .lbl{color:var(--wisdom-color);}
+  .stat-chip.courage .lbl{color:var(--courage-color);}
+  .stat-chip.leader .lbl{color:var(--leader-color);}
+  .stat-chip.strength .lbl{color:var(--strength-color);}
+  .stat-chip.obed .lbl{color:var(--obed-color);}
+  .stat-chip.compassion .lbl{color:var(--compassion-color);}
+  .stat-chip .val{font-family:'Cinzel',serif;font-weight:700;font-size:19px;}
+  .stat-chip.taken{opacity:.3;}
+
+  button{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    border-radius:2px;
+    border:1px solid transparent;
+    padding:12px 22px;
+    cursor:pointer;
+    transition:transform .12s ease, opacity .12s ease, filter .12s ease;
+  }
+  button:active{transform:scale(.97);}
+  button:disabled{opacity:.35;cursor:not-allowed;}
+  .btn-spin{background:var(--gold);color:#15110d;align-self:flex-start;}
+  .btn-spin:hover:not(:disabled){filter:brightness(1.08);}
+
+  .skip-options{display:flex;flex-wrap:wrap;gap:8px;}
+  .btn-skip-option{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--paper);
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:10px 16px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .btn-skip-option:hover{border-color:var(--gold);color:var(--gold);}
+
+  .skip-custom-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .skip-custom-input{
+    background:var(--panel-raised);
+    border:1px solid var(--line);
+    color:var(--paper);
+    font-family:'EB Garamond',serif;
+    font-weight:600;
+    font-size:14px;
+    padding:9px 12px;
+    border-radius:2px;
+    width:100px;
+  }
+  .skip-custom-input::placeholder{color:#6b6152;}
+
+  .mode-options{display:flex;flex-wrap:wrap;gap:10px;}
+  .btn-mode-option{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    text-align:left;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--paper);
+    padding:13px 16px;
+    border-radius:2px;
+    cursor:pointer;
+    max-width:240px;
+  }
+  .btn-mode-option:hover{border-color:var(--gold);}
+  .btn-mode-option:hover .mode-title{color:var(--gold);}
+  .mode-title{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.04em;
+  }
+  .mode-desc{
+    font-family:'EB Garamond',serif;
+    font-size:14px;
+    color:#96897a;
+    line-height:1.4;
+  }
+
+  .skip-row{margin-top:2px;}
+  .btn-skip{
+    background:transparent;
+    border:1px solid var(--maroon);
+    color:var(--maroon);
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:9px 16px;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .btn-skip:hover:not(:disabled){background:var(--maroon);color:var(--paper);}
+  .skip-note{font-size:13px;color:#96897a;font-style:italic;margin:0;}
+
+  .board{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:26px;
+  }
+  @media (max-width:920px){.board{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.board{grid-template-columns:1fr;}}
+
+  .stat-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:14px 12px 16px;
+    position:relative;
+    overflow:hidden;
+    text-align:left;
+  }
+  .stat-panel::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;height:4px;
+    background:var(--accent);
+  }
+  .stat-panel.faith{--accent:var(--faith-color);}
+  .stat-panel.wisdom{--accent:var(--wisdom-color);}
+  .stat-panel.courage{--accent:var(--courage-color);}
+  .stat-panel.leader{--accent:var(--leader-color);}
+  .stat-panel.strength{--accent:var(--strength-color);}
+  .stat-panel.obed{--accent:var(--obed-color);}
+  .stat-panel.compassion{--accent:var(--compassion-color);}
+  .stat-panel.available{
+    cursor:pointer;
+    border-color:var(--accent);
+  }
+  .stat-panel.available:hover{background:var(--panel-raised);}
+  .stat-panel.locked-panel{border-width:1.5px;}
+
+  .panel-label{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    margin:2px 0 10px;
+  }
+  .panel-body{
+    min-height:64px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .panel-empty{color:#6b6152;font-size:14px;font-style:italic;}
+  .panel-preview{color:var(--accent);font-size:13px;font-weight:600;}
+  .panel-filled .who{font-family:'Cinzel',serif;font-size:13.5px;color:#c9bfab;margin-bottom:4px;}
+  .panel-filled .num{font-family:'Cinzel',serif;font-weight:700;font-size:26px;}
+
+  .bar-track{height:5px;background:#332b22;border-radius:2px;margin-top:8px;overflow:hidden;}
+  .bar-fill{height:100%;width:0%;background:var(--accent);transition:width .4s ease;}
+
+  .result{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:28px 26px;
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:28px;
+    align-items:center;
+  }
+  @media (max-width:760px){.result{grid-template-columns:1fr;}}
+  .score-eyebrow{font-family:'Cinzel',serif;font-weight:700;font-size:12.5px;letter-spacing:.1em;color:var(--gold);margin:0 0 4px;}
+  .score-number{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(52px,9vw,80px);line-height:1;margin:0;}
+  .score-outof{color:#96897a;font-size:15px;margin-top:2px;font-style:italic;}
+  .score-name{margin-top:14px;font-size:17px;line-height:1.6;color:#c9bfab;}
+  .score-name strong{color:var(--paper);}
+  .name-input{
+    margin-top:12px;
+    background:var(--panel-raised);
+    border:1px solid var(--line);
+    color:var(--paper);
+    font-family:'EB Garamond',serif;
+    font-weight:600;
+    font-size:16px;
+    padding:10px 12px;
+    border-radius:2px;
+    width:100%;
+    max-width:280px;
+  }
+  .name-input::placeholder{color:#6b6152;}
+  .breakdown{display:flex;flex-direction:column;gap:10px;}
+  .b-row{display:grid;grid-template-columns:100px 1fr 34px;align-items:center;gap:10px;}
+  .b-label{font-family:'Cinzel',serif;font-size:11.5px;font-weight:700;letter-spacing:.02em;}
+  .b-source{font-size:13px;color:#96897a;font-style:italic;grid-column:1/-1;margin-top:-6px;margin-bottom:2px;}
+  .b-num{font-family:'Cinzel',serif;font-weight:700;font-size:15px;text-align:right;}
+  .placeholder-msg{color:#96897a;font-size:15px;font-style:italic;grid-column:1/-1;}
+
+  .leaderboard-player{padding-top:14px;margin-top:14px;border-top:1px solid var(--line);}
+  .leaderboard-player:first-child{padding-top:0;margin-top:0;border-top:none;}
+  .leaderboard-player-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .lp-title{font-family:'Cinzel',serif;font-weight:700;font-size:14px;letter-spacing:.03em;}
+  .lp-score{font-family:'Cinzel',serif;font-weight:900;font-size:20px;color:var(--gold);}
+
+  .reset-row{margin-top:20px;text-align:left;}
+  .btn-reset{background:transparent;border:1px solid var(--maroon);color:var(--maroon);padding:11px 20px;}
+  .btn-reset:hover{background:var(--maroon);color:var(--paper);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="theme-toggle-row">
+    <a class="home-link" href="index.html">← All games</a>
+    <button class="theme-toggle" id="themeToggle">☀️ Light mode</button>
+  </div>
+  <header>
+    <p class="kicker">BUILD-A-FIGURE</p>
+    <h1>Fuse a figure of Scripture</h1>
+    <p>Spin to reveal one biblical figure at a time. Look at their full attribute line, then choose the open category you want to draw from them. Hard Mode hides attribute values until you commit. Seven spins, seven placements, one fused figure.</p>
+  </header>
+
+  <div class="spin-card" id="spinCard">
+    <div class="spin-idle" id="spinIdle">
+      <p>Ready to reveal figure 1 of 7.</p>
+      <button class="btn-spin" id="spinBtn">SPIN</button>
+    </div>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <div class="result" id="result">
+    <div class="score-block">
+      <p class="score-eyebrow">OVERALL SCORE</p>
+      <p class="score-number" id="scoreNumber">—</p>
+      <p class="score-outof">out of 100</p>
+      <p class="score-name" id="scoreName">Place all seven attributes to reveal your fused figure.</p>
+      <input type="text" class="name-input" id="nameInput" placeholder="Name your fused figure...">
+    </div>
+    <div class="breakdown" id="breakdown">
+      <p class="placeholder-msg">Your attribute breakdown will appear here once you start placing picks.</p>
+    </div>
+  </div>
+
+  <div class="reset-row">
+    <button class="btn-reset" id="resetBtn">START OVER</button>
+  </div>
+</div>
+
+<script>
+const ROSTER = [
+  {name:"Moses",         faith:8,  wisdom:8,  courage:8,  leader:10, strength:5, obed:8,  compassion:7},
+  {name:"Abraham",       faith:10, wisdom:6,  courage:7,  leader:8,  strength:4, obed:9,  compassion:6},
+  {name:"David",         faith:9,  wisdom:7,  courage:10, leader:9,  strength:8, obed:6,  compassion:7},
+  {name:"Solomon",       faith:6,  wisdom:10, courage:5,  leader:8,  strength:3, obed:5,  compassion:6},
+  {name:"Noah",          faith:9,  wisdom:6,  courage:7,  leader:6,  strength:5, obed:10, compassion:5},
+  {name:"Joseph",        faith:8,  wisdom:8,  courage:7,  leader:8,  strength:4, obed:9,  compassion:9},
+  {name:"Daniel",        faith:10, wisdom:9,  courage:9,  leader:7,  strength:3, obed:10, compassion:7},
+  {name:"Esther",        faith:8,  wisdom:8,  courage:10, leader:7,  strength:3, obed:7,  compassion:8},
+  {name:"Ruth",          faith:8,  wisdom:6,  courage:7,  leader:4,  strength:3, obed:8,  compassion:9},
+  {name:"Deborah",       faith:8,  wisdom:9,  courage:9,  leader:10, strength:4, obed:8,  compassion:6},
+  {name:"Samson",        faith:6,  wisdom:3,  courage:8,  leader:6,  strength:10,obed:3,  compassion:4},
+  {name:"Gideon",        faith:6,  wisdom:6,  courage:7,  leader:7,  strength:6, obed:7,  compassion:5},
+  {name:"Elijah",        faith:9,  wisdom:7,  courage:9,  leader:8,  strength:5, obed:8,  compassion:5},
+  {name:"Elisha",        faith:8,  wisdom:8,  courage:6,  leader:6,  strength:3, obed:8,  compassion:7},
+  {name:"Isaiah",        faith:9,  wisdom:9,  courage:7,  leader:6,  strength:2, obed:9,  compassion:6},
+  {name:"Jeremiah",      faith:8,  wisdom:8,  courage:8,  leader:5,  strength:2, obed:9,  compassion:7},
+  {name:"Job",           faith:10, wisdom:7,  courage:6,  leader:4,  strength:4, obed:9,  compassion:6},
+  {name:"Joshua",        faith:8,  wisdom:6,  courage:10, leader:9,  strength:7, obed:9,  compassion:5},
+  {name:"Jonah",         faith:4,  wisdom:4,  courage:3,  leader:3,  strength:3, obed:3,  compassion:4},
+  {name:"Paul",          faith:10, wisdom:9,  courage:9,  leader:9,  strength:3, obed:9,  compassion:7},
+  {name:"Peter",         faith:7,  wisdom:5,  courage:8,  leader:8,  strength:5, obed:6,  compassion:7},
+  {name:"Mary",          faith:10, wisdom:6,  courage:8,  leader:4,  strength:2, obed:10, compassion:10},
+  {name:"John the Baptist",faith:9,wisdom:6,  courage:9,  leader:6,  strength:5, obed:9,  compassion:5},
+  {name:"Nehemiah",      faith:8,  wisdom:7,  courage:8,  leader:9,  strength:4, obed:8,  compassion:6},
+  {name:"Jesus",         faith:10, wisdom:10, courage:10, leader:10, strength:10,obed:10, compassion:10, rarity:1}
+];
+
+const STATS = [
+  {key:"faith",      label:"FAITH"},
+  {key:"wisdom",     label:"WISDOM"},
+  {key:"courage",    label:"COURAGE"},
+  {key:"leader",     label:"LEADERSHIP"},
+  {key:"strength",   label:"STRENGTH"},
+  {key:"obed",       label:"OBEDIENCE"},
+  {key:"compassion", label:"COMPASSION"}
+];
+
+let usedNames = [];
+let pendingFigure = null;
+let round = 0;
+let gameStarted = false;
+let gameMode = null;
+let skipsAllowed = 0;
+let skipsUsed = 0;
+let totalPlayers = 1;
+let currentPlayerIndex = 0;
+let multiplayer = false;
+let playerResults = [];
+const placements = {};
+
+const board = document.getElementById("board");
+STATS.forEach(s => {
+  const panel = document.createElement("div");
+  panel.className = `stat-panel ${s.key}`;
+  panel.id = `panel-${s.key}`;
+  panel.innerHTML = `
+    <p class="panel-label" style="color:var(--${s.key}-color)">${s.label}</p>
+    <div class="panel-body" id="body-${s.key}">
+      <span class="panel-empty">Not yet filled</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="bar-${s.key}"></div></div>
+  `;
+  panel.addEventListener("click", () => tryPlace(s.key));
+  board.appendChild(panel);
+});
+
+const spinCard = document.getElementById("spinCard");
+
+function renderModeSetup(){
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>Choose your difficulty for this round.</p>
+      <div class="mode-options" id="modeOptions"></div>
+    </div>`;
+  const modes = [
+    {key:"easy", label:"EASY MODE", desc:"See every attribute value while you decide where to place a figure."},
+    {key:"hard", label:"HARD MODE", desc:"Attribute values stay hidden until you commit a figure to a category."}
+  ];
+  const container = document.getElementById("modeOptions");
+  modes.forEach(m => {
+    const btn = document.createElement("button");
+    btn.className = "btn-mode-option";
+    btn.innerHTML = `<span class="mode-title">${m.label}</span><span class="mode-desc">${m.desc}</span>`;
+    btn.addEventListener("click", () => {
+      gameMode = m.key;
+      renderSetup();
+    });
+    container.appendChild(btn);
+  });
+}
+
+function renderSetup(){
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>How many skips would you like for this round? A skip lets you reroll a reveal you don't want, without spending a placement.</p>
+      <div class="skip-options" id="skipOptions"></div>
+      <div class="skip-custom-row">
+        <input type="number" min="0" step="1" class="skip-custom-input" id="customSkipInput" placeholder="Custom #">
+        <button class="btn-skip-option" id="customSkipBtn">Use this many</button>
+      </div>
+    </div>`;
+  const opts = [0,1,2,3,5,Infinity];
+  const container = document.getElementById("skipOptions");
+  opts.forEach(n => {
+    const btn = document.createElement("button");
+    btn.className = "btn-skip-option";
+    btn.textContent = n === 0 ? "No skips" : (n === Infinity ? "Unlimited skips" : `${n} skip${n>1?"s":""}`);
+    btn.addEventListener("click", () => {
+      skipsAllowed = n;
+      skipsUsed = 0;
+      renderPlayerCountSetup();
+    });
+    container.appendChild(btn);
+  });
+
+  const confirmCustom = () => {
+    const input = document.getElementById("customSkipInput");
+    const n = parseInt(input.value, 10);
+    if(!Number.isInteger(n) || n < 0) return;
+    skipsAllowed = n;
+    skipsUsed = 0;
+    renderPlayerCountSetup();
+  };
+  document.getElementById("customSkipBtn").addEventListener("click", confirmCustom);
+  document.getElementById("customSkipInput").addEventListener("keydown", (e) => {
+    if(e.key === "Enter") confirmCustom();
+  });
+}
+
+function renderPlayerCountSetup(){
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>How many players are building a figure this round? Each player takes a full turn, and every score stays hidden until everyone has finished.</p>
+      <div class="skip-options" id="playerOptions"></div>
+      <div class="skip-custom-row">
+        <input type="number" min="1" step="1" class="skip-custom-input" id="customPlayerInput" placeholder="Custom #">
+        <button class="btn-skip-option" id="customPlayerBtn">Use this many</button>
+      </div>
+    </div>`;
+  const opts = [1,2,3,4];
+  const container = document.getElementById("playerOptions");
+  opts.forEach(n => {
+    const btn = document.createElement("button");
+    btn.className = "btn-skip-option";
+    btn.textContent = n === 1 ? "Solo (1 player)" : `${n} players`;
+    btn.addEventListener("click", () => beginGameWithPlayers(n));
+    container.appendChild(btn);
+  });
+
+  const confirmCustom = () => {
+    const input = document.getElementById("customPlayerInput");
+    const n = parseInt(input.value, 10);
+    if(!Number.isInteger(n) || n < 1) return;
+    beginGameWithPlayers(n);
+  };
+  document.getElementById("customPlayerBtn").addEventListener("click", confirmCustom);
+  document.getElementById("customPlayerInput").addEventListener("keydown", (e) => {
+    if(e.key === "Enter") confirmCustom();
+  });
+}
+
+function beginGameWithPlayers(n){
+  totalPlayers = n;
+  multiplayer = n > 1;
+  currentPlayerIndex = 0;
+  playerResults = [];
+  gameStarted = true;
+  board.style.display = "";
+  renderSpinIdle();
+}
+
+function renderSpinIdle(){
+  if(round >= STATS.length){
+    spinCard.innerHTML = `<div class="spin-idle"><p>All ${STATS.length} attributes are filled. Your fused figure is complete below.</p></div>`;
+    return;
+  }
+  const skipNote = skipsAllowed > 0
+    ? `<p class="skip-note">Skips remaining: ${skipsAllowed === Infinity ? "Unlimited" : skipsAllowed - skipsUsed}</p>`
+    : "";
+  const modeNote = `<p class="skip-note">${gameMode === "hard" ? "Hard mode — attribute values hidden until placed" : "Easy mode — attribute values visible"}</p>`;
+  const playerNote = multiplayer ? `<p class="skip-note">Player ${currentPlayerIndex+1} of ${totalPlayers}</p>` : "";
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      ${playerNote}
+      <p>Ready to reveal figure ${round+1} of ${STATS.length}.</p>
+      ${modeNote}
+      ${skipNote}
+      <button class="btn-spin" id="spinBtn">SPIN</button>
+    </div>`;
+  document.getElementById("spinBtn").addEventListener("click", doSpin);
+}
+renderModeSetup();
+
+function doSpin(){
+  const spinBtn = document.getElementById("spinBtn");
+  if(spinBtn) spinBtn.disabled = true;
+
+  spinCard.innerHTML = `
+    <div class="hero-reveal">
+      <div class="hero-name-row">
+        <span class="hero-name spinning" id="heroName">...</span>
+        <span class="hero-hint">rolling</span>
+      </div>
+      <div class="stat-strip" id="statStrip"></div>
+      <div class="skip-row" id="skipRow"></div>
+    </div>`;
+
+  let ticks = 0;
+  const totalTicks = 14;
+  const interval = setInterval(() => {
+    const r = ROSTER[Math.floor(Math.random()*ROSTER.length)];
+    document.getElementById("heroName").textContent = r.name;
+    ticks++;
+    if(ticks >= totalTicks){
+      clearInterval(interval);
+      landOnFigure();
+    }
+  }, 70);
+}
+
+function weightedRandomPick(pool){
+  const totalWeight = pool.reduce((sum, r) => sum + (r.rarity !== undefined ? r.rarity : 10), 0);
+  let roll = Math.random() * totalWeight;
+  for(const item of pool){
+    roll -= (item.rarity !== undefined ? item.rarity : 10);
+    if(roll <= 0) return item;
+  }
+  return pool[pool.length - 1];
+}
+
+function landOnFigure(){
+  const available = ROSTER.filter(r => !usedNames.includes(r.name));
+  const pool = available.length ? available : ROSTER;
+  const figure = weightedRandomPick(pool);
+  pendingFigure = figure;
+  usedNames.push(figure.name);
+
+  const heroNameEl = document.getElementById("heroName");
+  heroNameEl.textContent = figure.name;
+  heroNameEl.classList.remove("spinning");
+  document.querySelector(".hero-hint").textContent = "choose a category below";
+
+  const strip = document.getElementById("statStrip");
+  strip.innerHTML = STATS.map(s => {
+    const isFilled = !!placements[s.key];
+    const displayVal = (gameMode === "hard" || multiplayer) ? "?" : figure[s.key];
+    return `
+      <div class="stat-chip ${s.key} ${isFilled ? "taken":""}">
+        <span class="lbl">${s.label}</span>
+        <span class="val">${displayVal}</span>
+      </div>`;
+  }).join("");
+
+  const skipRow = document.getElementById("skipRow");
+  if(skipsAllowed > 0){
+    const remaining = skipsAllowed - skipsUsed;
+    const remainingLabel = skipsAllowed === Infinity ? "unlimited" : `${remaining} left`;
+    const disabled = skipsAllowed !== Infinity && remaining <= 0;
+    skipRow.innerHTML = `<button class="btn-skip" id="skipBtn" ${disabled?"disabled":""}>SKIP THIS FIGURE (${remainingLabel})</button>`;
+    if(!disabled){
+      document.getElementById("skipBtn").addEventListener("click", trySkip);
+    }
+  } else {
+    skipRow.innerHTML = "";
+  }
+
+  updateBoardAvailability();
+}
+
+function trySkip(){
+  if(!pendingFigure) return;
+  if(skipsUsed >= skipsAllowed) return;
+  skipsUsed++;
+  pendingFigure = null;
+  doSpin();
+}
+
+function tryPlace(key){
+  if(!pendingFigure) return;
+  if(placements[key]) return;
+
+  placements[key] = {figure:pendingFigure, value:pendingFigure[key]};
+  round++;
+  pendingFigure = null;
+
+  renderPanel(key);
+  updateBoardAvailability();
+  refreshResult();
+
+  if(round >= STATS.length){
+    handleBuildComplete();
+  } else {
+    renderSpinIdle();
+  }
+}
+
+function computeScoreSummary(){
+  let sum = 0;
+  STATS.forEach(s => {
+    const p = placements[s.key];
+    if(p) sum += p.value;
+  });
+  const overall = Math.round((sum/(STATS.length*10))*100);
+  const nameList = [...new Set(STATS.map(s => placements[s.key] ? placements[s.key].figure.name : null).filter(Boolean))];
+  const details = STATS.map(s => {
+    const p = placements[s.key];
+    return p ? {key:s.key, label:s.label, value:p.value, figureName:p.figure.name} : null;
+  }).filter(Boolean);
+  return {overall, nameList, details};
+}
+
+function handleBuildComplete(){
+  if(!multiplayer){
+    renderSpinIdle();
+    return;
+  }
+  const summary = computeScoreSummary();
+  playerResults.push({
+    label: `Player ${currentPlayerIndex+1}`,
+    overall: summary.overall,
+    nameList: summary.nameList,
+    details: summary.details
+  });
+  if(currentPlayerIndex + 1 < totalPlayers){
+    renderHandoff();
+  } else {
+    renderShowResultsPrompt();
+  }
+}
+
+function renderShowResultsPrompt(){
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>Player ${currentPlayerIndex+1} is done — that's everyone! Tap below to reveal the scores and breakdowns.</p>
+      <button class="btn-spin" id="showResultsBtn">SHOW RESULTS</button>
+    </div>`;
+  document.getElementById("showResultsBtn").addEventListener("click", renderLeaderboard);
+}
+
+function renderHandoff(){
+  const nextPlayer = currentPlayerIndex + 2;
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>Player ${currentPlayerIndex+1} is done! Scores stay hidden until everyone has played. Pass the device to Player ${nextPlayer} and tap Continue when ready.</p>
+      <button class="btn-spin" id="continueBtn">CONTINUE — PLAYER ${nextPlayer}</button>
+    </div>`;
+  document.getElementById("continueBtn").addEventListener("click", startNextPlayer);
+}
+
+function startNextPlayer(){
+  currentPlayerIndex++;
+  round = 0;
+  pendingFigure = null;
+  usedNames = [];
+  skipsUsed = 0;
+  Object.keys(placements).forEach(k => delete placements[k]);
+  resetBoardVisuals();
+  refreshResult();
+  renderSpinIdle();
+}
+
+function renderLeaderboard(){
+  spinCard.innerHTML = `<div class="spin-idle"><p>All ${totalPlayers} players have finished. Scores and attribute breakdowns are revealed below!</p></div>`;
+  board.style.display = "none";
+
+  const sorted = [...playerResults].sort((a,b) => b.overall - a.overall);
+  const scoreNumber = document.getElementById("scoreNumber");
+  const scoreName = document.getElementById("scoreName");
+  const breakdown = document.getElementById("breakdown");
+
+  scoreNumber.textContent = sorted[0].overall;
+  scoreName.innerHTML = `🏆 <strong>${sorted[0].label}</strong> wins with a fused score of ${sorted[0].overall}!`;
+
+  breakdown.innerHTML = sorted.map((p,i) => `
+    <div class="leaderboard-player">
+      <div class="leaderboard-player-header">
+        <span class="lp-title">#${i+1} ${p.label}</span>
+        <span class="lp-score">${p.overall}</span>
+      </div>
+      ${p.details.map(d => `
+        <div class="b-row">
+          <span class="b-label">${d.label}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${d.value*10}%;background:var(--${d.key}-color)"></div></div>
+          <span class="b-num">${d.value}</span>
+        </div>
+        <div class="b-source">from ${d.figureName}</div>`).join("")}
+    </div>`).join("");
+}
+
+function resetBoardVisuals(){
+  STATS.forEach(s => {
+    const panel = document.getElementById(`panel-${s.key}`);
+    panel.classList.remove("locked-panel","available");
+    document.getElementById(`body-${s.key}`).innerHTML = `<span class="panel-empty">Not yet filled</span>`;
+    document.getElementById(`bar-${s.key}`).style.width = "0%";
+  });
+}
+
+function renderPanel(key){
+  const p = placements[key];
+  const panel = document.getElementById(`panel-${key}`);
+  const body = document.getElementById(`body-${key}`);
+  const bar = document.getElementById(`bar-${key}`);
+  panel.classList.add("locked-panel");
+  panel.classList.remove("available");
+  if(multiplayer){
+    body.innerHTML = `
+      <div class="panel-filled">
+        <div class="who">${p.figure.name}</div>
+        <div class="num">✓</div>
+      </div>`;
+    bar.style.width = "100%";
+  } else {
+    body.innerHTML = `
+      <div class="panel-filled">
+        <div class="who">${p.figure.name}</div>
+        <div class="num">${p.value}</div>
+      </div>`;
+    bar.style.width = (p.value*10)+"%";
+  }
+}
+
+function updateBoardAvailability(){
+  STATS.forEach(s => {
+    const panel = document.getElementById(`panel-${s.key}`);
+    const body = document.getElementById(`body-${s.key}`);
+    if(placements[s.key]) return;
+    if(pendingFigure){
+      panel.classList.add("available");
+      const preview = (gameMode === "hard" || multiplayer)
+        ? `Place ${pendingFigure.name} here`
+        : `Place ${pendingFigure.name} here → ${pendingFigure[s.key]}`;
+      body.innerHTML = `<span class="panel-preview">${preview}</span>`;
+    } else {
+      panel.classList.remove("available");
+      body.innerHTML = `<span class="panel-empty">Not yet filled</span>`;
+    }
+  });
+}
+
+function refreshResult(){
+  const filledKeys = STATS.filter(s => placements[s.key]);
+  const breakdown = document.getElementById("breakdown");
+  const scoreNumber = document.getElementById("scoreNumber");
+  const scoreName = document.getElementById("scoreName");
+
+  if(filledKeys.length === 0){
+    breakdown.innerHTML = multiplayer
+      ? `<p class="placeholder-msg">Attribute rankings stay hidden until every player has finished.</p>`
+      : `<p class="placeholder-msg">Your attribute breakdown will appear here once you start placing picks.</p>`;
+    scoreNumber.textContent = "—";
+    scoreName.textContent = "Place all seven attributes to reveal your fused figure.";
+    return;
+  }
+
+  let sum = 0;
+  STATS.forEach(s => {
+    const p = placements[s.key];
+    if(p) sum += p.value;
+  });
+
+  if(multiplayer){
+    breakdown.innerHTML = `<p class="placeholder-msg">Attribute rankings stay hidden until every player has finished.</p>`;
+  } else {
+    let rows = "";
+    STATS.forEach(s => {
+      const p = placements[s.key];
+      if(p){
+        rows += `
+          <div class="b-row">
+            <span class="b-label">${s.label}</span>
+            <div class="bar-track"><div class="bar-fill" style="width:${p.value*10}%;background:var(--${s.key}-color)"></div></div>
+            <span class="b-num">${p.value}</span>
+          </div>
+          <div class="b-source">from ${p.figure.name}</div>`;
+      }
+    });
+    breakdown.innerHTML = rows;
+  }
+
+  if(filledKeys.length < STATS.length){
+    scoreNumber.textContent = "—";
+    scoreName.textContent = `${filledKeys.length} of ${STATS.length} attributes placed. Keep spinning to finish your build.`;
+  } else if(multiplayer){
+    scoreNumber.textContent = "—";
+    scoreName.textContent = "Build complete! Scores stay hidden until every player has finished.";
+  } else {
+    const overall = Math.round((sum/(STATS.length*10))*100);
+    scoreNumber.textContent = overall;
+    const nameList = [...new Set(STATS.map(s => placements[s.key].figure.name))];
+    scoreName.innerHTML = `Fused from <strong>${nameList.join(", ")}</strong>.`;
+  }
+}
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  usedNames = [];
+  pendingFigure = null;
+  round = 0;
+  gameStarted = false;
+  gameMode = null;
+  skipsAllowed = 0;
+  skipsUsed = 0;
+  totalPlayers = 1;
+  currentPlayerIndex = 0;
+  multiplayer = false;
+  playerResults = [];
+  Object.keys(placements).forEach(k => delete placements[k]);
+
+  board.style.display = "";
+  resetBoardVisuals();
+
+  document.getElementById("nameInput").value = "";
+  renderModeSetup();
+  refreshResult();
+});
+
+document.getElementById("themeToggle").addEventListener("click", () => {
+  const isLight = document.body.classList.toggle("light");
+  document.getElementById("themeToggle").textContent = isLight ? "🌙 Dark mode" : "☀️ Light mode";
+});
+</script>
+</body>
+</html>

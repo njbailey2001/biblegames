@@ -1,0 +1,650 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Versle Unlimited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one narrow column like a lectern — verse card on top, guess ledger, then the input tray. */
+:root{
+  --bg:#EDEFEA; --surface:#F8F9F6; --ink:#1D272B; --muted:#5E6A66; --line:#D3D8D1;
+  --accent:#4A3E73; --accent-ink:#FFFFFF;
+  --hit:#3C7A4C; --near:#C38F22; --miss:#9AA19D; --tile-ink:#FFFFFF;
+  --empty:#E2E6DF;
+  --display:"Cardo", Georgia, "Times New Roman", serif;
+  --ui:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14181A; --surface:#1C2124; --ink:#E5E8E2; --muted:#9AA5A0; --line:#2E3539;
+  --accent:#A495D8; --accent-ink:#14181A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254; --tile-ink:#FFFFFF; --empty:#232A2D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14181A; --surface:#1C2124; --ink:#E5E8E2; --muted:#9AA5A0; --line:#2E3539;
+  --accent:#A495D8; --accent-ink:#14181A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254; --tile-ink:#FFFFFF; --empty:#232A2D; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5}
+.wrap{max-width:520px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-family:var(--display);font-weight:700;font-size:1.75rem;letter-spacing:.02em;margin:0;line-height:1}
+h1 small{display:block;font-family:var(--ui);font-weight:600;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.icon-btns{display:flex;gap:8px}
+button{font:inherit;cursor:pointer}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 11px;font-size:.85rem;font-weight:500}
+.ghost:hover{border-color:var(--muted)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.verse{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:22px 22px 18px;position:relative}
+.verse::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;background:var(--accent);opacity:.0}
+.verse .label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;display:flex;justify-content:space-between}
+.verse p{font-family:var(--display);font-size:1.32rem;line-height:1.55;margin:10px 0 0;text-wrap:pretty}
+.verse p::first-letter{font-size:2.6em;float:left;line-height:.85;padding:6px 8px 0 0;color:var(--accent);font-weight:700}
+.answer{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--display);font-weight:700;font-size:1.15rem;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.answer span{font-family:var(--ui);font-weight:600;font-size:.8rem}
+.win{color:var(--hit)} .lose{color:var(--muted)}
+
+.ledger{display:flex;flex-direction:column;gap:6px}
+.ledger .head,.row{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:6px}
+.ledger .head span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-left:2px}
+.tile{height:46px;border-radius:4px;background:var(--empty);display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--tile-ink);font-size:.98rem;min-width:0;padding:0 8px}
+.tile .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile.hit{background:var(--hit)} .tile.near{background:var(--near)} .tile.miss{background:var(--miss)}
+.tile .arr{font-size:.85rem;opacity:.95}
+.row.new .tile{animation:flip .45s ease both}
+.row.new .tile:nth-child(2){animation-delay:.1s}.row.new .tile:nth-child(3){animation-delay:.2s}
+@keyframes flip{from{transform:rotateX(90deg)}to{transform:rotateX(0)}}
+@media (prefers-reduced-motion:reduce){.row.new .tile{animation:none}}
+
+.tray{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.fields{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:8px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.field input,.bookbtn{height:44px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600;padding:0 10px;width:100%;font-variant-numeric:tabular-nums}
+.bookbtn{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bookbtn.placeholder{color:var(--muted);font-weight:500}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.primary{flex:1;background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;height:44px;font-weight:700;letter-spacing:.02em}
+.primary:disabled{opacity:.45;cursor:default}
+.msg{min-height:1.2em;font-size:.85rem;color:var(--muted)}
+.msg.err{color:var(--near)}
+.hints{display:flex;flex-direction:column;gap:4px;font-size:.88rem}
+.hints div{display:flex;gap:8px}
+.hints b{font-weight:600;color:var(--muted);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;min-width:72px;padding-top:2px}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+/* sheets */
+.scrim{position:fixed;inset:0;background:rgba(10,14,16,.45);display:flex;align-items:flex-end;justify-content:center;z-index:10}
+.sheet{background:var(--surface);color:var(--ink);width:100%;max-width:560px;max-height:82vh;overflow:auto;border-radius:12px 12px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+@media (min-width:600px){.scrim{align-items:center}.sheet{border-radius:10px}}
+.sheet h2{font-family:var(--display);font-size:1.35rem;margin:0}
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.group h3{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;font-weight:600}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:5px}
+.books button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:5px;padding:7px 4px;font-size:.8rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.books button:hover{border-color:var(--accent)}
+.books button.sel{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.stats div{display:flex;flex-direction:column}
+.stats strong{font-family:var(--display);font-size:1.8rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.stats span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.dist{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-variant-numeric:tabular-nums}
+.dist div{display:flex;gap:8px;align-items:center}
+.dist em{font-style:normal;width:12px;color:var(--muted)}
+.dist .bar{background:var(--miss);color:var(--tile-ink);padding:2px 6px;border-radius:3px;min-width:24px;text-align:right;font-weight:600}
+.dist .bar.cur{background:var(--hit)}
+.rules p{margin:0 0 8px;color:var(--ink)}
+.rules ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.modes{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:8px;padding:3px;background:var(--surface);gap:3px}
+.modes button{border:0;background:transparent;color:var(--muted);border-radius:6px;padding:8px 10px;font-weight:600;display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.modes button small{font-weight:500;font-size:.72rem;opacity:.85}
+.modes button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.badge{color:var(--accent)}
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;padding:4px 0 10px;font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button small{font-family:var(--ui);font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-left:6px;color:var(--accent)}
+.countdown{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.countdown b{color:var(--ink)}
+
+.home-link{font-size:.8rem;font-weight:600;color:var(--muted);text-decoration:none;align-self:flex-start}
+.home-link:hover{color:var(--accent)}
+</style>
+
+<div class="wrap">
+  <a class="home-link" href="index.html">← All games</a>
+  <header>
+    <h1>Versle<small>Daily + Unlimited · ASV</small></h1>
+    <div class="icon-btns">
+      <button class="ghost" id="rulesBtn" aria-label="How to play">How to play</button>
+      <button class="ghost" id="statsBtn" aria-label="Statistics">Stats</button>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Game type">
+    <button type="button" role="tab" id="tabDaily" data-play="daily" aria-selected="true">Daily Verse<small id="dailyDot"></small></button>
+    <button type="button" role="tab" id="tabUnl" data-play="unlimited" aria-selected="false">Unlimited</button>
+  </div>
+
+  <div class="modes" id="diffRow" role="group" aria-label="Difficulty">
+    <button type="button" id="modeEasy" data-mode="easy" aria-pressed="true">Easy<small>Well-known verses</small></button>
+    <button type="button" id="modeHard" data-mode="hard" aria-pressed="false">Hard<small>Deeper cuts</small></button>
+  </div>
+
+  <section class="verse" aria-live="polite">
+    <div class="label"><span><span class="badge" id="modeLabel">Easy</span> · <span id="vnum">Verse 1</span></span><span id="triesLeft">5 guesses left</span></div>
+    <p id="verseText"></p>
+    <div class="answer" id="answer" hidden></div>
+  </section>
+
+  <section class="ledger">
+    <div class="head"><span>Book</span><span>Chapter</span><span>Verse</span></div>
+    <div id="rows" style="display:flex;flex-direction:column;gap:6px"></div>
+  </section>
+
+  <section class="tray" id="tray">
+    <form id="guessForm" class="fields" autocomplete="off">
+      <div class="field"><label for="bookBtn">Book</label><button type="button" class="bookbtn placeholder" id="bookBtn">Choose book</button></div>
+      <div class="field"><label for="chIn">Chapter</label><input id="chIn" type="number" inputmode="numeric" min="1" placeholder="—"></div>
+      <div class="field"><label for="vsIn">Verse</label><input id="vsIn" type="number" inputmode="numeric" min="1" placeholder="—"></div>
+      <button type="submit" hidden></button>
+    </form>
+    <div class="actions">
+      <button class="ghost" id="hintBtn" type="button">Hint</button>
+      <button class="primary" id="submitBtn" type="button">Guess</button>
+    </div>
+    <div class="hints" id="hints"></div>
+    <div class="msg" id="msg"></div>
+  </section>
+
+  <section class="tray" id="endTray" hidden>
+    <div class="actions">
+      <button class="primary" id="nextBtn" type="button">Next verse →</button>
+      <button class="ghost" id="statsBtn2" type="button">Stats</button>
+    </div>
+    <div class="countdown" id="countdown" hidden></div>
+  </section>
+
+  <div class="legend">
+    <span><i style="background:var(--hit)"></i>Correct</span>
+    <span><i style="background:var(--near)"></i>Close (same section · within 3 chapters · within 5 verses)</span>
+    <span><i style="background:var(--miss)"></i>Off</span>
+  </div>
+</div>
+
+<div class="scrim" id="bookSheet" hidden>
+  <div class="sheet" role="dialog" aria-label="Choose a book">
+    <div class="sheet-head"><h2>Choose a book</h2><button class="ghost" data-close>Close</button></div>
+    <div id="bookGroups" style="display:flex;flex-direction:column;gap:14px"></div>
+  </div>
+</div>
+
+<div class="scrim" id="statsSheet" hidden>
+  <div class="sheet" role="dialog" aria-label="Statistics">
+    <div class="sheet-head"><h2 id="statsTitle">Your stats</h2><button class="ghost" data-close>Close</button></div>
+    <div class="stats" id="statsGrid"></div>
+    <div class="group"><h3>Guess distribution</h3><div class="dist" id="dist"></div></div>
+    <button class="ghost" id="resetStats" type="button">Reset stats</button>
+  </div>
+</div>
+
+<div class="scrim" id="rulesSheet" hidden>
+  <div class="sheet rules" role="dialog" aria-label="How to play">
+    <div class="sheet-head"><h2>How to play</h2><button class="ghost" data-close>Close</button></div>
+    <p>Name the book, chapter, and verse of the passage in five guesses. When you finish, hit <b>Next verse</b> and keep going as long as you like.</p>
+    <ul>
+      <li><b>Book</b> turns green when right, gold when it's in the same section (Gospels, Pauline Epistles, Minor Prophets…). The arrow says whether the answer comes earlier ↑ or later ↓ in the Bible.</li>
+      <li><b>Chapter</b> turns gold within 3, <b>verse</b> within 5. Arrows point higher ↑ or lower ↓.</li>
+      <li><b>Hint</b> reveals the testament, then the section. Hints are free but noted in your result.</li>
+      <li><b>Daily Verse</b> is one verse per day, the same for everyone, and builds a day-by-day streak. Come back tomorrow for the next one.</li>
+      <li>In <b>Unlimited</b>, <b>Easy</b> draws from well-known verses; <b>Hard</b> draws from less familiar ones. Daily, Easy and Hard each keep their own stats and streak.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const BOOKS=[
+["Genesis",50,"Law"],["Exodus",40,"Law"],["Leviticus",27,"Law"],["Numbers",36,"Law"],["Deuteronomy",34,"Law"],
+["Joshua",24,"History"],["Judges",21,"History"],["Ruth",4,"History"],["1 Samuel",31,"History"],["2 Samuel",24,"History"],["1 Kings",22,"History"],["2 Kings",25,"History"],["1 Chronicles",29,"History"],["2 Chronicles",36,"History"],["Ezra",10,"History"],["Nehemiah",13,"History"],["Esther",10,"History"],
+["Job",42,"Poetry & Wisdom"],["Psalms",150,"Poetry & Wisdom"],["Proverbs",31,"Poetry & Wisdom"],["Ecclesiastes",12,"Poetry & Wisdom"],["Song of Solomon",8,"Poetry & Wisdom"],
+["Isaiah",66,"Major Prophets"],["Jeremiah",52,"Major Prophets"],["Lamentations",5,"Major Prophets"],["Ezekiel",48,"Major Prophets"],["Daniel",12,"Major Prophets"],
+["Hosea",14,"Minor Prophets"],["Joel",3,"Minor Prophets"],["Amos",9,"Minor Prophets"],["Obadiah",1,"Minor Prophets"],["Jonah",4,"Minor Prophets"],["Micah",7,"Minor Prophets"],["Nahum",3,"Minor Prophets"],["Habakkuk",3,"Minor Prophets"],["Zephaniah",3,"Minor Prophets"],["Haggai",2,"Minor Prophets"],["Zechariah",14,"Minor Prophets"],["Malachi",4,"Minor Prophets"],
+["Matthew",28,"Gospels"],["Mark",16,"Gospels"],["Luke",24,"Gospels"],["John",21,"Gospels"],["Acts",28,"Acts"],
+["Romans",16,"Pauline Epistles"],["1 Corinthians",16,"Pauline Epistles"],["2 Corinthians",13,"Pauline Epistles"],["Galatians",6,"Pauline Epistles"],["Ephesians",6,"Pauline Epistles"],["Philippians",4,"Pauline Epistles"],["Colossians",4,"Pauline Epistles"],["1 Thessalonians",5,"Pauline Epistles"],["2 Thessalonians",3,"Pauline Epistles"],["1 Timothy",6,"Pauline Epistles"],["2 Timothy",4,"Pauline Epistles"],["Titus",3,"Pauline Epistles"],["Philemon",1,"Pauline Epistles"],
+["Hebrews",13,"General Epistles"],["James",5,"General Epistles"],["1 Peter",5,"General Epistles"],["2 Peter",3,"General Epistles"],["1 John",5,"General Epistles"],["2 John",1,"General Epistles"],["3 John",1,"General Epistles"],["Jude",1,"General Epistles"],
+["Revelation",22,"Prophecy"]
+];
+const IDX=Object.fromEntries(BOOKS.map((b,i)=>[b[0],i]));
+const testament=i=>i<39?"Old Testament":"New Testament";
+
+const HARD=[
+["Genesis",5,27,"and all the days of Methuselah were nine hundred sixty and nine years: and he died."],
+["Genesis",9,13,"I do set my bow in the cloud, and it shall be for a token of a covenant between me and the earth."],
+["Genesis",32,28,"And he said, Thy name shall be called no more Jacob, but Israel: for thou hast striven with God and with men, and hast prevailed."],
+["Exodus",3,14,"And God said unto Moses, I AM THAT I AM: and he said, Thus shalt thou say unto the children of Israel, I AM hath sent me unto you."],
+["Exodus",15,2,"Jehovah is my strength and song, And he is become my salvation: This is my God, and I will praise him; My father’s God, and I will exalt him."],
+["Leviticus",17,11,"For the life of the flesh is in the blood; and I have given it to you upon the altar to make atonement for your souls: for it is the blood that maketh atonement by reason of the life."],
+["Leviticus",19,18,"Thou shalt not take vengeance, nor bear any grudge against the children of thy people; but thou shalt love thy neighbor as thyself: I am Jehovah."],
+["Numbers",23,19,"God is not a man, that he should lie, Neither the son of man, that he should repent: Hath he said, and will he not do it? Or hath he spoken, and will he not make it good?"],
+["Numbers",32,23,"But if ye will not do so, behold, ye have sinned against Jehovah; and be sure your sin will find you out."],
+["Deuteronomy",6,5,"and thou shalt love Jehovah thy God with all thy heart, and with all thy soul, and with all thy might."],
+["Deuteronomy",8,3,"And he humbled thee, and suffered thee to hunger, and fed thee with manna, which thou knewest not, neither did thy fathers know; that he might make thee know that man doth not live by bread only, but by everything that proceedeth out of the mouth of Jehovah doth man live."],
+["Judges",21,25,"In those days there was no king in Israel: every man did that which was right in his own eyes."],
+["1 Samuel",3,10,"And Jehovah came, and stood, and called as at other times, Samuel, Samuel. Then Samuel said, Speak; for thy servant heareth."],
+["1 Samuel",15,22,"And Samuel said, Hath Jehovah as great delight in burnt-offerings and sacrifices, as in obeying the voice of Jehovah? Behold, to obey is better than sacrifice, and to hearken than the fat of rams."],
+["1 Samuel",17,45,"Then said David to the Philistine, Thou comest to me with a sword, and with a spear, and with a javelin: but I come to thee in the name of Jehovah of hosts, the God of the armies of Israel, whom thou hast defied."],
+["2 Samuel",12,7,"And Nathan said to David, Thou art the man. Thus saith Jehovah, the God of Israel, I anointed thee king over Israel, and I delivered thee out of the hand of Saul;"],
+["1 Kings",18,21,"And Elijah came near unto all the people, and said, How long go ye limping between the two sides? if Jehovah be God, follow him; but if Baal, then follow him. And the people answered him not a word."],
+["1 Kings",19,12,"and after the earthquake a fire; but Jehovah was not in the fire: and after the fire a still small voice."],
+["2 Kings",2,11,"And it came to pass, as they still went on, and talked, that, behold, there appeared a chariot of fire, and horses of fire, which parted them both asunder; and Elijah went up by a whirlwind into heaven."],
+["2 Kings",2,23,"And he went up from thence unto Beth-el; and as he was going up by the way, there came forth young lads out of the city, and mocked him, and said unto him, Go up, thou baldhead; go up, thou baldhead."],
+["2 Kings",6,16,"And he answered, Fear not; for they that are with us are more than they that are with them."],
+["1 Chronicles",4,10,"And Jabez called on the God of Israel, saying, Oh that thou wouldest bless me indeed, and enlarge my border, and that thy hand might be with me, and that thou wouldest keep me from evil, that it be not to my sorrow! And God granted him that which he requested."],
+["1 Chronicles",16,34,"O give thanks unto Jehovah; for he is good; For his lovingkindness endureth for ever."],
+["Ezra",7,10,"For Ezra had set his heart to seek the law of Jehovah, and to do it, and to teach in Israel statutes and ordinances."],
+["Nehemiah",6,3,"And I sent messengers unto them, saying, I am doing a great work, so that I cannot come down: why should the work cease, whilst I leave it, and come down to you?"],
+["Esther",4,14,"For if thou altogether holdest thy peace at this time, then will relief and deliverance arise to the Jews from another place, but thou and thy father’s house will perish: and who knoweth whether thou art not come to the kingdom for such a time as this?"],
+["Job",1,21,"and he said, Naked came I out of my mother’s womb, and naked shall I return thither: Jehovah gave, and Jehovah hath taken away; blessed be the name of Jehovah."],
+["Job",38,4,"Where wast thou when I laid the foundations of the earth? Declare, if thou hast understanding."],
+["Psalms",8,4,"What is man, that thou art mindful of him? And the son of man, that thou visitest him?"],
+["Psalms",90,4,"For a thousand years in thy sight Are but as yesterday when it is past, And as a watch in the night."],
+["Psalms",103,12,"As far as the east is from the west, So far hath he removed our transgressions from us."],
+["Psalms",127,1,"Except Jehovah build the house, They labor in vain that build it: Except Jehovah keep the city, The watchman waketh but in vain."],
+["Psalms",133,1,"Behold, how good and how pleasant it is For brethren to dwell together in unity!"],
+["Proverbs",15,1,"A soft answer turneth away wrath; But a grievous word stirreth up anger."],
+["Proverbs",17,22,"A cheerful heart is a good medicine; But a broken spirit drieth up the bones."],
+["Proverbs",26,11,"As a dog that returneth to his vomit, So is a fool that repeateth his folly."],
+["Proverbs",29,18,"Where there is no vision, the people cast off restraint; But he that keepeth the law, happy is he."],
+["Ecclesiastes",1,9,"That which hath been is that which shall be; and that which hath been done is that which shall be done: and there is no new thing under the sun."],
+["Ecclesiastes",12,13,"This is the end of the matter; all hath been heard: Fear God, and keep his commandments; for this is the whole duty of man."],
+["Song of Solomon",2,15,"Take us the foxes, the little foxes, That spoil the vineyards; For our vineyards are in blossom."],
+["Song of Solomon",8,7,"Many waters cannot quench love, Neither can floods drown it: If a man would give all the substance of his house for love, He would utterly be contemned."],
+["Isaiah",1,18,"Come now, and let us reason together, saith Jehovah: though your sins be as scarlet, they shall be as white as snow; though they be red like crimson, they shall be as wool."],
+["Isaiah",2,4,"And he will judge between the nations, and will decide concerning many peoples; and they shall beat their swords into plowshares, and their spears into pruning-hooks; nation shall not lift up sword against nation, neither shall they learn war any more."],
+["Isaiah",55,8,"For my thoughts are not your thoughts, neither are your ways my ways, saith Jehovah."],
+["Jeremiah",13,23,"Can the Ethiopian change his skin, or the leopard his spots? then may ye also do good, that are accustomed to do evil."],
+["Jeremiah",17,9,"The heart is deceitful above all things, and it is exceedingly corrupt: who can know it?"],
+["Ezekiel",37,4,"Again he said unto me, Prophesy over these bones, and say unto them, O ye dry bones, hear the word of Jehovah."],
+["Daniel",5,27,"TEKEL; thou art weighed in the balances, and art found wanting."],
+["Daniel",12,3,"And they that are wise shall shine as the brightness of the firmament; and they that turn many to righteousness as the stars for ever and ever."],
+["Hosea",8,7,"For they sow the wind, and they shall reap the whirlwind: he hath no standing grain; the blade shall yield no meal; if so be it yield, strangers shall swallow it up."],
+["Joel",2,28,"And it shall come to pass afterward, that I will pour out my Spirit upon all flesh; and your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions:"],
+["Amos",3,3,"Shall two walk together, except they have agreed?"],
+["Amos",5,24,"But let justice roll down as waters, and righteousness as a mighty stream."],
+["Jonah",1,17,"And Jehovah prepared a great fish to swallow up Jonah; and Jonah was in the belly of the fish three days and three nights."],
+["Habakkuk",2,2,"And Jehovah answered me, and said, Write the vision, and make it plain upon tablets, that he may run that readeth it."],
+["Zechariah",4,6,"Then he answered and spake unto me, saying, This is the word of Jehovah unto Zerubbabel, saying, Not by might, nor by power, but by my Spirit, saith Jehovah of hosts."],
+["Malachi",3,6,"For I, Jehovah, change not; therefore ye, O sons of Jacob, are not consumed."],
+["Matthew",5,9,"Blessed are the peacemakers: for they shall be called sons of God."],
+["Matthew",10,16,"Behold, I send you forth as sheep in the midst of wolves: be ye therefore wise as serpents, and harmless as doves."],
+["Matthew",16,26,"For what shall a man be profited, if he shall gain the whole world, and forfeit his life? or what shall a man give in exchange for his life?"],
+["Matthew",26,41,"Watch and pray, that ye enter not into temptation: the spirit indeed is willing, but the flesh is weak."],
+["Mark",2,27,"And he said unto them, The sabbath was made for man, and not man for the sabbath:"],
+["Mark",8,36,"For what doth it profit a man, to gain the whole world, and forfeit his life?"],
+["Mark",9,24,"Straightway the father of the child cried out, and said, I believe; help thou mine unbelief."],
+["Luke",9,62,"But Jesus said unto him, No man, having put his hand to the plow, and looking back, is fit for the kingdom of God."],
+["Luke",15,7,"I say unto you, that even so there shall be joy in heaven over one sinner that repenteth, more than over ninety and nine righteous persons, who need no repentance."],
+["Luke",19,10,"For the Son of man came to seek and to save that which was lost."],
+["Luke",23,34,"And Jesus said, Father, forgive them; for they know not what they do. And parting his garments among them, they cast lots."],
+["John",3,30,"He must increase, but I must decrease."],
+["John",10,10,"The thief cometh not, but that he may steal, and kill, and destroy: I came that they may have life, and may have it abundantly."],
+["John",20,29,"Jesus saith unto him, Because thou hast seen me, thou hast believed: blessed are they that have not seen, and yet have believed."],
+["Acts",4,12,"And in none other is there salvation: for neither is there any other name under heaven, that is given among men, wherein we must be saved."],
+["Acts",16,31,"And they said, Believe on the Lord Jesus, and thou shalt be saved, thou and thy house."],
+["Acts",17,28,"for in him we live, and move, and have our being; as certain even of your own poets have said, For we are also his offspring."],
+["Romans",1,16,"For I am not ashamed of the gospel: for it is the power of God unto salvation to every one that believeth; to the Jew first, and also to the Greek."],
+["Romans",5,8,"But God commendeth his own love toward us, in that, while we were yet sinners, Christ died for us."],
+["Romans",12,21,"Be not overcome of evil, but overcome evil with good."],
+["1 Corinthians",13,11,"When I was a child, I spake as a child, I felt as a child, I thought as a child: now that I am become a man, I have put away childish things."],
+["1 Corinthians",13,12,"For now we see in a mirror, darkly; but then face to face: now I know in part; but then shall I know fully even as also I was fully known."],
+["1 Corinthians",15,33,"Be not deceived: Evil companionships corrupt good morals."],
+["1 Corinthians",15,55,"O death, where is thy victory? O death, where is thy sting?"],
+["2 Corinthians",9,7,"Let each man do according as he hath purposed in his heart: not grudgingly, or of necessity: for God loveth a cheerful giver."],
+["Galatians",6,7,"Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap."],
+["Galatians",6,9,"And let us not be weary in well-doing: for in due season we shall reap, if we faint not."],
+["Ephesians",4,26,"Be ye angry, and sin not: let not the sun go down upon your wrath:"],
+["Philippians",1,21,"For to me to live is Christ, and to die is gain."],
+["Philippians",2,10,"that in the name of Jesus every knee should bow, of things in heaven and things on earth and things under the earth,"],
+["2 Thessalonians",3,10,"For even when we were with you, this we commanded you, If any will not work, neither let him eat."],
+["1 Timothy",4,12,"Let no man despise thy youth; but be thou an ensample to them that believe, in word, in manner of life, in love, in faith, in purity."],
+["1 Timothy",6,10,"For the love of money is a root of all kinds of evil: which some reaching after have been led astray from the faith, and have pierced themselves through with many sorrows."],
+["2 Timothy",4,7,"I have fought the good fight, I have finished the course, I have kept the faith:"],
+["Titus",2,11,"For the grace of God hath appeared, bringing salvation to all men,"],
+["Hebrews",13,2,"Forget not to show love unto strangers: for thereby some have entertained angels unawares."],
+["James",1,22,"But be ye doers of the word, and not hearers only, deluding your own selves."],
+["James",2,26,"For as the body apart from the spirit is dead, even so faith apart from works is dead."],
+["James",4,14,"whereas ye know not what shall be on the morrow. What is your life? For ye are a vapor that appeareth for a little time, and then vanisheth away."],
+["1 Peter",5,8,"Be sober, be watchful: your adversary the devil, as a roaring lion, walketh about, seeking whom he may devour:"],
+["2 Peter",3,8,"But forget not this one thing, beloved, that one day is with the Lord as a thousand years, and a thousand years as one day."],
+["1 John",4,18,"There is no fear in love: but perfect love casteth out fear, because fear hath punishment; and he that feareth is not made perfect in love."],
+["3 John",1,4,"Greater joy have I none than this, to hear of my children walking in the truth."],
+["Jude",1,24,"Now unto him that is able to guard you from stumbling, and to set you before the presence of his glory without blemish in exceeding joy,"],
+["Revelation",1,8,"I am the Alpha and the Omega, saith the Lord God, who is and who was and who is to come, the Almighty."],
+["Revelation",22,20,"He who testifieth these things saith, Yea: I come quickly. Amen: come, Lord Jesus."]
+];
+
+const EASY=[
+["Genesis",1,1,"In the beginning God created the heavens and the earth."],
+["Genesis",1,27,"And God created man in his own image, in the image of God created he him; male and female created he them."],
+["Genesis",50,20,"And as for you, ye meant evil against me; but God meant it for good, to bring to pass, as it is this day, to save much people alive."],
+["Exodus",14,14,"Jehovah will fight for you, and ye shall hold your peace."],
+["Exodus",20,3,"Thou shalt have no other gods before me."],
+["Numbers",6,24,"Jehovah bless thee, and keep thee:"],
+["Deuteronomy",31,6,"Be strong and of good courage, fear not, nor be affrighted at them: for Jehovah thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee."],
+["Joshua",1,9,"Have not I commanded thee? Be strong and of good courage; be not affrighted, neither be thou dismayed: for Jehovah thy God is with thee whithersoever thou goest."],
+["Joshua",24,15,"And if it seem evil unto you to serve Jehovah, choose you this day whom ye will serve; whether the gods which your fathers served that were beyond the River, or the gods of the Amorites, in whose land ye dwell: but as for me and my house, we will serve Jehovah."],
+["Ruth",1,16,"And Ruth said, Entreat me not to leave thee, and to return from following after thee, for whither thou goest, I will go; and where thou lodgest, I will lodge; thy people shall be my people, and thy God my God;"],
+["1 Samuel",16,7,"But Jehovah said unto Samuel, Look not on his countenance, or on the height of his stature; because I have rejected him: for Jehovah seeth not as man seeth; for man looketh on the outward appearance, but Jehovah looketh on the heart."],
+["2 Chronicles",7,14,"if my people, who are called by my name, shall humble themselves, and pray, and seek my face, and turn from their wicked ways; then will I hear from heaven, and will forgive their sin, and will heal their land."],
+["Nehemiah",8,10,"Then he said unto them, Go your way, eat the fat, and drink the sweet, and send portions unto him for whom nothing is prepared; for this day is holy unto our Lord: neither be ye grieved; for the joy of Jehovah is your strength."],
+["Job",19,25,"But as for me I know that my Redeemer liveth, And at last he will stand up upon the earth:"],
+["Psalms",19,14,"Let the words of my mouth and the meditation of my heart Be acceptable in thy sight, O Jehovah, my rock, and my redeemer."],
+["Psalms",23,1,"Jehovah is my shepherd; I shall not want."],
+["Psalms",34,8,"Oh taste and see that Jehovah is good: Blessed is the man that taketh refuge in him."],
+["Psalms",37,4,"Delight thyself also in Jehovah; And he will give thee the desires of thy heart."],
+["Psalms",46,10,"Be still, and know that I am God: I will be exalted among the nations, I will be exalted in the earth."],
+["Psalms",51,10,"Create in me a clean heart, O God; And renew a right spirit within me."],
+["Psalms",90,12,"So teach us to number our days, That we may get us a heart of wisdom."],
+["Psalms",118,24,"This is the day which Jehovah hath made; We will rejoice and be glad in it."],
+["Psalms",119,105,"Thy word is a lamp unto my feet, And light unto my path."],
+["Psalms",121,1,"I will lift up mine eyes unto the mountains: From whence shall my help come?"],
+["Psalms",139,14,"I will give thanks unto thee; for I am fearfully and wonderfully made: Wonderful are thy works; And that my soul knoweth right well."],
+["Proverbs",3,5,"Trust in Jehovah with all thy heart, And lean not upon thine own understanding:"],
+["Proverbs",16,18,"Pride goeth before destruction, And a haughty spirit before a fall."],
+["Proverbs",18,10,"The name of Jehovah is a strong tower; The righteous runneth into it, and is safe."],
+["Proverbs",22,6,"Train up a child in the way he should go, And even when he is old he will not depart from it."],
+["Proverbs",27,17,"Iron sharpeneth iron; So a man sharpeneth the countenance of his friend."],
+["Ecclesiastes",3,1,"For everything there is a season, and a time for every purpose under heaven:"],
+["Isaiah",6,8,"And I heard the voice of the Lord, saying, Whom shall I send, and who will go for us? Then I said, Here am I; send me."],
+["Isaiah",9,6,"For unto us a child is born, unto us a son is given; and the government shall be upon his shoulder: and his name shall be called Wonderful, Counsellor, Mighty God, Everlasting Father, Prince of Peace."],
+["Isaiah",40,31,"but they that wait for Jehovah shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; they shall walk, and not faint."],
+["Isaiah",41,10,"fear thou not, for I am with thee; be not dismayed, for I am thy God; I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."],
+["Isaiah",53,5,"But he was wounded for our transgressions, he was bruised for our iniquities; the chastisement of our peace was upon him; and with his stripes we are healed."],
+["Jeremiah",29,11,"For I know the thoughts that I think toward you, saith Jehovah, thoughts of peace, and not of evil, to give you hope in your latter end."],
+["Lamentations",3,22,"It is of Jehovah’s lovingkindnesses that we are not consumed, because his compassions fail not."],
+["Ezekiel",36,26,"A new heart also will I give you, and a new spirit will I put within you; and I will take away the stony heart out of your flesh, and I will give you a heart of flesh."],
+["Micah",6,8,"He hath showed thee, O man, what is good; and what doth Jehovah require of thee, but to do justly, and to love kindness, and to walk humbly with thy God?"],
+["Zephaniah",3,17,"Jehovah thy God is in the midst of thee, a mighty one who will save; he will rejoice over thee with joy; he will rest in his love; he will joy over thee with singing."],
+["Matthew",5,14,"Ye are the light of the world. A city set on a hill cannot be hid."],
+["Matthew",6,33,"But seek ye first his kingdom, and his righteousness; and all these things shall be added unto you."],
+["Matthew",7,7,"Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you:"],
+["Matthew",11,28,"Come unto me, all ye that labor and are heavy laden, and I will give you rest."],
+["Matthew",22,37,"And he said unto him, Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy mind."],
+["Matthew",28,19,"Go ye therefore, and make disciples of all the nations, baptizing them into the name of the Father and of the Son and of the Holy Spirit:"],
+["Mark",10,27,"Jesus looking upon them saith, With men it is impossible, but not with God: for all things are possible with God."],
+["Luke",1,37,"For no word from God shall be void of power."],
+["Luke",2,11,"for there is born to you this day in the city of David a Saviour, who is Christ the Lord."],
+["Luke",6,31,"And as ye would that men should do to you, do ye also to them likewise."],
+["John",1,1,"In the beginning was the Word, and the Word was with God, and the Word was God."],
+["John",3,16,"For God so loved the world, that he gave his only begotten Son, that whosoever believeth on him should not perish, but have eternal life."],
+["John",8,32,"and ye shall know the truth, and the truth shall make you free."],
+["John",11,35,"Jesus wept."],
+["John",13,34,"A new commandment I give unto you, that ye love one another; even as I have loved you, that ye also love one another."],
+["John",14,6,"Jesus saith unto him, I am the way, and the truth, and the life: no one cometh unto the Father, but by me."],
+["John",15,13,"Greater love hath no man than this, that a man lay down his life for his friends."],
+["Acts",1,8,"But ye shall receive power, when the Holy Spirit is come upon you: and ye shall be my witnesses both in Jerusalem, and in all Judæa and Samaria, and unto the uttermost part of the earth."],
+["Romans",3,23,"for all have sinned, and fall short of the glory of God;"],
+["Romans",6,23,"For the wages of sin is death; but the free gift of God is eternal life in Christ Jesus our Lord."],
+["Romans",8,28,"And we know that to them that love God all things work together for good, even to them that are called according to his purpose."],
+["Romans",10,9,"because if thou shalt confess with thy mouth Jesus as Lord, and shalt believe in thy heart that God raised him from the dead, thou shalt be saved:"],
+["Romans",12,2,"And be not fashioned according to this world: but be ye transformed by the renewing of your mind, that ye may prove what is the good and acceptable and perfect will of God."],
+["Romans",15,13,"Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, in the power of the Holy Spirit."],
+["1 Corinthians",10,13,"There hath no temptation taken you but such as man can bear: but God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation make also the way of escape, that ye may be able to endure it."],
+["1 Corinthians",13,4,"Love suffereth long, and is kind; love envieth not; love vaunteth not itself, is not puffed up,"],
+["1 Corinthians",13,13,"But now abideth faith, hope, love, these three; and the greatest of these is love."],
+["2 Corinthians",5,17,"Wherefore if any man is in Christ, he is a new creature: the old things are passed away; behold, they are become new."],
+["2 Corinthians",12,9,"And he hath said unto me, My grace is sufficient for thee: for my power is made perfect in weakness. Most gladly therefore will I rather glory in my weaknesses, that the power of Christ may rest upon me."],
+["Galatians",2,20,"I have been crucified with Christ; and it is no longer I that live, but Christ liveth in me: and that life which I now live in the flesh I live in faith, the faith which is in the Son of God, who loved me, and gave himself up for me."],
+["Galatians",5,22,"But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness,"],
+["Ephesians",2,8,"for by grace have ye been saved through faith; and that not of yourselves, it is the gift of God;"],
+["Ephesians",6,11,"Put on the whole armor of God, that ye may be able to stand against the wiles of the devil."],
+["Philippians",4,6,"In nothing be anxious; but in everything by prayer and supplication with thanksgiving let your requests be made known unto God."],
+["Philippians",4,7,"And the peace of God, which passeth all understanding, shall guard your hearts and your thoughts in Christ Jesus."],
+["Philippians",4,13,"I can do all things in him that strengtheneth me."],
+["Colossians",3,23,"whatsoever ye do, work heartily, as unto the Lord, and not unto men;"],
+["1 Thessalonians",5,18,"in everything give thanks: for this is the will of God in Christ Jesus to you-ward."],
+["2 Timothy",1,7,"For God gave us not a spirit of fearfulness; but of power and love and discipline."],
+["2 Timothy",3,16,"Every scripture inspired of God is also profitable for teaching, for reproof, for correction, for instruction which is in righteousness:"],
+["Hebrews",4,12,"For the word of God is living, and active, and sharper than any two-edged sword, and piercing even to the dividing of soul and spirit, of both joints and marrow, and quick to discern the thoughts and intents of the heart."],
+["Hebrews",11,1,"Now faith is assurance of things hoped for, a conviction of things not seen."],
+["Hebrews",11,6,"and without faith it is impossible to be well-pleasing unto him; for he that cometh to God must believe that he is, and that he is a rewarder of them that seek after him."],
+["Hebrews",13,8,"Jesus Christ is the same yesterday and to-day, yea and for ever."],
+["James",1,5,"But if any of you lacketh wisdom, let him ask of God, who giveth to all liberally and upbraideth not; and it shall be given him."],
+["James",4,7,"Be subject therefore unto God; but resist the devil, and he will flee from you."],
+["1 Peter",3,15,"but sanctify in your hearts Christ as Lord: being ready always to give answer to every man that asketh you a reason concerning the hope that is in you, yet with meekness and fear:"],
+["1 Peter",5,7,"casting all your anxiety upon him, because he careth for you."],
+["1 John",1,9,"If we confess our sins, he is faithful and righteous to forgive us our sins, and to cleanse us from all unrighteousness."],
+["1 John",4,8,"He that loveth not knoweth not God; for God is love."],
+["Revelation",3,20,"Behold, I stand at the door and knock: if any man hear my voice and open the door, I will come in to him, and will sup with him, and he with me."],
+["Revelation",21,4,"and he shall wipe away every tear from their eyes; and death shall be no more; neither shall there be mourning, nor crying, nor pain, any more: the first things are passed away."],
+["Revelation",22,13,"I am the Alpha and the Omega, the first and the last, the beginning and the end."]
+];
+
+const MAX=5;
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const POOLS={easy:EASY,hard:HARD};
+const blankStats=()=>({played:0,wins:0,streak:0,best:0,dist:[0,0,0,0,0]});
+// Daily: every verse from both lists in a fixed, seeded order; one per calendar day
+function mulberry(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const DAILY=(()=>{const all=EASY.concat(HARD),rnd=mulberry(20261020);for(let i=all.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[all[i],all[j]]=[all[j],all[i]]}return all})();
+const EPOCH=Date.UTC(2026,9,20);
+const todayKey=()=>{const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
+const dayNum=k=>{const[y,m,d]=k.split("-").map(Number);return Math.round((Date.UTC(y,m-1,d)-EPOCH)/864e5)};
+const keyMinus=(k,n)=>{const[y,m,d]=k.split("-").map(Number);const t=new Date(y,m-1,d-n);return`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`};
+
+let play=store.get("vu-play","daily"); if(play!=="daily"&&play!=="unlimited") play="daily";
+let diff=store.get("vu-mode","easy"); if(!POOLS[diff]) diff="easy";
+let mode, V,stats,deck,count, dayKey;
+let cur,guesses,done,won,hintLevel,pickBook=null,timer=null;
+function loadMode(){
+  mode=play==="daily"?"daily":diff;
+  if(mode==="daily"){
+    V=DAILY; stats=store.get("vu-stats-daily",blankStats());
+    $("modeLabel").textContent="Daily";
+  }else{
+    V=POOLS[mode];
+    const legacy=mode==="easy"?store.get("vu-stats",null):null;
+    stats=store.get("vu-stats-"+mode,legacy||blankStats());
+    deck=store.get("vu-deck-"+mode,[]);
+    count=store.get("vu-count-"+mode,mode==="easy"?store.get("vu-count",0):0);
+    $("modeLabel").textContent=mode==="easy"?"Easy":"Hard";
+  }
+  document.querySelectorAll(".modes button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===diff)));
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.play===play)));
+  $("diffRow").hidden=play==="daily";
+}
+function setPlay(p){ if(p===play) return; play=p; store.set("vu-play",play); start(); }
+function setMode(m){ if(m===diff) return; diff=m; store.set("vu-mode",diff); start(); }
+function start(){ loadMode(); if(mode==="daily") startDaily(); else newGame(); updateDot(); }
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function drawVerse(){
+  if(!deck.length||deck.some(i=>i>=V.length)) deck=shuffle(V.map((_,i)=>i));
+  const i=deck.pop(); store.set("vu-deck-"+mode,deck); return i;
+}
+function resetBoard(){
+  $("verseText").textContent=cur[3];
+  $("answer").hidden=true; $("tray").hidden=false; $("endTray").hidden=true; $("countdown").hidden=true;
+  $("chIn").value=""; $("vsIn").value=""; setBook(null); msg("");
+  clearInterval(timer);
+}
+function newGame(){
+  if(mode==="daily") return setPlay("unlimited");
+  cur=V[drawVerse()]; guesses=[]; done=false; won=false; hintLevel=0; pickBook=null;
+  count++; store.set("vu-count-"+mode,count);
+  $("vnum").textContent="Verse "+count;
+  resetBoard(); renderHints(); render(false);
+}
+function startDaily(){
+  dayKey=todayKey(); const n=dayNum(dayKey);
+  cur=V[((n%V.length)+V.length)%V.length];
+  const saved=store.get("vu-daily-state",null);
+  if(saved&&saved.day===dayKey){guesses=saved.guesses;hintLevel=saved.hints;done=saved.done;won=saved.won}
+  else{guesses=[];hintLevel=0;done=false;won=false}
+  const d=new Date(); $("vnum").textContent=d.toLocaleDateString(undefined,{month:"short",day:"numeric"})+` · #${n+1}`;
+  resetBoard(); renderHints(); render(false);
+  if(done) showEnd();
+}
+function saveDaily(){ if(mode==="daily") store.set("vu-daily-state",{day:dayKey,guesses,hints:hintLevel,done,won}); }
+function updateDot(){
+  const s=store.get("vu-daily-state",null);
+  $("dailyDot").textContent=s&&s.day===todayKey()&&s.done?"✓ done":"new";
+}
+function setBook(name){
+  pickBook=name; const b=$("bookBtn");
+  b.textContent=name||"Choose book"; b.classList.toggle("placeholder",!name);
+  if(name) $("chIn").max=BOOKS[IDX[name]][1];
+}
+function msg(t,err){const m=$("msg");m.textContent=t;m.classList.toggle("err",!!err)}
+
+function judge(g){
+  const ti=IDX[cur[0]], gi=IDX[g[0]];
+  const book={text:g[0],cls:gi===ti?"hit":(BOOKS[gi][2]===BOOKS[ti][2]?"near":"miss"),arr:gi===ti?"":(ti<gi?"↑":"↓"),title:gi===ti?"Correct book":(ti<gi?"Answer is earlier in the Bible":"Answer is later in the Bible")};
+  const num=(gv,tv,r)=>({text:gv,cls:gv===tv?"hit":(Math.abs(gv-tv)<=r?"near":"miss"),arr:gv===tv?"":(tv>gv?"↑":"↓"),title:gv===tv?"Correct":(tv>gv?"Go higher":"Go lower")});
+  return [book,num(g[1],cur[1],3),num(g[2],cur[2],5)];
+}
+function render(animateLast){
+  const rows=$("rows"); rows.innerHTML="";
+  for(let r=0;r<MAX;r++){
+    const row=document.createElement("div"); row.className="row";
+    if(animateLast&&r===guesses.length-1) row.classList.add("new");
+    const g=guesses[r]; const cells=g?judge(g):[null,null,null];
+    cells.forEach(c=>{
+      const t=document.createElement("div"); t.className="tile"+(c?" "+c.cls:"");
+      if(c){t.title=c.title;t.innerHTML=`<span class="t"></span>${c.arr?`<span class="arr" aria-label="${c.title}">${c.arr}</span>`:""}`;t.querySelector(".t").textContent=c.text}
+      row.appendChild(t);
+    });
+    rows.appendChild(row);
+  }
+  const left=MAX-guesses.length;
+  $("triesLeft").textContent=done?"":`${left} guess${left===1?"":"es"} left`;
+}
+function submit(){
+  if(done) return;
+  if(!pickBook) return msg("Pick a book first.",true);
+  const max=BOOKS[IDX[pickBook]][1];
+  const ch=parseInt($("chIn").value,10), vs=parseInt($("vsIn").value,10);
+  if(!ch||ch<1||ch>max) return msg(`${pickBook} has chapters 1–${max}.`,true);
+  if(!vs||vs<1||vs>176) return msg("Enter a verse number.",true);
+  guesses.push([pickBook,ch,vs]); msg("");
+  const hit=pickBook===cur[0]&&ch===cur[1]&&vs===cur[2];
+  if(hit||guesses.length>=MAX) finish(hit); else saveDaily();
+  render(true);
+  if(!done){$("vsIn").value="";}
+}
+function finish(w){
+  done=true; won=w;
+  stats.played++;
+  if(mode==="daily"){
+    if(won){stats.streak=stats.lastWin===keyMinus(dayKey,1)?stats.streak+1:1;stats.lastWin=dayKey;stats.wins++;stats.best=Math.max(stats.best,stats.streak);stats.dist[guesses.length-1]++}
+    else stats.streak=0;
+    saveDaily(); updateDot();
+  }else{
+    if(won){stats.wins++;stats.streak++;stats.best=Math.max(stats.best,stats.streak);stats.dist[guesses.length-1]++}
+    else stats.streak=0;
+  }
+  store.set("vu-stats-"+mode,stats);
+  showEnd();
+}
+function showEnd(){
+  const a=$("answer"); a.hidden=false;
+  a.innerHTML=`<div></div><span class="${won?"win":"lose"}"></span>`;
+  a.querySelector("div").textContent=`${cur[0]} ${cur[1]}:${cur[2]}`;
+  const hintTxt=hintLevel?` · ${hintLevel} hint${hintLevel>1?"s":""}`:"";
+  a.querySelector("span").textContent=won?`Solved in ${guesses.length}/${MAX}${hintTxt} · streak ${curStreak()}`:"Out of guesses · streak reset";
+  $("tray").hidden=true; $("endTray").hidden=false;
+  if(mode==="daily"){
+    $("nextBtn").textContent="Play unlimited →";
+    $("countdown").hidden=false; tick(); clearInterval(timer); timer=setInterval(tick,1000);
+  }else{
+    $("nextBtn").textContent="Next verse →"; $("countdown").hidden=true;
+  }
+  $("nextBtn").focus();
+}
+function tick(){
+  if(mode!=="daily"){clearInterval(timer);return}
+  if(todayKey()!==dayKey){clearInterval(timer);startDaily();updateDot();return}
+  const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),t=Math.max(0,Math.floor((m-n)/1000));
+  const p=x=>String(x).padStart(2,"0");
+  $("countdown").innerHTML=`Next daily verse in <b>${p(Math.floor(t/3600))}:${p(Math.floor(t%3600/60))}:${p(t%60)}</b>`;
+}
+function curStreak(){
+  if(mode!=="daily") return stats.streak;
+  const t=todayKey();
+  return stats.lastWin===t||stats.lastWin===keyMinus(t,1)?stats.streak:0;
+}
+function hint(){
+  const ti=IDX[cur[0]];
+  const items=[["Testament",testament(ti)],["Section",BOOKS[ti][2]]];
+  if(hintLevel>=items.length) return;
+  hintLevel++; saveDaily(); renderHints();
+}
+function renderHints(){
+  const ti=IDX[cur[0]];
+  const items=[["Testament",testament(ti)],["Section",BOOKS[ti][2]]];
+  $("hints").innerHTML="";
+  items.slice(0,hintLevel).forEach(([k,v])=>{
+    const d=document.createElement("div"); d.innerHTML="<b></b><span></span>";
+    d.querySelector("b").textContent=k; d.querySelector("span").textContent=v;
+    $("hints").appendChild(d);
+  });
+  $("hintBtn").disabled=hintLevel>=items.length;
+}
+
+// book picker
+(function buildBooks(){
+  const groups=[...new Set(BOOKS.map(b=>b[2]))]; const host=$("bookGroups");
+  groups.forEach(g=>{
+    const sec=document.createElement("div"); sec.className="group";
+    sec.innerHTML=`<h3></h3><div class="books"></div>`; sec.querySelector("h3").textContent=g;
+    BOOKS.filter(b=>b[2]===g).forEach(b=>{
+      const btn=document.createElement("button"); btn.type="button"; btn.textContent=b[0]; btn.title=b[0];
+      btn.onclick=()=>{setBook(b[0]);close("bookSheet");$("chIn").focus()};
+      sec.querySelector(".books").appendChild(btn);
+    });
+    host.appendChild(sec);
+  });
+})();
+function open(id){
+  if(id==="bookSheet") document.querySelectorAll("#bookGroups button").forEach(b=>b.classList.toggle("sel",b.textContent===pickBook));
+  if(id==="statsSheet") renderStats();
+  $(id).hidden=false; const c=$(id).querySelector("[data-close]"); c&&c.focus();
+}
+function close(id){$(id).hidden=true}
+document.querySelectorAll(".scrim").forEach(s=>{
+  s.addEventListener("click",e=>{if(e.target===s||e.target.hasAttribute("data-close")) s.hidden=true});
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape") document.querySelectorAll(".scrim").forEach(s=>s.hidden=true)});
+
+function renderStats(){
+  $("statsTitle").textContent=mode==="daily"?"Daily Verse stats":(mode==="easy"?"Easy":"Hard")+" mode stats";
+  const pct=stats.played?Math.round(stats.wins/stats.played*100):0;
+  $("statsGrid").innerHTML=[[stats.played,"Played"],[pct,"Win %"],[curStreak(),"Streak"],[stats.best,"Best"]].map(([n,l])=>`<div><strong>${n}</strong><span>${l}</span></div>`).join("");
+  const mx=Math.max(1,...stats.dist);
+  $("dist").innerHTML=stats.dist.map((n,i)=>`<div><em>${i+1}</em><span class="bar${done&&won&&guesses.length===i+1?" cur":""}" style="width:${Math.max(8,n/mx*100)}%">${n}</span></div>`).join("");
+}
+
+$("bookBtn").onclick=()=>open("bookSheet");
+$("submitBtn").onclick=submit;
+$("guessForm").addEventListener("submit",e=>{e.preventDefault();submit()});
+$("hintBtn").onclick=hint;
+$("nextBtn").onclick=newGame;
+$("statsBtn").onclick=()=>open("statsSheet");
+$("statsBtn2").onclick=()=>open("statsSheet");
+$("rulesBtn").onclick=()=>open("rulesSheet");
+let resetArmed=false;
+$("resetStats").onclick=e=>{
+  if(!resetArmed){resetArmed=true;e.target.textContent="Tap again to reset";setTimeout(()=>{resetArmed=false;e.target.textContent="Reset stats"},3000);return}
+  stats=blankStats();store.set("vu-stats-"+mode,stats);renderStats();resetArmed=false;e.target.textContent="Reset stats";
+};
+
+document.querySelectorAll(".modes button").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>setPlay(b.dataset.play));
+
+start();
+
+</script>
+
+</body></html>
