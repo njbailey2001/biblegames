@@ -1,4 +1,6 @@
-# Biblegames.io
+# Bible Games Daily
+
+Live at **[biblegamesdaily.com](https://biblegamesdaily.com)**.
 
 Free Bible games that run in the browser. No sign-up, no install.
 
