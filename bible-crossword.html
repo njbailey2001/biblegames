@@ -1,0 +1,279 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Daily Bible Crossword</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Libre+Franklin:wght@500;600;700&display=swap">
+<style>
+/* Layout: a printed-Bible page. Grid is the "column", clues are the margin notes; red is used only the way rubricators used it — for numbers, active marks, and references. */
+:root{
+  --page:#f6f6f2; --paper:#ffffff; --ink:#1d2433; --muted:#5d6577; --rule:#d5d8de;
+  --rubric:#a3262a; --rubric-soft:#f3dcdb; --word:#e6ebf3; --wrong:#c2410c; --good:#2f6b4f;
+  --block:#1d2433;
+  --display:"IM Fell English SC", "Garamond", Georgia, serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --ui:"Libre Franklin", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --page:#14171e; --paper:#1c2029; --ink:#e9e7e1; --muted:#9aa1b0; --rule:#343a47;
+  --rubric:#e0716d; --rubric-soft:#4a2629; --word:#2a3242; --wrong:#f59e6b; --good:#7cc4a0; --block:#0b0d12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --page:#14171e; --paper:#1c2029; --ink:#e9e7e1; --muted:#9aa1b0; --rule:#343a47;
+  --rubric:#e0716d; --rubric-soft:#4a2629; --word:#2a3242; --wrong:#f59e6b; --good:#7cc4a0; --block:#0b0d12; color-scheme:dark}
+html,body{background:var(--page);color:var(--ink)}
+body{font-family:var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:980px;margin:0 auto;padding-block:20px 48px;display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid var(--rule);padding-bottom:14px}
+.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,5vw,40px);margin:0;line-height:1;letter-spacing:.01em;text-wrap:balance}
+.brand h1 span{color:var(--rubric)}
+.brand p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.datenav{display:flex;align-items:center;gap:6px;font-family:var(--ui);font-size:14px}
+.datenav button{width:34px;height:34px;border-radius:50%}
+.datenav .d{min-width:150px;text-align:center;font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+.meta h2{font-family:var(--body);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+.meta .book{color:var(--muted);font-style:italic}
+.diff{font-family:var(--ui);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:6px}
+.pips{display:inline-flex;gap:3px}.pips i{width:7px;height:7px;border-radius:50%;border:1px solid var(--rubric)}
+.pips i.on{background:var(--rubric)}
+button{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:7px 11px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--ink)}
+.home-link{font-family:var(--ui);font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;align-self:flex-start;margin-bottom:-6px}
+.home-link:hover{color:var(--rubric)}
+button:disabled{opacity:.35;cursor:default}
+button:focus-visible{outline:2px solid var(--rubric);outline-offset:2px}
+.game{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:28px;align-items:start}
+.left{display:flex;flex-direction:column;gap:12px;min-width:0}
+.cluebar{font-family:var(--body);background:var(--word);border-radius:6px;padding:10px 12px;min-height:46px;display:flex;gap:10px;align-items:baseline}
+.cluebar b{font-family:var(--ui);color:var(--rubric);white-space:nowrap;font-size:13px}
+.board{position:relative;width:100%;aspect-ratio:1;max-width:100%}
+.grid{display:grid;grid-template-columns:repeat(9,1fr);grid-template-rows:repeat(9,1fr);width:100%;height:100%;border:2px solid var(--ink);background:var(--block);gap:1px}
+.cell{position:relative;background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--ui);font-weight:600;font-size:clamp(16px,4.6vw,24px);text-transform:uppercase;cursor:pointer;user-select:none;color:var(--ink)}
+.cell.blk{background:var(--block);cursor:default}
+.cell .n{position:absolute;top:1px;left:3px;font-size:clamp(8px,2vw,11px);font-weight:600;color:var(--rubric)}
+.cell.inword{background:var(--word)}
+.cell.cur{background:var(--rubric-soft);box-shadow:inset 0 0 0 2px var(--rubric)}
+.cell.bad{color:var(--wrong)}
+.cell.bad::after{content:"";position:absolute;left:15%;right:15%;top:50%;border-top:2px solid var(--wrong);transform:rotate(-30deg)}
+.cell.rev{color:var(--rubric)}
+.cell.rev::before{content:"";position:absolute;right:3px;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--rubric)}
+.cell.ok{color:var(--good)}
+#kb{position:absolute;opacity:0;width:1px;height:1px;left:0;top:0;border:0;padding:0;font-size:16px}
+.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tools .lbl{font-family:var(--ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.tools .grp{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.confirm{display:flex;gap:8px;align-items:center;font-family:var(--ui);font-size:13px;flex-wrap:wrap}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:22px;min-width:0}
+.clues h3{font-family:var(--display);font-weight:400;font-size:20px;margin:0 0 8px;border-bottom:1px solid var(--rule);padding-bottom:4px}
+.clues ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.clues li{display:grid;grid-template-columns:26px 1fr;gap:6px;padding:6px 6px;border-radius:5px;cursor:pointer;font-size:15px;line-height:1.4}
+.clues li:hover{background:var(--word)}
+.clues li.act{background:var(--rubric-soft)}
+.clues li .num{font-family:var(--ui);font-weight:700;color:var(--rubric);font-size:13px;padding-top:2px;font-variant-numeric:tabular-nums}
+.clues li.done .txt{color:var(--muted)}
+.ref{display:block;font-family:var(--ui);font-size:12px;font-weight:600;margin-top:2px;color:var(--rubric);text-decoration:none}
+.ref:hover{text-decoration:underline}
+.solved{border:1px solid var(--rubric);border-radius:8px;padding:16px 18px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.solved h3{font-family:var(--display);font-weight:400;font-size:24px;margin:0;color:var(--rubric)}
+.solved p{margin:0;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--rule);padding-top:12px;max-width:70ch}
+@media (max-width:760px){
+  .game{grid-template-columns:minmax(0,1fr)}
+  .clues{grid-template-columns:1fr}
+  .cluebar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+}
+@media (prefers-reduced-motion:no-preference){.cell{transition:background .12s}}
+</style>
+
+<div class="wrap">
+  <a class="home-link" href="index.html">← All games</a>
+  <header>
+    <div class="brand">
+      <h1>Bible <span>Crossword</span></h1>
+      <p>A 9×9 Bible crossword. New puzzle every day. Answers follow the NIV.</p>
+    </div>
+    <div class="datenav">
+      <button id="prev" aria-label="Previous day">‹</button>
+      <div class="d" id="dateLbl"></div>
+      <button id="next" aria-label="Next day">›</button>
+    </div>
+  </header>
+
+  <div class="meta">
+    <h2 id="theme"></h2>
+    <span class="book" id="book"></span>
+    <span class="diff"><span id="diffName"></span><span class="pips" id="pips"></span></span>
+  </div>
+
+  <div class="game">
+    <div class="left">
+      <div class="cluebar" id="cluebar"><b id="cbNum"></b><span id="cbTxt"></span></div>
+      <div class="board">
+        <div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div>
+        <input id="kb" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Type letters">
+      </div>
+      <div class="tools">
+        <div class="grp"><span class="lbl">Check</span>
+          <button data-a="check-cell">Letter</button><button data-a="check-word">Word</button><button data-a="check-all">Puzzle</button></div>
+        <div class="grp"><span class="lbl">Reveal</span>
+          <button data-a="rev-cell">Letter</button><button data-a="rev-word">Word</button><button data-a="rev-all">Puzzle</button></div>
+        <button data-a="clear">Clear</button>
+      </div>
+      <div class="confirm" id="confirm" hidden><span id="confirmTxt"></span><button id="yes">Yes</button><button id="no">Cancel</button></div>
+      <div class="solved" id="solved" hidden>
+        <h3 id="solvedH">Well done</h3>
+        <p id="solvedP"></p>
+      </div>
+    </div>
+    <div class="clues">
+      <section><h3>Across</h3><ol id="across"></ol></section>
+      <section><h3>Down</h3><ol id="down"></ol></section>
+    </div>
+  </div>
+
+  <footer>Verse references appear under each clue once you solve that word; tap one to read it on Bible Gateway (NIV). Difficulty climbs from Monday to Sunday, and each day focuses on one book or theme. Your progress saves in this browser.</footer>
+</div>
+
+<script>
+const PUZZLES = [[{"theme": "Creation and Eden", "book": "Genesis 1–3", "grid": ["D.SERPENT", "U.E...V..", "S.V.EDEN.", "TREE....A", "..N.E.R.D", "..T.A.I.A", ".CHERUBIM", "....T....", ".LIGHT..."], "across": [{"n": 2, "r": 0, "c": 2, "answer": "SERPENT", "clue": "More crafty than any wild animal", "ref": "Genesis 3:1"}, {"n": 4, "r": 2, "c": 4, "answer": "EDEN", "clue": "Garden God planted in the east", "ref": "Genesis 2:8"}, {"n": 5, "r": 3, "c": 0, "answer": "TREE", "clue": "The ___ of life stood in the garden", "ref": "Genesis 2:9"}, {"n": 9, "r": 6, "c": 1, "answer": "CHERUBIM", "clue": "Guards placed east of the garden", "ref": "Genesis 3:24"}, {"n": 10, "r": 8, "c": 1, "answer": "LIGHT", "clue": "God said, \"Let there be ___\"", "ref": "Genesis 1:3"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "DUST", "clue": "God formed man from the ___ of the ground", "ref": "Genesis 2:7"}, {"n": 2, "r": 0, "c": 2, "answer": "SEVENTH", "clue": "Day on which God rested", "ref": "Genesis 2:2"}, {"n": 3, "r": 0, "c": 6, "answer": "EVE", "clue": "Mother of all the living", "ref": "Genesis 3:20"}, {"n": 6, "r": 3, "c": 8, "answer": "ADAM", "clue": "First man", "ref": "Genesis 2:20"}, {"n": 7, "r": 4, "c": 4, "answer": "EARTH", "clue": "In the beginning God created the heavens and the ___", "ref": "Genesis 1:1"}, {"n": 8, "r": 4, "c": 6, "answer": "RIB", "clue": "God made the woman from this", "ref": "Genesis 2:22"}]}, {"theme": "Noah and the Flood", "book": "Genesis 6–9", "grid": ["..RAVEN.S", "D.A...O.H", "OLIVE.A.E", "V.N...HAM", "E.B....R.", ".FORTY.A.", "..W...ARK", ".......A.", "...CUBITS"], "across": [{"n": 1, "r": 0, "c": 2, "answer": "RAVEN", "clue": "First bird Noah sent out", "ref": "Genesis 8:7"}, {"n": 5, "r": 2, "c": 0, "answer": "OLIVE", "clue": "Kind of leaf the dove brought back", "ref": "Genesis 8:11"}, {"n": 6, "r": 3, "c": 6, "answer": "HAM", "clue": "Noah's son, father of Canaan", "ref": "Genesis 9:18"}, {"n": 8, "r": 5, "c": 1, "answer": "FORTY", "clue": "Days and nights of rain", "ref": "Genesis 7:12"}, {"n": 9, "r": 6, "c": 6, "answer": "ARK", "clue": "Vessel built for the flood", "ref": "Genesis 6:14"}, {"n": 10, "r": 8, "c": 3, "answer": "CUBITS", "clue": "The ark was 300 of these long", "ref": "Genesis 6:15"}], "down": [{"n": 1, "r": 0, "c": 2, "answer": "RAINBOW", "clue": "Sign of God's covenant in the clouds", "ref": "Genesis 9:13"}, {"n": 2, "r": 0, "c": 6, "answer": "NOAH", "clue": "He found favor in the eyes of the LORD", "ref": "Genesis 6:8"}, {"n": 3, "r": 0, "c": 8, "answer": "SHEM", "clue": "Noah's son listed first", "ref": "Genesis 6:10"}, {"n": 4, "r": 1, "c": 0, "answer": "DOVE", "clue": "Bird that returned with a leaf", "ref": "Genesis 8:11"}, {"n": 7, "r": 3, "c": 7, "answer": "ARARAT", "clue": "Mountains where the ark came to rest", "ref": "Genesis 8:4"}]}], [{"theme": "The Exodus", "book": "Exodus 2–16", "grid": ["..QUAIL..", "P.....O..", "AARON.C.P", "S....BUSH", "STAFF.S.A", "O..R..T.R", "V.MOSES.A", "E..G....O", "REDSEA..H"], "across": [{"n": 1, "r": 0, "c": 2, "answer": "QUAIL", "clue": "Birds that covered the camp in the evening", "ref": "Exodus 16:13"}, {"n": 4, "r": 2, "c": 0, "answer": "AARON", "clue": "Brother who spoke for Moses", "ref": "Exodus 4:14"}, {"n": 6, "r": 3, "c": 5, "answer": "BUSH", "clue": "It burned but did not burn up", "ref": "Exodus 3:2"}, {"n": 7, "r": 4, "c": 0, "answer": "STAFF", "clue": "Aaron threw it down and it became a snake", "ref": "Exodus 7:10"}, {"n": 9, "r": 6, "c": 2, "answer": "MOSES", "clue": "Named because he was drawn out of the water", "ref": "Exodus 2:10"}, {"n": 10, "r": 8, "c": 0, "answer": "REDSEA", "clue": "Waters parted for Israel (3,3)", "ref": "Exodus 13:18"}], "down": [{"n": 2, "r": 0, "c": 6, "answer": "LOCUSTS", "clue": "They covered the ground in the eighth plague", "ref": "Exodus 10:4"}, {"n": 3, "r": 1, "c": 0, "answer": "PASSOVER", "clue": "\"It is the LORD's ___\"", "ref": "Exodus 12:11"}, {"n": 5, "r": 2, "c": 8, "answer": "PHARAOH", "clue": "King who would not let the people go", "ref": "Exodus 5:2"}, {"n": 8, "r": 4, "c": 3, "answer": "FROGS", "clue": "Second plague", "ref": "Exodus 8:2"}]}, {"theme": "The Birth of Jesus", "book": "Matthew 1–2; Luke 1–2", "grid": ["B..EGYPT.", "E.M.O....", "T.A.L.J..", "HEROD.O.M", "L.Y...S.A", "E..SIMEON", "H..T..P.G", "E..A..H.E", "MYRRH...R"], "across": [{"n": 2, "r": 0, "c": 3, "answer": "EGYPT", "clue": "Where Joseph took the family to escape", "ref": "Matthew 2:13"}, {"n": 6, "r": 3, "c": 0, "answer": "HEROD", "clue": "King of Judea when Jesus was born", "ref": "Matthew 2:1"}, {"n": 8, "r": 5, "c": 3, "answer": "SIMEON", "clue": "Righteous man who held Jesus in the temple", "ref": "Luke 2:25"}, {"n": 9, "r": 8, "c": 0, "answer": "MYRRH", "clue": "Gift alongside gold and frankincense", "ref": "Matthew 2:11"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "BETHLEHEM", "clue": "Town of David where Jesus was born", "ref": "Luke 2:4"}, {"n": 3, "r": 0, "c": 4, "answer": "GOLD", "clue": "First gift named", "ref": "Matthew 2:11"}, {"n": 4, "r": 1, "c": 2, "answer": "MARY", "clue": "Virgin pledged to be married to Joseph", "ref": "Luke 1:27"}, {"n": 5, "r": 2, "c": 6, "answer": "JOSEPH", "clue": "Descendant of David, husband of Mary", "ref": "Matthew 1:16"}, {"n": 7, "r": 3, "c": 8, "answer": "MANGER", "clue": "Where the baby was laid", "ref": "Luke 2:7"}, {"n": 8, "r": 5, "c": 3, "answer": "STAR", "clue": "\"We saw his ___ when it rose\"", "ref": "Matthew 2:2"}]}], [{"theme": "Israel's First Kings", "book": "1 Samuel – 1 Kings", "grid": ["..JESSE..", "D....T..T", "ABSALOM.E", "V.O..N..M", "I.LYRE..P", "D.O..SAUL", "..M.....E", "..O......", "JONATHAN."], "across": [{"n": 1, "r": 0, "c": 2, "answer": "JESSE", "clue": "Bethlehemite whose son God chose as king", "ref": "1 Samuel 16:1"}, {"n": 5, "r": 2, "c": 0, "answer": "ABSALOM", "clue": "His hair got caught in a tree", "ref": "2 Samuel 18:9"}, {"n": 7, "r": 4, "c": 2, "answer": "LYRE", "clue": "Instrument David played for Saul", "ref": "1 Samuel 16:23"}, {"n": 8, "r": 5, "c": 5, "answer": "SAUL", "clue": "First king, anointed by Samuel", "ref": "1 Samuel 10:1"}, {"n": 9, "r": 8, "c": 0, "answer": "JONATHAN", "clue": "Saul's son, one in spirit with David", "ref": "1 Samuel 18:1"}, {"n": 10, "r": 8, "c": 2, "answer": "NATHAN", "clue": "Prophet who told David about a poor man's lamb", "ref": "2 Samuel 12:1"}], "down": [{"n": 2, "r": 0, "c": 5, "answer": "STONES", "clue": "David chose five smooth ones", "ref": "1 Samuel 17:40"}, {"n": 3, "r": 1, "c": 0, "answer": "DAVID", "clue": "Youngest son, keeping the sheep", "ref": "1 Samuel 16:11"}, {"n": 4, "r": 1, "c": 8, "answer": "TEMPLE", "clue": "Built in the 480th year after the Exodus", "ref": "1 Kings 6:1"}, {"n": 6, "r": 2, "c": 2, "answer": "SOLOMON", "clue": "He built the temple", "ref": "1 Kings 6:1"}]}, {"theme": "Parables of Jesus", "book": "Matthew 7–25; Luke 10–15", "grid": ["R....Y...", "O...NET.S", "CALF.A..A", "K.A..S..N", "..MUSTARD", "P.P.O....", "I.S.WEEDS", "G...E....", "SAMARITAN"], "across": [{"n": 3, "r": 1, "c": 4, "answer": "NET", "clue": "Let down into the lake, it caught all kinds of fish", "ref": "Matthew 13:47"}, {"n": 5, "r": 2, "c": 0, "answer": "CALF", "clue": "Fattened one killed for the celebration", "ref": "Luke 15:23"}, {"n": 7, "r": 4, "c": 2, "answer": "MUSTARD", "clue": "Smallest of seeds, becomes a tree", "ref": "Matthew 13:31–32"}, {"n": 10, "r": 6, "c": 4, "answer": "WEEDS", "clue": "An enemy sowed them among the wheat", "ref": "Matthew 13:25"}, {"n": 11, "r": 8, "c": 0, "answer": "SAMARITAN", "clue": "He took pity on the man beaten by robbers", "ref": "Luke 10:33"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "ROCK", "clue": "The wise man built his house on it", "ref": "Matthew 7:24"}, {"n": 2, "r": 0, "c": 5, "answer": "YEAST", "clue": "Mixed into flour until it worked all through", "ref": "Matthew 13:33"}, {"n": 4, "r": 1, "c": 8, "answer": "SAND", "clue": "The foolish man built his house on it", "ref": "Matthew 7:26"}, {"n": 6, "r": 2, "c": 2, "answer": "LAMPS", "clue": "The ten virgins took these to meet the bridegroom", "ref": "Matthew 25:1"}, {"n": 8, "r": 4, "c": 4, "answer": "SOWER", "clue": "\"Listen then to what the parable of the ___ means\"", "ref": "Matthew 13:18"}, {"n": 9, "r": 5, "c": 0, "answer": "PIGS", "clue": "The younger son was sent to feed them", "ref": "Luke 15:15"}]}], [{"theme": "Prophets of Israel", "book": "1 Kings – Jonah", "grid": ["L..N....B", "ISAIAH..A", "O..N....A", "N.JEZEBEL", "S..V.L...", "...ELISHA", "FISH.J...", ".....AHAB", ".JONAH..."], "across": [{"n": 4, "r": 1, "c": 0, "answer": "ISAIAH", "clue": "He saw the Lord the year Uzziah died", "ref": "Isaiah 6:1"}, {"n": 5, "r": 3, "c": 2, "answer": "JEZEBEL", "clue": "She threatened Elijah's life", "ref": "1 Kings 19:2"}, {"n": 7, "r": 5, "c": 3, "answer": "ELISHA", "clue": "He asked for a double portion", "ref": "2 Kings 2:9"}, {"n": 8, "r": 6, "c": 0, "answer": "FISH", "clue": "Huge creature that swallowed a prophet", "ref": "Jonah 1:17"}, {"n": 9, "r": 7, "c": 5, "answer": "AHAB", "clue": "King who did more evil than all before him", "ref": "1 Kings 16:30"}, {"n": 10, "r": 8, "c": 1, "answer": "JONAH", "clue": "Son of Amittai who ran from God", "ref": "Jonah 1:1"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "LIONS", "clue": "Daniel was thrown into their den", "ref": "Daniel 6:16"}, {"n": 2, "r": 0, "c": 3, "answer": "NINEVEH", "clue": "\"That great city\" Jonah was sent to", "ref": "Jonah 1:2"}, {"n": 3, "r": 0, "c": 8, "answer": "BAAL", "clue": "His 450 prophets lost the contest", "ref": "1 Kings 18:22"}, {"n": 6, "r": 3, "c": 5, "answer": "ELIJAH", "clue": "Tishbite who announced the drought to Ahab", "ref": "1 Kings 17:1"}]}, {"theme": "Paul's Journeys", "book": "Acts 9–28", "grid": ["....MALTA", "S.....Y.T", "I.C.V.D.H", "L.O.I.I.E", "AGRIPPA.N", "S.I.E...S", "..N.ROME.", "..T......", ".PHILIPPI"], "across": [{"n": 1, "r": 0, "c": 4, "answer": "MALTA", "clue": "Island of the shipwreck", "ref": "Acts 28:1"}, {"n": 7, "r": 4, "c": 0, "answer": "AGRIPPA", "clue": "\"Do you think that in such a short time…\"", "ref": "Acts 26:28"}, {"n": 8, "r": 6, "c": 4, "answer": "ROME", "clue": "Paul lived here under guard", "ref": "Acts 28:16"}, {"n": 9, "r": 8, "c": 1, "answer": "PHILIPPI", "clue": "Roman colony, leading city of Macedonia", "ref": "Acts 16:12"}], "down": [{"n": 2, "r": 0, "c": 6, "answer": "LYDIA", "clue": "Dealer in purple cloth from Thyatira", "ref": "Acts 16:14"}, {"n": 3, "r": 0, "c": 8, "answer": "ATHENS", "clue": "City full of idols", "ref": "Acts 17:16"}, {"n": 4, "r": 1, "c": 0, "answer": "SILAS", "clue": "Paul's companion after the split with Barnabas", "ref": "Acts 15:40"}, {"n": 5, "r": 2, "c": 2, "answer": "CORINTH", "clue": "Paul met Aquila and Priscilla here", "ref": "Acts 18:1"}, {"n": 6, "r": 2, "c": 4, "answer": "VIPER", "clue": "It fastened on Paul's hand", "ref": "Acts 28:3"}]}], [{"theme": "The Judges", "book": "Judges 3–16", "grid": [".DAGON...", ".E.I...D.", ".L.D.JAEL", "SISERA.B.", ".L.O.W.O.", ".A.N.B.R.", ".H..ZORAH", ".....N.H.", "TORCHES.."], "across": [{"n": 1, "r": 0, "c": 1, "answer": "DAGON", "clue": "Philistine god of the temple Samson toppled", "ref": "Judges 16:23"}, {"n": 4, "r": 2, "c": 5, "answer": "JAEL", "clue": "She used a tent peg", "ref": "Judges 4:21"}, {"n": 5, "r": 3, "c": 0, "answer": "SISERA", "clue": "Commander of Jabin's army", "ref": "Judges 4:2"}, {"n": 6, "r": 6, "c": 4, "answer": "ZORAH", "clue": "Hometown of Manoah", "ref": "Judges 13:2"}, {"n": 7, "r": 8, "c": 0, "answer": "TORCHES", "clue": "Hidden inside empty jars", "ref": "Judges 7:16"}], "down": [{"n": 1, "r": 0, "c": 1, "answer": "DELILAH", "clue": "Woman in the Valley of Sorek", "ref": "Judges 16:4"}, {"n": 2, "r": 0, "c": 3, "answer": "GIDEON", "clue": "Threshing wheat in a winepress", "ref": "Judges 6:11"}, {"n": 3, "r": 1, "c": 7, "answer": "DEBORAH", "clue": "Prophet who held court under a palm", "ref": "Judges 4:4"}, {"n": 4, "r": 2, "c": 5, "answer": "JAWBONE", "clue": "Samson struck down a thousand with one", "ref": "Judges 15:15"}]}, {"theme": "The Early Church", "book": "Acts 1–12", "grid": ["..CLOUD..", "S.H.....M", "A.A.S.R.A", "P.I.T.H.T", "PENTECOST", "H.S.P.D.H", "I...H.A.I", "R...E...A", "A.TONGUES"], "across": [{"n": 1, "r": 0, "c": 2, "answer": "CLOUD", "clue": "It hid Jesus from sight", "ref": "Acts 1:9"}, {"n": 6, "r": 4, "c": 0, "answer": "PENTECOST", "clue": "Day when all were together in one place", "ref": "Acts 2:1"}, {"n": 7, "r": 8, "c": 2, "answer": "TONGUES", "clue": "They looked like fire and rested on each", "ref": "Acts 2:3"}], "down": [{"n": 1, "r": 0, "c": 2, "answer": "CHAINS", "clue": "They fell off Peter's wrists", "ref": "Acts 12:7"}, {"n": 2, "r": 1, "c": 0, "answer": "SAPPHIRA", "clue": "Wife who kept back part of the price", "ref": "Acts 5:1"}, {"n": 3, "r": 1, "c": 8, "answer": "MATTHIAS", "clue": "Chosen by lot to replace Judas", "ref": "Acts 1:26"}, {"n": 4, "r": 2, "c": 4, "answer": "STEPHEN", "clue": "Man full of faith, chosen among the seven", "ref": "Acts 6:5"}, {"n": 5, "r": 2, "c": 6, "answer": "RHODA", "clue": "Servant who left Peter knocking", "ref": "Acts 12:13"}]}], [{"theme": "The Patriarchs", "book": "Genesis 11–37", "grid": ["S.H..R...", "T.ABRAHAM", "A.G..M..O", "ISAAC..UR", "R.R.....I", "W..L....A", "A.REBEKAH", "Y..A.....", ".ISHMAEL."], "across": [{"n": 4, "r": 1, "c": 2, "answer": "ABRAHAM", "clue": "\"Father of many nations\"", "ref": "Genesis 17:5"}, {"n": 6, "r": 3, "c": 0, "answer": "ISAAC", "clue": "Son born when Abraham was 100", "ref": "Genesis 21:5"}, {"n": 7, "r": 3, "c": 7, "answer": "UR", "clue": "City of the Chaldeans Terah left", "ref": "Genesis 11:31"}, {"n": 9, "r": 6, "c": 2, "answer": "REBEKAH", "clue": "Came out with her jar on her shoulder", "ref": "Genesis 24:15"}, {"n": 10, "r": 8, "c": 1, "answer": "ISHMAEL", "clue": "Name meaning \"God hears\"", "ref": "Genesis 16:11"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "STAIRWAY", "clue": "Resting on earth, its top reaching heaven", "ref": "Genesis 28:12"}, {"n": 2, "r": 0, "c": 2, "answer": "HAGAR", "clue": "Sarai's Egyptian slave", "ref": "Genesis 16:1"}, {"n": 3, "r": 0, "c": 5, "answer": "RAM", "clue": "Caught by its horns in a thicket", "ref": "Genesis 22:13"}, {"n": 5, "r": 1, "c": 8, "answer": "MORIAH", "clue": "Region of the mountain of testing", "ref": "Genesis 22:2"}, {"n": 8, "r": 5, "c": 3, "answer": "LEAH", "clue": "Laban's older daughter, with weak eyes", "ref": "Genesis 29:17"}]}, {"theme": "Psalms and Wisdom", "book": "Job, Psalms, Proverbs, Ecclesiastes", "grid": ["SHEPHERD.", "L........", "UZ..K.S.W", "G...O.E.I", "G.STREAMS", "ANT.A.S.D", "R.I.H.O.O", "D.L...N.M", "..LAMP..."], "across": [{"n": 1, "r": 0, "c": 0, "answer": "SHEPHERD", "clue": "\"The LORD is my ___\"", "ref": "Psalm 23:1"}, {"n": 2, "r": 2, "c": 0, "answer": "UZ", "clue": "Land where Job lived", "ref": "Job 1:1"}, {"n": 6, "r": 4, "c": 2, "answer": "STREAMS", "clue": "The blessed man is like a tree planted by these", "ref": "Psalm 1:3"}, {"n": 7, "r": 5, "c": 0, "answer": "ANT", "clue": "\"Go to the ___, you sluggard\"", "ref": "Proverbs 6:6"}, {"n": 8, "r": 8, "c": 2, "answer": "LAMP", "clue": "God's word, to my feet", "ref": "Psalm 119:105"}], "down": [{"n": 1, "r": 0, "c": 0, "answer": "SLUGGARD", "clue": "Told to consider the ant's ways", "ref": "Proverbs 6:6"}, {"n": 3, "r": 2, "c": 4, "answer": "KORAH", "clue": "His sons are credited with Psalm 42", "ref": "Psalm 42 (title)"}, {"n": 4, "r": 2, "c": 6, "answer": "SEASON", "clue": "One for every activity under the heavens", "ref": "Ecclesiastes 3:1"}, {"n": 5, "r": 2, "c": 8, "answer": "WISDOM", "clue": "The fear of the LORD is its beginning", "ref": "Proverbs 9:10"}, {"n": 6, "r": 4, "c": 2, "answer": "STILL", "clue": "\"Be ___, and know that I am God\"", "ref": "Psalm 46:10"}]}], [{"theme": "Exile and Return", "book": "Daniel, Ezra, Nehemiah, Esther", "grid": ["..M......", "..O.EZRA.", "CYRUS....", "..D.T..V.", "S.E.HAMAN", "U.C.E..S.", "SHADRACH.", "A.I....T.", "....PURIM"], "across": [{"n": 2, "r": 1, "c": 4, "answer": "EZRA", "clue": "Teacher well versed in the Law of Moses", "ref": "Ezra 7:6"}, {"n": 3, "r": 2, "c": 0, "answer": "CYRUS", "clue": "Persian king whose heart the LORD moved", "ref": "Ezra 1:1"}, {"n": 6, "r": 4, "c": 4, "answer": "HAMAN", "clue": "Agagite elevated above the nobles", "ref": "Esther 3:1"}, {"n": 7, "r": 6, "c": 0, "answer": "SHADRACH", "clue": "Name given to Hananiah", "ref": "Daniel 1:7"}, {"n": 8, "r": 8, "c": 4, "answer": "PURIM", "clue": "Days named from the word \"pur\"", "ref": "Esther 9:26"}], "down": [{"n": 1, "r": 0, "c": 2, "answer": "MORDECAI", "clue": "Benjamite who raised his cousin", "ref": "Esther 2:7"}, {"n": 2, "r": 1, "c": 4, "answer": "ESTHER", "clue": "Queen \"for such a time as this\"", "ref": "Esther 4:14"}, {"n": 4, "r": 3, "c": 7, "answer": "VASHTI", "clue": "Queen who refused to come", "ref": "Esther 1:12"}, {"n": 5, "r": 4, "c": 0, "answer": "SUSA", "clue": "Citadel of the royal throne", "ref": "Esther 1:2"}]}, {"theme": "Revelation", "book": "Revelation 1–21", "grid": ["PATMOS...", "....M.L.S", ".LUKEWARM", "L...G.O.Y", "ALPHA.D.R", "M.....I.N", "BEAST.C.A", "......E..", ".CRYSTAL."], "across": [{"n": 1, "r": 0, "c": 0, "answer": "PATMOS", "clue": "Island of John's exile", "ref": "Revelation 1:9"}, {"n": 5, "r": 2, "c": 1, "answer": "LUKEWARM", "clue": "Neither hot nor cold", "ref": "Revelation 3:16"}, {"n": 7, "r": 4, "c": 0, "answer": "ALPHA", "clue": "\"I am the ___ and the Omega\"", "ref": "Revelation 1:8"}, {"n": 8, "r": 6, "c": 0, "answer": "BEAST", "clue": "It came out of the sea", "ref": "Revelation 13:1"}, {"n": 9, "r": 8, "c": 1, "answer": "CRYSTAL", "clue": "The sea of glass was clear as this", "ref": "Revelation 4:6"}], "down": [{"n": 2, "r": 0, "c": 4, "answer": "OMEGA", "clue": "Last letter in the divine title", "ref": "Revelation 1:8"}, {"n": 3, "r": 1, "c": 6, "answer": "LAODICEA", "clue": "Seventh church addressed", "ref": "Revelation 3:14"}, {"n": 4, "r": 1, "c": 8, "answer": "SMYRNA", "clue": "Church told \"Be faithful, even to the point of death\"", "ref": "Revelation 2:10"}, {"n": 6, "r": 3, "c": 0, "answer": "LAMB", "clue": "Looking as if it had been slain", "ref": "Revelation 5:6"}]}]];
+const DAYNAMES=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+const DIFF=["Gentle","Easy","Medium","Medium","Tough","Tough","Challenging"];
+const DIFFPIPS=[1,2,3,3,4,4,5];
+const EPOCH=Date.UTC(2026,0,5); // a Monday
+const FIRST=Date.UTC(2026,9,19);
+const DAY=864e5;
+function todayUTC(){const d=new Date();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());}
+const TODAY=todayUTC();
+let cur=TODAY;
+function pick(t){const k=Math.round((t-EPOCH)/DAY);const wd=((k%7)+7)%7;const wk=Math.floor(k/7);return {wd,p:PUZZLES[wd][((wk%2)+2)%2]};}
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+let P,sol,fill,marks,words,cellWords,pos,dir,solvedFlag;
+const gridEl=document.getElementById('grid'),kb=document.getElementById('kb');
+
+function load(t){
+  cur=t;const {wd,p}=pick(t);P=p;
+  sol=p.grid.map(r=>r.split(''));
+  const key='versle-'+new Date(t).toISOString().slice(0,10);
+  const saved=store.get(key)||{};
+  fill=saved.fill||sol.map(r=>r.map(()=>''));
+  marks=saved.marks||sol.map(r=>r.map(()=>''));
+  words=[];cellWords={};
+  for(const [d,list] of [['A',p.across],['D',p.down]]) for(const w of list){
+    const cells=[];for(let i=0;i<w.answer.length;i++)cells.push(d==='A'?[w.r,w.c+i]:[w.r+i,w.c]);
+    const o={...w,d,cells,id:d+w.n};words.push(o);
+    for(const [r,c] of cells){(cellWords[r+','+c]=cellWords[r+','+c]||{})[d]=o;}
+  }
+  const d=new Date(t);
+  document.getElementById('dateLbl').textContent=DAYNAMES[wd]+', '+d.toLocaleDateString(undefined,{month:'short',day:'numeric',timeZone:'UTC'});
+  document.getElementById('theme').textContent=p.theme;
+  document.getElementById('book').textContent=p.book;
+  document.getElementById('diffName').textContent=DIFF[wd];
+  document.getElementById('pips').innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<=DIFFPIPS[wd]?'on':''}"></i>`).join('');
+  document.getElementById('prev').disabled=t<=FIRST;
+  document.getElementById('next').disabled=t>=TODAY;
+  buildGrid();buildClues();
+  const first=words.find(w=>w.d==='A')||words[0];pos=[...first.cells[0]];dir=first.d;
+  solvedFlag=false;render();checkSolved(true);
+}
+function save(){store.set('versle-'+new Date(cur).toISOString().slice(0,10),{fill,marks});}
+function buildGrid(){
+  gridEl.innerHTML='';const nums={};
+  for(const w of words)nums[w.r+','+w.c]=w.n;
+  for(let r=0;r<9;r++)for(let c=0;c<9;c++){
+    const el=document.createElement('div');el.className='cell'+(sol[r][c]==='.'?' blk':'');el.id=`c${r}${c}`;
+    if(sol[r][c]!=='.'){el.setAttribute('role','gridcell');el.innerHTML=(nums[r+','+c]?`<span class="n">${nums[r+','+c]}</span>`:'')+'<span class="l"></span>';
+      el.addEventListener('click',()=>{if(pos[0]===r&&pos[1]===c){toggleDir();}else{pos=[r,c];if(!cellWords[r+','+c][dir])dir=dir==='A'?'D':'A';}render();focusKb();});}
+    gridEl.appendChild(el);
+  }
+}
+function refLink(ref){const q=encodeURIComponent(ref.replace(/\s*\(title\)/,'').replace('–','-'));return `<a class="ref" href="https://www.biblegateway.com/passage/?search=${q}&version=NIV" target="_blank" rel="noopener">${ref}</a>`;}
+function buildClues(){
+  for(const d of ['A','D']){
+    const ol=document.getElementById(d==='A'?'across':'down');ol.innerHTML='';
+    for(const w of words.filter(x=>x.d===d)){
+      const li=document.createElement('li');li.id='q'+w.id;
+      li.innerHTML=`<span class="num">${w.n}</span><span class="txt">${esc(w.clue)} <span style="color:var(--muted)">(${w.answer.length})</span><span class="refwrap"></span></span>`;
+      li.addEventListener('click',()=>{pos=[...w.cells[0]];dir=w.d;const e=w.cells.find(([r,c])=>!fill[r][c]);if(e)pos=[...e];render();focusKb();});
+      ol.appendChild(li);
+    }
+  }
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function curWord(){const cw=cellWords[pos[0]+','+pos[1]];return cw[dir]||cw[dir==='A'?'D':'A'];}
+function toggleDir(){const cw=cellWords[pos[0]+','+pos[1]];const o=dir==='A'?'D':'A';if(cw[o])dir=o;}
+function wordDone(w){return w.cells.every(([r,c])=>fill[r][c]===sol[r][c]);}
+function render(){
+  const w=curWord();dir=w.d;
+  const inw=new Set(w.cells.map(([r,c])=>r+','+c));
+  for(let r=0;r<9;r++)for(let c=0;c<9;c++){if(sol[r][c]==='.')continue;
+    const el=document.getElementById(`c${r}${c}`);
+    el.querySelector('.l').textContent=fill[r][c];
+    el.className='cell'+(inw.has(r+','+c)?' inword':'')+(pos[0]===r&&pos[1]===c?' cur':'')+(marks[r][c]?' '+marks[r][c]:'');
+  }
+  document.querySelectorAll('.clues li').forEach(li=>li.classList.remove('act'));
+  const li=document.getElementById('q'+w.id);li.classList.add('act');
+  document.getElementById('cbNum').textContent=w.n+(w.d==='A'?' Across':' Down');
+  document.getElementById('cbTxt').textContent=w.clue+' ('+w.answer.length+')';
+  for(const x of words){const l=document.getElementById('q'+x.id);const done=wordDone(x);l.classList.toggle('done',done);
+    l.querySelector('.refwrap').innerHTML=done?refLink(x.ref):'';}
+  if(window.matchMedia('(max-width:760px)').matches===false){li.scrollIntoView({block:'nearest'});}
+}
+function focusKb(){try{kb.focus({preventScroll:true})}catch(e){kb.focus()}}
+function step(n){const w=curWord();const i=w.cells.findIndex(([r,c])=>r===pos[0]&&c===pos[1]);const j=i+n;if(j>=0&&j<w.cells.length)pos=[...w.cells[j]];}
+function nextWord(back){const list=words.filter(w=>w.d===dir).concat(words.filter(w=>w.d!==dir));const w=curWord();let i=list.indexOf(w);i=(i+(back?-1:1)+list.length)%list.length;const nw=list[i];dir=nw.d;const e=nw.cells.find(([r,c])=>!fill[r][c]);pos=[...(e||nw.cells[0])];}
+function type(ch){
+  if(solvedFlag)return;const [r,c]=pos;
+  if(marks[r][c]==='rev'||marks[r][c]==='ok')return advance();
+  fill[r][c]=ch;marks[r][c]='';advance();save();checkSolved();
+}
+function advance(){const w=curWord();const i=w.cells.findIndex(([r,c])=>r===pos[0]&&c===pos[1]);
+  for(let j=i+1;j<w.cells.length;j++){const [r,c]=w.cells[j];if(!fill[r][c]){pos=[r,c];render();return;}}
+  if(i<w.cells.length-1)pos=[...w.cells[i+1]];render();}
+function back(){if(solvedFlag)return;const [r,c]=pos;
+  if(fill[r][c]&&marks[r][c]!=='rev'&&marks[r][c]!=='ok'){fill[r][c]='';marks[r][c]='';}
+  else{step(-1);const [r2,c2]=pos;if(marks[r2][c2]!=='rev'&&marks[r2][c2]!=='ok'){fill[r2][c2]='';marks[r2][c2]='';}}
+  save();render();}
+function move(dr,dc){const nd=dc?'A':'D';if(dir!==nd&&cellWords[pos[0]+','+pos[1]][nd]){dir=nd;render();return;}
+  let r=pos[0]+dr,c=pos[1]+dc;while(r>=0&&r<9&&c>=0&&c<9){if(sol[r][c]!=='.'){pos=[r,c];if(!cellWords[r+','+c][dir])toggleDir();break;}r+=dr;c+=dc;}render();}
+kb.addEventListener('keydown',e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key;
+  if(k==='Backspace'){e.preventDefault();back();}
+  else if(k==='ArrowLeft'){e.preventDefault();move(0,-1);}else if(k==='ArrowRight'){e.preventDefault();move(0,1);}
+  else if(k==='ArrowUp'){e.preventDefault();move(-1,0);}else if(k==='ArrowDown'){e.preventDefault();move(1,0);}
+  else if(k==='Tab'||k==='Enter'){e.preventDefault();nextWord(e.shiftKey);render();}
+  else if(k===' '){e.preventDefault();toggleDir();render();}
+  else if(/^[a-z]$/i.test(k)){e.preventDefault();type(k.toUpperCase());}
+});
+kb.addEventListener('input',()=>{const v=kb.value.replace(/[^a-z]/gi,'');kb.value='';if(v)type(v.slice(-1).toUpperCase());});
+document.addEventListener('keydown',e=>{if(document.activeElement===kb||e.target.closest('button,a,input'))return;if(/^[a-z]$/i.test(e.key)||e.key.startsWith('Arrow')||e.key==='Backspace'){focusKb();kb.dispatchEvent(new KeyboardEvent('keydown',{key:e.key,shiftKey:e.shiftKey}));e.preventDefault();}});
+
+function cellsFor(scope){const w=curWord();if(scope==='cell')return [pos];if(scope==='word')return w.cells;const a=[];for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(sol[r][c]!=='.')a.push([r,c]);return a;}
+function check(scope){for(const [r,c] of cellsFor(scope)){if(!fill[r][c]||marks[r][c]==='rev')continue;marks[r][c]=fill[r][c]===sol[r][c]?'ok':'bad';}save();render();}
+function reveal(scope){for(const [r,c] of cellsFor(scope)){if(fill[r][c]!==sol[r][c]){fill[r][c]=sol[r][c];marks[r][c]='rev';}}save();render();checkSolved();}
+let pending=null;const conf=document.getElementById('confirm');
+function ask(txt,fn){pending=fn;document.getElementById('confirmTxt').textContent=txt;conf.hidden=false;}
+document.getElementById('yes').onclick=()=>{conf.hidden=true;if(pending)pending();pending=null;};
+document.getElementById('no').onclick=()=>{conf.hidden=true;pending=null;focusKb();};
+document.querySelector('.tools').addEventListener('click',e=>{const a=e.target.closest('button')?.dataset.a;if(!a)return;
+  if(a==='check-cell')check('cell');else if(a==='check-word')check('word');else if(a==='check-all')check('all');
+  else if(a==='rev-cell')reveal('cell');else if(a==='rev-word')reveal('word');
+  else if(a==='rev-all')ask('Reveal the whole puzzle?',()=>reveal('all'));
+  else if(a==='clear')ask('Clear all your letters for this puzzle?',()=>{fill=sol.map(r=>r.map(()=>''));marks=sol.map(r=>r.map(()=>''));solvedFlag=false;document.getElementById('solved').hidden=true;save();render();});
+  if(!a.startsWith('rev-all')&&a!=='clear')focusKb();
+});
+function checkSolved(quiet){
+  let all=true,revd=0;for(let r=0;r<9;r++)for(let c=0;c<9;c++){if(sol[r][c]==='.')continue;if(fill[r][c]!==sol[r][c])all=false;if(marks[r][c]==='rev')revd++;}
+  const box=document.getElementById('solved');
+  if(all){solvedFlag=true;box.hidden=false;
+    document.getElementById('solvedH').textContent=revd?'Puzzle complete':'Solved';
+    document.getElementById('solvedP').textContent=(revd?`Finished with ${revd} revealed letter${revd>1?'s':''}. `:'Every answer correct, no reveals. ')+`Each clue now shows its verse. Come back tomorrow for a new ${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'][pick(cur+DAY).wd]} puzzle.`;
+  } else {box.hidden=true;solvedFlag=false;}
+}
+document.getElementById('prev').onclick=()=>{if(cur>FIRST)load(cur-DAY);};
+document.getElementById('next').onclick=()=>{if(cur<TODAY)load(cur+DAY);};
+load(TODAY);
+</script>
+
+</body></html>

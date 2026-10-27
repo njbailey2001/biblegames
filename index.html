@@ -6,7 +6,7 @@
 <style>body{margin:0}img{max-width:100%}</style>
 <title>Bible Games Daily</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Free Bible games: guess the verse in Daily Verse Quest, find the hidden word in Cross Reference, or fuse a biblical figure in Build-a-Figure.">
+<meta name="description" content="Free Bible games: guess the verse in Daily Verse Quest, find the hidden word in Cross Reference, solve the Bible Crossword, or fuse a biblical figure in Build-a-Figure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
@@ -74,6 +74,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:17px;
 .ranks span,.ranks em{position:relative}
 .ranks em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted)}
 
+/* Bible Crossword preview: a corner of the grid */
+.pv-cross-word{background:var(--bg)}
+.xw{display:grid;grid-template-columns:repeat(7,26px);gap:2px}
+.xw i{width:26px;height:26px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:.8rem;position:relative;color:var(--ink)}
+.xw i.b{background:var(--ink);border-color:var(--ink)}
+.xw sup{position:absolute;top:1px;left:2px;font-size:.5rem;font-weight:500;color:var(--muted)}
+
 /* Build-a-Figure preview: the seven attribute bars */
 .pv-figure{background:var(--fig-bg);color:var(--fig-ink)}
 .bars{display:flex;flex-direction:column;gap:6px;width:100%;max-width:240px}
@@ -96,7 +103,7 @@ footer{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);paddi
   </section>
 
   <section style="display:flex;flex-direction:column;gap:16px">
-    <div class="shelf-head"><h2>THE GAMES</h2><span>3 games · no sign-up</span></div>
+    <div class="shelf-head"><h2>THE GAMES</h2><span>4 games · no sign-up</span></div>
     <div class="shelf">
       <a class="game" href="daily-verse-quest.html">
         <div class="preview pv-versle" aria-hidden="true">
@@ -130,6 +137,25 @@ footer{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);paddi
           <p>Guess any word to find the hidden one from Scripture. Each guess gets a rank, and the closer it ties to the answer, the lower the number.</p>
           <div class="tags"><span>Daily</span><span>Unlimited</span><span>Hints</span></div>
           <span class="play">Play Cross Reference <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <a class="game" href="bible-crossword.html">
+        <div class="preview pv-cross-word" aria-hidden="true">
+          <div class="xw">
+            <i class="b"></i><i><sup>1</sup>M</i><i>O</i><i>S</i><i>E</i><i>S</i><i class="b"></i>
+            <i class="b"></i><i>A</i><i class="b"></i><i class="b"></i><i class="b"></i><i>I</i><i class="b"></i>
+            <i><sup>2</sup>N</i><i>N</i><i>O</i><i>A</i><i>H</i><i>N</i><i class="b"></i>
+            <i class="b"></i><i>N</i><i class="b"></i><i class="b"></i><i class="b"></i><i>A</i><i class="b"></i>
+            <i class="b"></i><i>A</i><i class="b"></i><i class="b"></i><i class="b"></i><i>I</i><i class="b"></i>
+          </div>
+        </div>
+        <div class="body">
+          <span class="ref">New puzzle every day</span>
+          <h3>Bible Crossword</h3>
+          <p>A 9×9 crossword built from Scripture, with names, places and words from the NIV. Go back to earlier days to catch up.</p>
+          <div class="tags"><span>Daily</span><span>Solo</span><span>Past puzzles</span></div>
+          <span class="play">Play Bible Crossword <span class="arr">→</span></span>
         </div>
       </a>
 
