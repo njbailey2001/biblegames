@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90" viewBox="0 0 120 90">
+<title>Bible Games Daily</title>
+<path d="M4 16 L4 82 C24 78 46 80 60 88 C74 80 96 78 116 82 L116 16 Z" fill="#27477A"/>
+<path d="M60 18 C46 10 24 8 9 12 L9 76 C24 72 46 74 60 82 Z" fill="#FFFFFF" stroke="#27477A" stroke-width="3" stroke-linejoin="round"/>
+<path d="M60 18 C74 10 96 8 111 12 L111 76 C96 72 74 74 60 82 Z" fill="#FFFFFF" stroke="#27477A" stroke-width="3" stroke-linejoin="round"/>
+<path d="M18 28 L50 31 M18 40 L50 43 M18 52 L42 54" stroke="#97A2B0" stroke-width="3" stroke-linecap="round" fill="none"/>
+<path d="M18 64 L34 65" stroke="#B88A1E" stroke-width="3" stroke-linecap="round" fill="none"/>
+<rect x="70" y="24" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/><rect x="82" y="24" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/><rect x="94" y="24" width="10" height="10" fill="#17202B"/><rect x="70" y="36" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/><rect x="82" y="36" width="10" height="10" fill="#B88A1E"/><rect x="94" y="36" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/><rect x="70" y="48" width="10" height="10" fill="#17202B"/><rect x="82" y="48" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/><rect x="94" y="48" width="10" height="10" fill="#FFFFFF" stroke="#27477A" stroke-width="1.5"/>
+</svg>

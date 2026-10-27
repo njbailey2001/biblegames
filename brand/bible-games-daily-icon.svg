@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+<title>Bible Games Daily</title>
+<rect width="120" height="120" rx="26" fill="#27477A"/>
+<g transform="translate(0 16)">
+<path d="M60 18 C46 10 24 8 10 12 L10 76 C24 72 46 74 60 82 Z" fill="#FFFFFF"/>
+<path d="M60 18 C74 10 96 8 110 12 L110 76 C96 72 74 74 60 82 Z" fill="#F1F4F8"/>
+<path d="M60 18 L60 82" stroke="#27477A" stroke-width="3"/>
+<path d="M19 30 L50 33 M19 43 L50 46 M19 56 L42 58" stroke="#97A2B0" stroke-width="4" stroke-linecap="round" fill="none"/>
+<rect x="69" y="25" width="11" height="11" fill="#27477A" fill-opacity="0.18"/><rect x="82" y="25" width="11" height="11" fill="#27477A" fill-opacity="0.18"/><rect x="95" y="25" width="11" height="11" fill="#17202B"/><rect x="69" y="38" width="11" height="11" fill="#27477A" fill-opacity="0.18"/><rect x="82" y="38" width="11" height="11" fill="#E2B54A"/><rect x="95" y="38" width="11" height="11" fill="#27477A" fill-opacity="0.18"/><rect x="69" y="51" width="11" height="11" fill="#17202B"/><rect x="82" y="51" width="11" height="11" fill="#27477A" fill-opacity="0.18"/><rect x="95" y="51" width="11" height="11" fill="#27477A" fill-opacity="0.18"/>
+</g>
+</svg>
