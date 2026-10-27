@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>Privacy Policy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How Bible Games Daily handles your information, cookies and ads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: a short title plate, then the games as a shelf of two tall cards; each card opens with a tiny working preview of its board. */
+:root{
+  --bg:#E9ECEF; --surface:#F7F8F9; --ink:#17202B; --muted:#5A6573; --line:#CBD2DA;
+  --lapis:#27477A; --lapis-ink:#FFFFFF; --gold:#B88A1E;
+  --hit:#3C7A4C; --near:#C38F22; --miss:#9AA19D;
+  --fig-bg:#201a15; --fig-ink:#ece3d2;
+  --display:"Alegreya SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --ui:"Alegreya Sans", "Gill Sans", "Trebuchet MS", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161D; --surface:#19202A; --ink:#E4E8EE; --muted:#97A2B0; --line:#2A3441;
+  --lapis:#8FAEE3; --lapis-ink:#11161D; --gold:#D4A63A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254;
+  --fig-bg:#0D0A08; --fig-ink:#ece3d2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161D; --surface:#19202A; --ink:#E4E8EE; --muted:#97A2B0; --line:#2A3441;
+  --lapis:#8FAEE3; --lapis-ink:#11161D; --gold:#D4A63A;
+  --hit:#4E9A62; --near:#C99A33; --miss:#4A5254;
+  --fig-bg:#0D0A08; --fig-ink:#ece3d2; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:17px;line-height:1.5}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 56px;display:flex;flex-direction:column;gap:40px}
+
+.plate{display:flex;flex-direction:column;gap:12px}
+.mark{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,8vw,4.2rem);line-height:.95;margin:0;letter-spacing:.01em;text-wrap:balance}
+.mark .io{color:var(--gold);font-weight:700;display:block;font-size:.5em;letter-spacing:.14em;margin-top:.25em}
+.mark .initial{color:var(--lapis)}
+.plate p{margin:0;max-width:34em;color:var(--muted);font-size:1.12rem}
+
+.shelf-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:8px;gap:12px;flex-wrap:wrap}
+.shelf-head h2{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.08em;margin:0}
+.shelf-head span{font-size:.9rem;color:var(--muted)}
+
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.game{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .18s ease,border-color .18s ease}
+.game:hover{transform:translateY(-3px);border-color:var(--lapis)}
+.game:focus-visible{outline:2px solid var(--lapis);outline-offset:3px}
+.preview{height:170px;display:flex;align-items:center;justify-content:center;padding:20px;border-bottom:1px solid var(--line)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h3{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:0;line-height:1}
+.body p{margin:0;color:var(--muted);min-width:0}
+.ref{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tags span{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted)}
+.play{margin-top:auto;padding-top:8px;font-weight:700;color:var(--lapis);display:flex;align-items:center;gap:6px}
+.game:hover .play .arr{transform:translateX(3px)}
+.play .arr{transition:transform .18s ease}
+
+/* Daily Verse Quest preview: the guess ledger in miniature */
+.pv-versle{background:var(--bg)}
+.ledger{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:5px;width:100%;max-width:240px}
+.ledger i{height:26px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.74rem;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.hit{background:var(--hit)} .near{background:var(--near)} .miss{background:var(--miss)}
+
+/* Cross Reference preview: ranked guesses, closest on top */
+.pv-cross{background:var(--bg)}
+.ranks{display:flex;flex-direction:column;gap:5px;width:100%;max-width:240px}
+.ranks div{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:5px 10px;border-radius:3px;background:var(--surface);border:1px solid var(--line);font-size:.85rem;font-weight:500;position:relative;overflow:hidden}
+.ranks div::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c);opacity:.22}
+.ranks span,.ranks em{position:relative}
+.ranks em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted)}
+
+/* Bible Crossword preview: a corner of the grid */
+.pv-cross-word{background:var(--bg)}
+.xw{display:grid;grid-template-columns:repeat(7,26px);gap:2px}
+.xw i{width:26px;height:26px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:.8rem;position:relative;color:var(--ink)}
+.xw i.b{background:var(--ink);border-color:var(--ink)}
+.xw sup{position:absolute;top:1px;left:2px;font-size:.5rem;font-weight:500;color:var(--muted)}
+
+/* Build-a-Figure preview: the seven attribute bars */
+.pv-figure{background:var(--fig-bg);color:var(--fig-ink)}
+.bars{display:flex;flex-direction:column;gap:6px;width:100%;max-width:240px}
+.bars div{display:grid;grid-template-columns:78px 1fr 16px;gap:8px;align-items:center;font-family:var(--display);font-size:.62rem;letter-spacing:.06em;font-weight:700}
+.bars b{height:5px;border-radius:2px;background:#332b22;position:relative;overflow:hidden}
+.bars b::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c)}
+.bars em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
+
+footer{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (prefers-reduced-motion:reduce){.game,.play .arr{transition:none}.game:hover{transform:none}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4288496976882487" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-4288496976882487">
+<style>
+.doc{max-width:42em;display:flex;flex-direction:column;gap:14px}
+.doc h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,2.8rem);line-height:1;margin:0;text-wrap:balance}
+.doc h2{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:.04em;margin:18px 0 0}
+.doc p,.doc li{margin:0;color:var(--ink)}
+.doc ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.doc a{color:var(--lapis)}
+.doc .updated{color:var(--muted);font-size:.95rem}
+.back{font-weight:700;color:var(--muted);text-decoration:none;font-size:.95rem}
+.back:hover{color:var(--lapis)}
+.email{font-weight:700;font-size:1.15rem;user-select:all}
+footer nav{display:flex;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← All games</a>
+  <article class="doc">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated October 27, 2026</p>
+    <p>This policy explains what information Bible Games Daily (biblegamesdaily.com) collects and how it is used. The short version: we don't ask for your name or email to play, and your game progress stays on your own device. Our advertising partner, Google, uses cookies to show ads.</p>
+
+    <h2>Information we don't collect</h2>
+    <p>You don't need an account to play. We don't ask for your name, email address or any other personal details. If you email us, we use your message and address only to reply.</p>
+
+    <h2>Game progress saved on your device</h2>
+    <p>The games save your stats, streaks and puzzle progress in your browser's local storage. This data stays on your device and is never sent to us. You can erase it at any time by clearing your browser's site data for biblegamesdaily.com.</p>
+
+    <h2>Advertising and cookies</h2>
+    <ul>
+      <li>We use Google AdSense to show ads. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites.</li>
+      <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the internet.</li>
+      <li>You can opt out of personalized advertising by visiting Google's <a href="https://adssettings.google.com" rel="noopener">Ads Settings</a>. You can also opt out of some third-party vendors' use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" rel="noopener">aboutads.info</a>.</li>
+      <li>To learn more, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">How Google uses information from sites or apps that use its services</a>.</li>
+    </ul>
+    <p>Visitors in the European Economic Area, the UK and Switzerland are asked for consent before personalized ads are shown.</p>
+
+    <h2>Hosting</h2>
+    <p>The site is hosted on GitHub Pages. Like most web hosts, GitHub may log basic technical information such as your IP address when you load a page, for security and to keep the service running. See the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
+
+    <h2>Children</h2>
+    <p>The site is meant for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+    <h2>Changes</h2>
+    <p>If we change this policy, we'll update the date at the top of this page.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy? Email <a href="mailto:biblegamesdaily@gmail.com">biblegamesdaily@gmail.com</a>.</p>
+  </article>
+  <footer><span>biblegamesdaily.com</span><nav><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav></footer>
+</div>
+</body>
+</html>
