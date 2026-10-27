@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="/sync-hook.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>body{margin:0}img{max-width:100%}</style>
@@ -113,6 +114,7 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<script type="module" src="/account.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -120,13 +122,21 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
   <article class="doc">
     <h1>Privacy Policy</h1>
     <p class="updated">Last updated October 27, 2026</p>
-    <p>This policy explains what information Bible Games Daily (biblegamesdaily.com) collects and how it is used. The short version: we don't ask for your name or email to play, and your game progress stays on your own device. Our advertising partner, Google, uses cookies to show ads.</p>
+    <p>This policy explains what information Bible Games Daily (biblegamesdaily.com) collects and how it is used. The short version: you can play without giving us anything. If you choose to make an account, we store your email address and your game progress so you can play on any device. Our advertising partner, Google, uses cookies to show ads.</p>
 
-    <h2>Information we don't collect</h2>
-    <p>You don't need an account to play. We don't ask for your name, email address or any other personal details. If you email us, we use your message and address only to reply.</p>
+    <h2>Playing without an account</h2>
+    <p>You don't need an account to play. Without one, we don't ask for your name, email address or any other personal details. If you email us, we use your message and address only to reply.</p>
+
+    <h2>If you make an account</h2>
+    <ul>
+      <li><b>What we store:</b> your email address, your name if you sign in with Google, and your game progress (stats, streaks and puzzle answers). Accounts run on Google Firebase, which stores this data for us.</li>
+      <li><b>Why:</b> only to sign you in and keep your progress the same on every device. We don't sell it, share it with advertisers, or send you marketing email.</li>
+      <li><b>Age:</b> accounts are for players 13 and older. We ask for your birth month and year before you sign up, and we don't save them.</li>
+      <li><b>Deleting it:</b> you can delete your account and its saved progress at any time from the <a href="account.html">Account page</a>. You can also email us and we'll delete it for you.</li>
+    </ul>
 
     <h2>Game progress saved on your device</h2>
-    <p>The games save your stats, streaks and puzzle progress in your browser's local storage. This data stays on your device and is never sent to us. You can erase it at any time by clearing your browser's site data for biblegamesdaily.com.</p>
+    <p>The games save your stats, streaks and puzzle progress in your browser's local storage. Unless you sign in to an account, this data stays on your device and is never sent to us. You can erase it at any time by clearing your browser's site data for biblegamesdaily.com.</p>
 
     <h2>Advertising and cookies</h2>
     <ul>
@@ -138,10 +148,10 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
     <p>Visitors in the European Economic Area, the UK and Switzerland are asked for consent before personalized ads are shown.</p>
 
     <h2>Hosting</h2>
-    <p>The site is hosted on GitHub Pages. Like most web hosts, GitHub may log basic technical information such as your IP address when you load a page, for security and to keep the service running. See the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
+    <p>The site is hosted on GitHub Pages, and accounts use Google Firebase (see the <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy information</a>). Like most web hosts, GitHub may log basic technical information such as your IP address when you load a page, for security and to keep the service running. See the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
 
     <h2>Children</h2>
-    <p>The site is meant for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+    <p>The site is meant for a general audience and is not directed at children under 13. Children can play every game without an account. Accounts are only for players 13 and older, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 has made an account, email us and we'll delete it.</p>
 
     <h2>Changes</h2>
     <p>If we change this policy, we'll update the date at the top of this page.</p>
@@ -149,7 +159,7 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
     <h2>Contact</h2>
     <p>Questions about this policy? Email <a href="mailto:biblegamesdaily@gmail.com">biblegamesdaily@gmail.com</a>.</p>
   </article>
-  <footer><span>biblegamesdaily.com</span><nav><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a></nav></footer>
+  <footer><span>biblegamesdaily.com</span><nav><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="account.html">Account</a></nav></footer>
 </div>
 </body>
 </html>

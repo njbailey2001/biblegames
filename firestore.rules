@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Bible Games Daily: each signed-in player can read and write only their own progress document.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['ageConfirmed', 'createdAt', 'updatedAt', 'data', 'times'])
+        && request.resource.data.ageConfirmed == true
+        && request.resource.data.data is map
+        && request.resource.data.times is map;
+    }
+
+    // Nothing else in the database can be read or written from the site.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
