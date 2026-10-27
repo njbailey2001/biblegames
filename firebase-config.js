@@ -1,17 +1,11 @@
-/* Bible Games Daily: Firebase settings.
-   While this is null, accounts stay switched off and the site works without them.
-   To switch accounts on, replace null with the config object from
-   Firebase console → Project settings → Your apps → Web app → "SDK setup and configuration" → Config.
+/* Bible Games Daily: Firebase settings (project "bible-games-daily", owned by biblegamesdaily@gmail.com).
    These values are meant to be public; the security rules in firestore.rules are what protect players' data.
-
-   Example shape:
-   export default {
-     apiKey: "AIza...",
-     authDomain: "your-project.firebaseapp.com",
-     projectId: "your-project",
-     storageBucket: "your-project.appspot.com",
-     messagingSenderId: "1234567890",
-     appId: "1:1234567890:web:abc123"
-   };
-*/
-export default null;
+   Set this to `export default null;` to switch accounts off; the games keep working without them. */
+export default {
+  apiKey: "AIzaSyBsfdUHKyyaT9eIf4Xts3NtIFZFtggcxl0",
+  authDomain: "bible-games-daily.firebaseapp.com",
+  projectId: "bible-games-daily",
+  storageBucket: "bible-games-daily.firebasestorage.app",
+  messagingSenderId: "820819472286",
+  appId: "1:820819472286:web:70b229336057a3d19d708f"
+};
