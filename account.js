@@ -16,8 +16,14 @@ export const account = {
   sendPasswordReset: () => notReady(),
   signOut: () => notReady(),
   deleteAccount: () => notReady(),
-  syncNow: () => Promise.resolve()
+  syncNow: () => Promise.resolve(),
+  // For live battles: resolves to { auth, db, A, F, user } once Firebase is up; signs in as a guest if needed.
+  // Guest sign-ins are anonymous: no email, no password, nothing sent. They never sync game progress.
+  battleSession: () => battleReadyP.then((open) => open())
 };
+let battleReady, battleFailed;
+const battleReadyP = new Promise((res, rej) => { battleReady = res; battleFailed = rej; });
+battleReadyP.catch(() => {});
 window.BGDAccount = account;
 
 function notReady() { return Promise.reject(new Error("Accounts aren't switched on yet.")); }
@@ -27,9 +33,10 @@ const onAccountPage = /\/account(\.html)?$/.test(location.pathname);
 const store = window.__bgdStore;
 
 if (state.enabled && store) {
-  start().catch((e) => { console.error("Account setup failed", e); state.error = e.message; state.ready = true; emit(); });
+  start().catch((e) => { console.error("Account setup failed", e); state.error = e.message; state.ready = true; battleFailed(e); emit(); });
 } else {
   state.ready = true;
+  battleFailed(new Error("Accounts aren't switched on."));
 }
 
 async function start() {
@@ -43,13 +50,22 @@ async function start() {
   const db = F.getFirestore(app);
   const userDoc = (uid) => F.doc(db, "users", uid);
 
+  const realUser = () => (auth.currentUser && !auth.currentUser.isAnonymous ? auth.currentUser : null);
+  let authReady; const authReadyP = new Promise((r) => (authReady = r));
+  battleReady(async () => {
+    await authReadyP;
+    let user = auth.currentUser;
+    if (!user) user = (await A.signInAnonymously(auth)).user;
+    return { auth, db, A, F, user };
+  });
+
   account.createAccount = (email, password) => A.createUserWithEmailAndPassword(auth, email, password);
   account.signIn = (email, password) => A.signInWithEmailAndPassword(auth, email, password);
   account.sendPasswordReset = (email) => A.sendPasswordResetEmail(auth, email, { url: location.origin + "/account.html" });
   account.signOut = () => A.signOut(auth);
   // Deleting needs the password again, so nobody can delete an account from a device left signed in.
   account.deleteAccount = async (password) => {
-    const u = auth.currentUser;
+    const u = realUser();
     if (!u) return;
     await A.reauthenticateWithCredential(u, A.EmailAuthProvider.credential(u.email, password));
     await F.deleteDoc(userDoc(u.uid));
@@ -96,7 +112,7 @@ async function start() {
 
   async function push() {
     pushTimer = null;
-    const user = auth.currentUser;
+    const user = realUser();
     if (!user || !mergedOnce || !pending.size) return;
     const keys = [...pending]; pending = new Set();
     const times = store.times(); const data = {}, t = {};
@@ -121,12 +137,15 @@ async function start() {
     const k = e.detail && e.detail.key;
     if (!k || !PATTERN.test(k)) return;
     pending.add(k);
-    if (auth.currentUser) schedulePush(1500);
+    if (realUser()) schedulePush(1500);
   });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden" && pending.size) push(); });
-  account.syncNow = async () => { if (auth.currentUser) await pullAndMerge(auth.currentUser); };
+  account.syncNow = async () => { if (realUser()) await pullAndMerge(realUser()); };
 
   A.onAuthStateChanged(auth, async (user) => {
+    authReady();
+    // A guest (anonymous) sign-in is only for live battles: it isn't an account and doesn't sync.
+    if (user && user.isAnonymous) user = null;
     state.user = user ? { uid: user.uid, name: user.displayName || "", email: user.email || "" } : null;
     state.ready = true; mergedOnce = false; emit();
     if (user) {

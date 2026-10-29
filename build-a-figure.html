@@ -359,6 +359,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <script type="module" src="/account.js"></script>
+<script type="module" src="/build-a-figure-battle.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -369,7 +370,7 @@
   <header>
     <p class="kicker">BUILD-A-FIGURE</p>
     <h1>Fuse a figure of Scripture</h1>
-    <p>Spin to reveal one biblical figure at a time. Look at their full attribute line, then choose the open category you want to draw from them. Hard Mode hides attribute values until you commit. Seven spins, seven placements, one fused figure.</p>
+    <p>Spin to reveal one biblical figure at a time. Look at their full attribute line, then choose the open category you want to draw from them. Hard Mode hides attribute values until you commit. Seven spins, seven placements, one fused figure. Then battle a friend, live or by text, one category at a time.</p>
   </header>
 
   <div class="spin-card" id="spinCard">
@@ -439,6 +440,8 @@ const STATS = [
 ];
 
 let usedNames = [];
+let rand = Math.random;      // seeded when a battle uses "same spins"
+let battleBuild = null;      // set while building a figure for a battle
 let pendingFigure = null;
 let round = 0;
 let gameStarted = false;
@@ -468,6 +471,39 @@ STATS.forEach(s => {
 });
 
 const spinCard = document.getElementById("spinCard");
+
+function renderPlayStyle(){
+  battleBuild = null;
+  rand = Math.random;
+  board.style.display = "";
+  spinCard.innerHTML = `
+    <div class="spin-idle">
+      <p>How do you want to play?</p>
+      <div class="mode-options" id="styleOptions"></div>
+    </div>`;
+  const styles = [
+    {key:"build", label:"BUILD & SCORE", desc:"Fuse the strongest figure you can. Play solo, or pass one device around."},
+    {key:"live", label:"LIVE BATTLE", desc:"Text a friend a link. Build at the same time, then battle round by round."},
+    {key:"link", label:"CHALLENGE LINK", desc:"Build and set your battle order, then text the link. Your friend plays whenever."}
+  ];
+  const container = document.getElementById("styleOptions");
+  styles.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "btn-mode-option";
+    btn.innerHTML = `<span class="mode-title">${s.label}</span><span class="mode-desc">${s.desc}</span>`;
+    btn.addEventListener("click", () => {
+      if(s.key === "build") renderModeSetup();
+      else openBattle(s.key);
+    });
+    container.appendChild(btn);
+  });
+}
+
+function openBattle(kind){
+  if(window.BAFBattle){ window.BAFBattle.start(kind); return; }
+  spinCard.innerHTML = `<div class="spin-idle"><p>Loading battles…</p></div>`;
+  window.addEventListener("baf-battle-ready", () => window.BAFBattle.start(kind), {once:true});
+}
 
 function renderModeSetup(){
   spinCard.innerHTML = `
@@ -592,7 +628,7 @@ function renderSpinIdle(){
     </div>`;
   document.getElementById("spinBtn").addEventListener("click", doSpin);
 }
-renderModeSetup();
+renderPlayStyle();
 
 function doSpin(){
   const spinBtn = document.getElementById("spinBtn");
@@ -623,7 +659,7 @@ function doSpin(){
 
 function weightedRandomPick(pool){
   const totalWeight = pool.reduce((sum, r) => sum + (r.rarity !== undefined ? r.rarity : 10), 0);
-  let roll = Math.random() * totalWeight;
+  let roll = rand() * totalWeight;
   for(const item of pool){
     roll -= (item.rarity !== undefined ? item.rarity : 10);
     if(roll <= 0) return item;
@@ -685,6 +721,7 @@ function tryPlace(key){
   placements[key] = {figure:pendingFigure, value:pendingFigure[key]};
   round++;
   pendingFigure = null;
+  if(battleBuild && battleBuild.onProgress) battleBuild.onProgress(round);
 
   renderPanel(key);
   updateBoardAvailability();
@@ -713,6 +750,13 @@ function computeScoreSummary(){
 }
 
 function handleBuildComplete(){
+  if(battleBuild){
+    const done = battleBuild.onDone;
+    const stats = {}, figs = {};
+    STATS.forEach(s => { stats[s.key] = placements[s.key].value; figs[s.key] = placements[s.key].figure.name; });
+    done({stats, figs, name: document.getElementById("nameInput").value.trim()});
+    return;
+  }
   if(!multiplayer){
     renderSpinIdle();
     return;
@@ -895,7 +939,7 @@ function refreshResult(){
   }
 }
 
-document.getElementById("resetBtn").addEventListener("click", () => {
+function resetBuildState(){
   usedNames = [];
   pendingFigure = null;
   round = 0;
@@ -913,9 +957,35 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   resetBoardVisuals();
 
   document.getElementById("nameInput").value = "";
-  renderModeSetup();
   refreshResult();
+}
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if(window.BAFBattle) window.BAFBattle.leave();
+  resetBuildState();
+  renderPlayStyle();
 });
+
+// Used by build-a-figure-battle.js: build one figure for a battle with the given settings.
+window.BAF = {
+  spinCard, board,
+  result: document.getElementById("result"),
+  STATS, ROSTER,
+  reset(){ resetBuildState(); battleBuild = null; rand = Math.random; },
+  showMenu(){ resetBuildState(); renderPlayStyle(); },
+  startBuild({mode, skips, seed, onDone, onProgress}){
+    resetBuildState();
+    gameMode = mode === "hard" ? "hard" : "easy";
+    skipsAllowed = skips === "inf" ? Infinity : (skips || 0);
+    skipsUsed = 0;
+    rand = Number.isInteger(seed) ? window.BAFBattle.seededRandom(seed) : Math.random;
+    battleBuild = {onDone, onProgress};
+    gameStarted = true;
+    board.style.display = "";
+    document.getElementById("result").style.display = "";
+    renderSpinIdle();
+  }
+};
 
 document.getElementById("themeToggle").addEventListener("click", () => {
   const isLight = document.body.classList.toggle("light");

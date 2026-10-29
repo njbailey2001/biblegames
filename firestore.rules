@@ -14,6 +14,43 @@ service cloud.firestore {
         && request.resource.data.times is map;
     }
 
+    // Build-a-Figure live battles. Anyone signed in (players can be anonymous guests) can open a room by its code,
+    // but rooms can't be listed. The host creates the room; one other player can join it, once.
+    match /battles/{room} {
+      allow get: if request.auth != null;
+
+      allow create: if request.auth != null
+        && room.size() >= 8 && room.size() <= 16
+        && request.resource.data.keys().hasOnly(['host', 'hostName', 'guest', 'guestName', 'createdAt', 'settings'])
+        && request.resource.data.host == request.auth.uid
+        && request.resource.data.guest == null
+        && request.resource.data.hostName is string && request.resource.data.hostName.size() <= 24
+        && request.resource.data.settings is map;
+
+      allow update: if request.auth != null
+        && resource.data.guest == null
+        && request.auth.uid != resource.data.host
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['guest', 'guestName'])
+        && request.resource.data.guest == request.auth.uid
+        && request.resource.data.guestName is string && request.resource.data.guestName.size() <= 24;
+
+      // Each player's side of the battle: only the two players can read it, and each writes only their own.
+      match /players/{uid} {
+        function roomData() { return get(/databases/$(database)/documents/battles/$(room)).data; }
+        function inRoom() {
+          return request.auth != null
+            && (request.auth.uid == roomData().host || request.auth.uid == roomData().guest);
+        }
+        allow read: if inRoom();
+        allow create, update: if inRoom()
+          && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['name', 'progress', 'ready', 'stats', 'figs', 'commits', 'reveals', 'updatedAt'])
+          && request.resource.data.name is string && request.resource.data.name.size() <= 24
+          && request.resource.data.commits is list && request.resource.data.commits.size() <= 7
+          && request.resource.data.reveals is list && request.resource.data.reveals.size() <= 7;
+      }
+    }
+
     // Nothing else in the database can be read or written from the site.
     match /{document=**} {
       allow read, write: if false;
