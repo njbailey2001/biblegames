@@ -7,7 +7,7 @@
 <style>body{margin:0}img{max-width:100%}</style>
 <title>Bible Games Daily</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Free Bible games: guess the verse in Daily Verse Quest, find the hidden word in Cross Reference, solve the Bible Crossword, or fuse a biblical figure in Build-a-Figure.">
+<meta name="description" content="Free Bible games: guess the verse in Daily Verse Quest, find the hidden word in Cross Reference, solve the Bible Crossword, or fuse a biblical figure in Build-a-Figure. Plus a daily Bible history reading with a quiz.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
@@ -81,6 +81,20 @@ body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:17px;
 .xw i{width:26px;height:26px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:.8rem;position:relative;color:var(--ink)}
 .xw i.b{background:var(--ink);border-color:var(--ink)}
 .xw sup{position:absolute;top:1px;left:2px;font-size:.5rem;font-weight:500;color:var(--muted)}
+
+/* Daily reading band: a museum object label beside the reading's title */
+.reading{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .18s ease,border-color .18s ease}
+.reading:hover{transform:translateY(-3px);border-color:var(--lapis)}
+.reading:focus-visible{outline:2px solid var(--lapis);outline-offset:3px}
+.rd-label{display:flex;flex-direction:column;gap:6px;justify-content:center;padding:20px;background:var(--bg);border-right:1px solid var(--line);border-top:3px solid var(--gold);font-size:.88rem;color:var(--muted)}
+.rd-label b{color:var(--ink)}
+.rd-lh{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.rd-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.rd-body h3{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:0;line-height:1.05}
+.rd-body p{margin:0;color:var(--muted)}
+.reading:hover .play .arr{transform:translateX(3px)}
+@media (max-width:560px){.reading{grid-template-columns:1fr}.rd-label{border-right:0;border-bottom:1px solid var(--line)}}
+@media (prefers-reduced-motion:reduce){.reading{transition:none}.reading:hover{transform:none}}
 
 /* Build-a-Figure preview: the seven attribute bars */
 .pv-figure{background:var(--fig-bg);color:var(--fig-ink)}
@@ -192,8 +206,42 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
     </div>
   </section>
 
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <div class="shelf-head"><h2>DAILY READING</h2><span>New every day · 5-question quiz</span></div>
+    <a class="reading" href="/stones/">
+      <div class="rd-label" aria-hidden="true">
+        <span class="rd-lh">At a glance</span>
+        <span><b>Found</b> 1947, Qumran</span>
+        <span><b>Age</b> c. 250 BC – AD 68</span>
+        <span><b>Now</b> Israel Museum</span>
+      </div>
+      <div class="rd-body">
+        <span class="ref">Stones &amp; Scripture</span>
+        <h3 id="rdTitle">Daily readings in Bible history</h3>
+        <p id="rdDek">A short reading each day on archaeology and the history behind the Bible, with a quick quiz to test what you learned.</p>
+        <span class="play">Read today's reading <span class="arr">→</span></span>
+      </div>
+    </a>
+  </section>
+
   <footer><span>biblegamesdaily.com</span><nav><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="account.html">Account</a></nav></footer>
 </div>
 
+<script>
+/* Show today's Stones & Scripture title on the home page band. */
+(function(){
+  var d=new Date(),T=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  fetch("/stones/").then(function(r){return r.text()}).then(function(t){
+    var m=t.match(/<script type="application\/json" id="index">([\s\S]*?)<\/script>/); if(!m) return;
+    var open=JSON.parse(m[1]).filter(function(a){return a.date<=T}); if(!open.length) return;
+    var a=open[open.length-1];
+    document.getElementById("rdTitle").textContent=a.title;
+    document.getElementById("rdDek").textContent=a.dek;
+    document.querySelector(".reading").href="/stones/"+a.slug+".html";
+    if(a.label&&a.label.length){var box=document.querySelector(".rd-label"),lh=box.querySelector(".rd-lh");box.textContent="";box.append(lh);
+      a.label.forEach(function(p){var s=document.createElement("span"),b=document.createElement("b");b.textContent=p[0]+" ";s.append(b,document.createTextNode(p[1]));box.append(s);});}
+  }).catch(function(){});
+})();
+</script>
 </body>
 </html>

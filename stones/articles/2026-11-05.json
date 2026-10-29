@@ -1,0 +1,103 @@
+{
+ "body": [
+  "In 1896, British archaeologist Flinders Petrie was excavating the remains of a funerary temple of Pharaoh Merneptah at Thebes in Egypt. His team uncovered a large black granite slab covered in hieroglyphs. When a colleague translated it, one word stood out. Petrie reportedly said this stele would be better known in the world than anything else he had found. He was right.",
+  "## A pharaoh's boast",
+  "Merneptah was the son and successor of Ramesses II, one of Egypt's most famous pharaohs. The stele celebrates Merneptah's victory over the Libyans and their allies. Most of the long text is about that war. But near the end comes a short poem about lands to the northeast, in Canaan. Translated, it says something like this: Canaan has been plundered; Ashkelon has been carried off; Gezer has been captured; Yanoam is made as though it never existed; Israel is laid waste, his seed is no more.",
+  "## Why the word \"Israel\" matters",
+  "Egyptian writing used signs called determinatives to show what kind of thing a word was. Ashkelon, Gezer and Yanoam are marked with the sign for a city-state or foreign land. Israel is marked with the sign for a people. So around 1208 BC, Egypt knew of a group called Israel living in Canaan, important enough to be listed alongside major city-states, but not yet organized as a kingdom with a fixed territory.",
+  "That fits well with the picture in the Book of Judges, when the tribes of Israel lived in the hill country of Canaan as a loose group without a king. The stele is about 3,200 years old and is the earliest known mention of Israel outside the Bible.",
+  "## The claim of total destruction",
+  "Merneptah claimed Israel's \"seed\" was wiped out. Pharaohs commonly made extreme boasts like this. History shows the claim was wrong. Israel not only survived; it became a kingdom, and the people of Israel are still here today. For believers, the stele is a reminder of God's promise to preserve the descendants of Abraham.",
+  "## What it does and doesn't tell us",
+  "The stele does not mention the Exodus, Moses, or Israel ever being in Egypt. What it does show is that by about 1208 BC Israel was already established in Canaan. That means any Exodus and settlement had to happen before then, which is one reason the stele is central to discussions about when the Exodus happened."
+ ],
+ "date": "2026-11-05",
+ "dek": "A pharaoh's victory poem contains the oldest known reference to Israel outside the Bible.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Granite stele about 3 m (10 ft) tall, with an Egyptian hieroglyphic inscription"
+  ],
+  [
+   "Dated",
+   "c. 1208 BC (5th year of Pharaoh Merneptah)"
+  ],
+  [
+   "Found",
+   "Thebes (near modern Luxor), Egypt, 1896, by Flinders Petrie"
+  ],
+  [
+   "Now at",
+   "Egyptian Museum, Cairo"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 0,
+   "explain": "Dated around 1208 BC, it is the oldest known extra-biblical reference to Israel.",
+   "options": [
+    "It contains the earliest known mention of Israel outside the Bible",
+    "It names King David",
+    "It shows a picture of Moses",
+    "It describes the Exodus"
+   ],
+   "q": "Why is the Merneptah Stele famous?"
+  },
+  {
+   "answer": 2,
+   "explain": "Merneptah succeeded his father, Ramesses II.",
+   "options": [
+    "Tutankhamun",
+    "Akhenaten",
+    "Ramesses II",
+    "Thutmose III"
+   ],
+   "q": "Which famous pharaoh was Merneptah's father?"
+  },
+  {
+   "answer": 1,
+   "explain": "Israel is marked with the sign for a people, unlike the city-states listed with it.",
+   "options": [
+    "It was part of Egypt",
+    "It was a people, not yet a fixed kingdom or territory",
+    "It was an island",
+    "It was a large city"
+   ],
+   "q": "What does the Egyptian determinative tell us about Israel?"
+  },
+  {
+   "answer": 0,
+   "explain": "In the days of the judges, Israel was a group of tribes in Canaan without a king.",
+   "options": [
+    "The time of the judges",
+    "The reign of Solomon",
+    "The Babylonian exile",
+    "The time of Jesus"
+   ],
+   "q": "Which biblical period best fits the stele's picture of Israel?"
+  },
+  {
+   "answer": 3,
+   "explain": "Flinders Petrie found it in Merneptah's funerary temple at Thebes.",
+   "options": [
+    "Howard Carter",
+    "Austen Henry Layard",
+    "Hormuzd Rassam",
+    "Flinders Petrie"
+   ],
+   "q": "Who discovered the stele in 1896?"
+  }
+ ],
+ "readMinutes": 3,
+ "scholars": "Christians and scholars hold two main views on the date of the Exodus: an earlier date around 1446 BC, based on 1 Kings 6:1, and a later date in the 13th century BC, linked to the city of Rameses in Exodus 1:11. The Merneptah Stele fits either view, since both place Israel in Canaan before 1208 BC. Some scholars also study carvings at Karnak that may show Merneptah's battles with Israel.",
+ "scripture": "Judges 1–2; Exodus 1:8–11",
+ "sources": [
+  "Egyptian Museum, Cairo: Merneptah Stele (JE 31408)",
+  "James B. Pritchard, ed., Ancient Near Eastern Texts Relating to the Old Testament (Princeton, 1969)",
+  "James K. Hoffmeier, Israel in Egypt (Oxford University Press, 1996)",
+  "K. A. Kitchen, On the Reliability of the Old Testament (Eerdmans, 2003)"
+ ],
+ "title": "The Merneptah Stele: Israel's First Mention"
+}

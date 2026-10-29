@@ -143,6 +143,13 @@ function renderStats() {
   }
   out.push(`<section class="game-stats"><h3>Cross Reference</h3><div class="stats">${statRow("Daily words found", crSolved)}${statRow("Average guesses", crSolved ? Math.round(crGuesses / crSolved) : "–")}${statRow("Gave up", crGaveUp)}</div></section>`);
   out.push(`<section class="game-stats"><h3>Bible Crossword</h3><div class="stats">${statRow("Puzzles played", xwDays)}</div></section>`);
+
+  let ssDone = 0, ssPts = 0, ssTot = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (/^ss-\d{4}-\d{2}-\d{2}$/.test(k)) { const s = read(k); if (s && s.total) { ssDone++; ssPts += s.score; ssTot += s.total; } }
+  }
+  out.push(`<section class="game-stats"><h3>Stones &amp; Scripture</h3><div class="stats">${statRow("Readings quizzed", ssDone)}${statRow("Average score", ssTot ? Math.round((ssPts / ssTot) * 100) + "%" : "–")}</div></section>`);
   $("stats").innerHTML = out.join("");
 }
 

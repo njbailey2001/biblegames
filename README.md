@@ -11,6 +11,10 @@ Free Bible games that run in the browser. No sign-up, no install.
 | [Bible Crossword](bible-crossword.html) | A new 9×9 Bible crossword every day (NIV), with past puzzles to catch up on. |
 | [Build-a-Figure](build-a-figure.html) | Spin seven biblical figures and draw one attribute from each to fuse the strongest figure you can. Solo or pass-and-play. |
 
+## Daily reading
+
+[Stones & Scripture](stones/) is a daily Bible history reading with a quiz. Readings live in `stones/articles/*.json`; run `python3 tools/build_stones.py` to rebuild the pages and `sitemap.xml` after adding or editing one.
+
 ## How it's built
 
 Plain static HTML. Each game is one self-contained file, and `index.html` is the home page that links to them. There is no build step and no server code, so the folder can be hosted as-is on GitHub Pages, Netlify or Cloudflare Pages.

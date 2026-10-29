@@ -1,0 +1,104 @@
+{
+ "body": [
+  "In 701 BC, King Sennacherib of Assyria marched west to crush a rebellion. Among the rebels was Hezekiah, king of Judah. The Bible tells this story in three places: 2 Kings 18–19, Isaiah 36–37 and 2 Chronicles 32. Remarkably, Sennacherib told his own version too, and it has survived.",
+  "## The prisms",
+  "Assyrian kings recorded their deeds on clay prisms, six- or eight-sided columns covered in cuneiform writing. Several copies of Sennacherib's annals exist. The best known is the Taylor Prism, acquired at Nineveh by a British officer, Colonel Robert Taylor, in 1830 and now in the British Museum. Others are at the Oriental Institute in Chicago and the Israel Museum in Jerusalem.",
+  "In the section on his third campaign, Sennacherib says that Hezekiah of Judah did not submit to him. He claims he besieged and captured 46 of Hezekiah's strong walled cities and countless small villages, and took many people captive. Then comes his most famous line: he shut Hezekiah up in Jerusalem, his royal city, \"like a bird in a cage.\"",
+  "## Tribute, but no conquest",
+  "Sennacherib goes on to list a large tribute Hezekiah sent to Nineveh, including 30 talents of gold along with silver and other treasures. 2 Kings 18:14 also records that Hezekiah paid tribute, and gives the same amount of gold: 30 talents.",
+  "What Sennacherib does not say is that he captured Jerusalem. Assyrian annals loved to describe conquered capitals and executed rebel kings. Here there is only a siege and a boast. Hezekiah stayed on his throne.",
+  "The Bible explains why. 2 Kings 19 records Hezekiah praying in the temple and Isaiah prophesying that the Assyrian king would not enter the city or shoot an arrow there. Then the angel of the Lord struck the Assyrian camp, and Sennacherib went home to Nineveh (2 Kings 19:35–36). Not surprisingly, his own annals do not mention a disaster.",
+  "## The Lachish reliefs",
+  "Sennacherib was clearly prouder of another victory: Lachish, Judah's second most important city. 2 Kings 18:14 says Sennacherib was at Lachish when Hezekiah sent his message. In his palace at Nineveh, Sennacherib decorated a room with carved stone panels showing the siege of Lachish in detail: siege ramps, battering rams, archers, and families of Judah being led away. Archaeologists at Lachish in Israel have found the actual Assyrian siege ramp and hundreds of arrowheads.",
+  "Taken together, the Bible, the prism and the reliefs give a rare three-way view of one event. They agree on the main facts: Judah was devastated, Lachish fell, Hezekiah paid tribute, and Jerusalem survived."
+ ],
+ "date": "2026-11-02",
+ "dek": "The Assyrian king boasted about trapping Hezekiah in Jerusalem. What he left out is just as interesting.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Six-sided clay prisms recording Sennacherib's military campaigns, plus stone wall reliefs of Lachish"
+  ],
+  [
+   "Dated",
+   "Campaign of 701 BC; prisms written c. 691–689 BC"
+  ],
+  [
+   "Found",
+   "Nineveh, in modern Iraq (Taylor Prism bought in 1830; Lachish reliefs excavated by Austen Henry Layard in the 1840s)"
+  ],
+  [
+   "Now at",
+   "British Museum, London (Taylor Prism and Lachish reliefs); other copies in Chicago and Jerusalem"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 2,
+   "explain": "The prism says he shut Hezekiah up in Jerusalem like a bird in a cage.",
+   "options": [
+    "\"Like a lion in a den\"",
+    "\"Like a fish in a net\"",
+    "\"Like a bird in a cage\"",
+    "\"Like a sheep in a pen\""
+   ],
+   "q": "How did Sennacherib describe trapping Hezekiah in Jerusalem?"
+  },
+  {
+   "answer": 3,
+   "explain": "He claims 46 strong walled cities plus many small villages.",
+   "options": [
+    "12",
+    "7",
+    "100",
+    "46"
+   ],
+   "q": "How many walled cities of Judah does Sennacherib claim he captured?"
+  },
+  {
+   "answer": 2,
+   "explain": "Both give 30 talents of gold. The silver amounts differ (300 in 2 Kings, 800 on the prism).",
+   "options": [
+    "1,000 horses",
+    "800 talents of silver",
+    "30 talents of gold",
+    "300 talents of silver"
+   ],
+   "q": "Which amount of tribute matches exactly between 2 Kings and the prism?"
+  },
+  {
+   "answer": 0,
+   "explain": "Sennacherib never claims to have captured the city, which fits the Bible's account that Jerusalem was spared.",
+   "options": [
+    "That Sennacherib captured Jerusalem",
+    "That Sennacherib besieged Jerusalem",
+    "That he took many captives",
+    "That Hezekiah paid tribute"
+   ],
+   "q": "What does the prism NOT claim?"
+  },
+  {
+   "answer": 2,
+   "explain": "The Lachish reliefs, now in the British Museum, show the siege in detail.",
+   "options": [
+    "Samaria",
+    "Bethlehem",
+    "Lachish",
+    "Hebron"
+   ],
+   "q": "Which Judean city's siege is shown on the reliefs in Sennacherib's palace?"
+  }
+ ],
+ "readMinutes": 4,
+ "scholars": "Historians debate what forced Sennacherib to leave. Suggestions include disease in the army, news from home, or the Egyptian army mentioned in 2 Kings 19:9. Some also debate whether 2 Kings 18–19 describes one campaign or two. The Bible attributes the deliverance to God's direct action.",
+ "scripture": "2 Kings 18–19; Isaiah 36–37; 2 Chronicles 32",
+ "sources": [
+  "British Museum: Taylor Prism (object 91032) and Lachish reliefs, Room 10",
+  "James B. Pritchard, ed., Ancient Near Eastern Texts Relating to the Old Testament (Princeton, 1969)",
+  "David Ussishkin, The Conquest of Lachish by Sennacherib (Tel Aviv University, 1982)",
+  "Mordechai Cogan, The Raging Torrent: Historical Inscriptions from Assyria and Babylonia Relating to Ancient Israel (Carta, 2008)"
+ ],
+ "title": "Sennacherib's Prism: The Siege from Assyria's Side"
+}

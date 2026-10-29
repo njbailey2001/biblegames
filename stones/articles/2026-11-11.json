@@ -1,0 +1,104 @@
+{
+ "body": [
+  "Herod the Great began a massive rebuilding of the Jerusalem temple around 20 or 19 BC. The project continued long after his death; John 2:20 mentions that it had already taken forty-six years. The result was one of the most impressive buildings in the Roman world, set on an enormous platform still partly visible today, including the Western Wall.",
+  "## Courts and boundaries",
+  "The temple complex was arranged in zones of increasing holiness. The large outer area, often called the Court of the Gentiles, was open to everyone, including non-Jews. Further in were courts for Jewish women, Jewish men and priests, and finally the sanctuary itself. Between the outer court and the inner courts stood a low stone barrier. Jewish writings call it the soreg.",
+  "The Jewish historian Josephus, who saw the temple himself, wrote that stone markers were set at intervals along this barrier, warning in Greek and Latin that no foreigner could go farther.",
+  "## The stone is found",
+  "In 1871, French scholar Charles Clermont-Ganneau found one of those warning stones built into a later structure near the Temple Mount. It is a complete block with seven lines of Greek. In paraphrase, it says that no foreigner may enter within the barrier and enclosure around the temple, and that anyone caught doing so will be responsible for his own death, which will follow. The stone was taken to Constantinople (Istanbul), where it remains.",
+  "In 1935, a broken piece of a second warning stone was found outside the Lions' Gate of the Old City. Traces of red paint remain in its letters, showing how the words were made to stand out. It is displayed at the Israel Museum.",
+  "## A riot in Acts 21",
+  "This inscription explains a dangerous moment in Paul's life. In Acts 21, Paul was in the temple completing a purification vow. Some Jews from Asia saw him and shouted that he had brought Greeks into the temple and defiled it. They had earlier seen him in the city with Trophimus, a Gentile from Ephesus, and assumed Paul had taken him inside the barrier. The whole city was stirred up, and the crowd dragged Paul out and tried to kill him. Roman soldiers had to rescue him (Acts 21:27–32). Given what the warning stones said, the crowd believed the penalty was death.",
+  "## The dividing wall torn down",
+  "A few years later, Paul wrote to the church at Ephesus, the hometown of Trophimus. In Ephesians 2:14, he says Christ himself is our peace, who has made Jews and Gentiles one and has broken down \"the dividing wall of hostility.\" In the temple, a stone wall and a warning of death kept Gentiles out. In Christ, Paul says, Gentiles who were once far off have been brought near, and both have access to the Father by one Spirit (Ephesians 2:13, 18)."
+ ],
+ "date": "2026-11-11",
+ "dek": "A stone sign from Herod's Temple threatened death to any Gentile who went too far. It helps explain a riot in Acts and a key verse in Ephesians.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Limestone block with a Greek warning inscription (one complete, one partial)"
+  ],
+  [
+   "Dated",
+   "Herod's Temple, late 1st century BC – AD 70"
+  ],
+  [
+   "Found",
+   "Jerusalem: complete stone 1871 (Charles Clermont-Ganneau); partial stone 1935"
+  ],
+  [
+   "Now at",
+   "Istanbul Archaeology Museums (complete); Israel Museum, Jerusalem (partial)"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 3,
+   "explain": "Herod the Great started the project, which continued for decades.",
+   "options": [
+    "Zerubbabel",
+    "Solomon",
+    "Pontius Pilate",
+    "Herod the Great"
+   ],
+   "q": "Who began the major rebuilding of the temple around 20/19 BC?"
+  },
+  {
+   "answer": 0,
+   "explain": "It warned that any foreigner going beyond the barrier would be responsible for his own death.",
+   "options": [
+    "Foreigners going past the barrier into the inner courts",
+    "Selling animals in the temple",
+    "Bringing coins into the temple",
+    "Women entering the temple"
+   ],
+   "q": "What did the warning inscription forbid?"
+  },
+  {
+   "answer": 3,
+   "explain": "The complete stone is in Greek. Josephus says markers were in Greek and Latin.",
+   "options": [
+    "Hebrew",
+    "Aramaic",
+    "Latin",
+    "Greek"
+   ],
+   "q": "In what language is the complete inscription written?"
+  },
+  {
+   "answer": 3,
+   "explain": "They assumed Paul had taken Trophimus of Ephesus past the barrier.",
+   "options": [
+    "He insulted the high priest",
+    "He refused to pay a tax",
+    "He healed on the Sabbath",
+    "They thought he had brought a Gentile, Trophimus, into the temple"
+   ],
+   "q": "Why did a crowd attack Paul in Acts 21?"
+  },
+  {
+   "answer": 0,
+   "explain": "Paul says Christ broke down the dividing wall between Jews and Gentiles.",
+   "options": [
+    "Ephesians 2:14, \"the dividing wall of hostility\"",
+    "John 3:16",
+    "Psalm 23:1",
+    "Romans 8:28"
+   ],
+   "q": "Which verse may refer to this barrier?"
+  }
+ ],
+ "readMinutes": 4,
+ "scholars": "Scholars debate whether the Romans allowed Jewish authorities to carry out the death penalty for this offense on their own, or whether the warning reflects mob action. Some also question whether Paul in Ephesians 2:14 meant the temple barrier specifically or the Law of Moses as a barrier more generally; many see both ideas together.",
+ "scripture": "Acts 21:26–36; Ephesians 2:11–22",
+ "sources": [
+  "Istanbul Archaeology Museums: Temple warning inscription",
+  "Israel Museum, Jerusalem: fragment of temple warning inscription",
+  "Josephus, Jewish War 5.193–194; Antiquities 15.417",
+  "Peretz Segal, \"The Penalty of the Warning Inscription from the Temple of Jerusalem,\" Israel Exploration Journal 39 (1989)"
+ ],
+ "title": "The Temple Warning Inscription"
+}

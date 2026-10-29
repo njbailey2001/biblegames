@@ -1,7 +1,7 @@
 /* Bible Games Daily: pure helpers for merging saved game progress between this device and the cloud.
    No browser or Firebase code here, so it can be tested on its own. */
 
-export const PATTERN = /^(vu-|versle-)/;
+export const PATTERN = /^(vu-|versle-|ss-)/;
 
 // Everything this device has saved for the games: { data: {key: rawString}, times: {key: ms} }
 export function collectLocal(keys, getItem, times) {

@@ -1,0 +1,104 @@
+{
+ "body": [
+  "In 539 BC, Cyrus the Great of Persia took Babylon, the empire that had destroyed Jerusalem and its temple in 586 BC. For the Jewish people living in exile there, this was a turning point. Within a short time, many were allowed to return home and rebuild. A small clay object found in the ruins of Babylon helps us understand how that happened.",
+  "## The discovery",
+  "In 1879, Assyrian-born archaeologist Hormuzd Rassam, working for the British Museum, found a clay cylinder about 23 centimeters (9 inches) long at Babylon. It is covered in Akkadian cuneiform, the writing system of Mesopotamia. Cylinders like this were often buried in the foundations of buildings as a record for future kings and the gods.",
+  "## What it says",
+  "The text first criticizes Nabonidus, the last Babylonian king, for neglecting the worship of Marduk, the chief god of Babylon. It then says Marduk chose Cyrus to rule and let him enter Babylon without a battle. Cyrus speaks in the first person, listing his royal titles and describing how he brought peace to the city.",
+  "The most important part for Bible readers comes near the end. Cyrus says he returned the images of gods to their sanctuaries in various cities and gathered their former inhabitants and returned them to their homes. In other words, Cyrus had a general policy of letting displaced peoples go back to their homelands and restore their local temples.",
+  "## Connecting to Ezra",
+  "Ezra 1:1–4 records a decree of Cyrus allowing the Jews to return to Jerusalem and rebuild the house of the Lord, and ordering that the temple vessels Nebuchadnezzar took be given back. The Cyrus Cylinder does not mention the Jews, Judah or Jerusalem. It focuses on cities in Mesopotamia. But it shows that the kind of decree Ezra describes fits exactly how Cyrus governed.",
+  "There is a striking difference in language. On the cylinder, Cyrus credits Marduk. In Ezra, Cyrus says the Lord, the God of heaven, gave him the kingdoms of the earth. Ancient rulers often spoke respectfully of each local people's god as a way to win their loyalty, so this is not surprising.",
+  "## Isaiah's prophecy",
+  "For believers, the most remarkable connection is Isaiah 44:28 and 45:1, where God names Cyrus as his shepherd and his anointed, who will say of Jerusalem, \"She shall be built,\" and of the temple, \"Your foundation shall be laid.\" Isaiah describes God using a foreign king who did not know him (Isaiah 45:4) to carry out his purposes for his people.",
+  "The exiles who returned faced a hard road, as the books of Ezra, Nehemiah, Haggai and Zechariah show. But the door home was opened by a Persian king whose own record still survives."
+ ],
+ "date": "2026-11-04",
+ "dek": "A Persian king's clay announcement helps explain how the Jewish exiles were able to go home.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Barrel-shaped clay cylinder inscribed in Akkadian cuneiform"
+  ],
+  [
+   "Dated",
+   "Shortly after 539 BC"
+  ],
+  [
+   "Found",
+   "Babylon, Iraq, 1879, by Hormuzd Rassam"
+  ],
+  [
+   "Now at",
+   "British Museum, London"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 2,
+   "explain": "Cyrus conquered Babylon in 539 BC. 586 BC is when Babylon destroyed Jerusalem.",
+   "options": [
+    "70 AD",
+    "586 BC",
+    "539 BC",
+    "722 BC"
+   ],
+   "q": "In what year did Cyrus take Babylon?"
+  },
+  {
+   "answer": 2,
+   "explain": "Cyrus says he returned images of gods to their sanctuaries and people to their homes.",
+   "options": [
+    "Forcing all peoples to worship Persian gods",
+    "Destroying local temples",
+    "Returning displaced peoples and their gods to their homelands",
+    "Moving everyone to Persia"
+   ],
+   "q": "What policy does the Cyrus Cylinder describe?"
+  },
+  {
+   "answer": 3,
+   "explain": "It doesn't name the Jews, but its policy fits the decree in Ezra 1.",
+   "options": [
+    "It mentions only Moses",
+    "Yes, once",
+    "Yes, several times",
+    "No, it focuses on Mesopotamian cities"
+   ],
+   "q": "Does the Cyrus Cylinder mention the Jews or Jerusalem by name?"
+  },
+  {
+   "answer": 0,
+   "explain": "On the cylinder he credits Marduk, Babylon's chief god. In Ezra he credits the God of heaven.",
+   "options": [
+    "Marduk",
+    "Ra",
+    "The Lord (Yahweh)",
+    "Zeus"
+   ],
+   "q": "Which god does Cyrus credit on the cylinder?"
+  },
+  {
+   "answer": 1,
+   "explain": "Isaiah 44:28 and 45:1 name Cyrus as the Lord's shepherd and anointed.",
+   "options": [
+    "Daniel",
+    "Isaiah",
+    "Jeremiah",
+    "Malachi"
+   ],
+   "q": "Which prophet names Cyrus and calls him God's \"anointed\"?"
+  }
+ ],
+ "readMinutes": 4,
+ "scholars": "Scholars debate whether the cylinder should be called an early \"human rights charter,\" as it is sometimes described today; most historians see it as a traditional Mesopotamian royal inscription and political propaganda. Some scholars also question how much of Isaiah 40–55 was written before Cyrus's rise, while many conservative scholars hold that Isaiah wrote it as prophecy.",
+ "scripture": "Ezra 1:1–4; Isaiah 44:28–45:1; 2 Chronicles 36:22–23",
+ "sources": [
+  "British Museum: Cyrus Cylinder (object 90920) and Irving Finkel's translation",
+  "Irving Finkel, ed., The Cyrus Cylinder: The King of Persia's Proclamation from Ancient Babylon (I. B. Tauris, 2013)",
+  "Edwin M. Yamauchi, Persia and the Bible (Baker, 1990)"
+ ],
+ "title": "The Cyrus Cylinder"
+}

@@ -1,0 +1,102 @@
+{
+ "body": [
+  "Before 1993, no ancient inscription outside the Bible was known to mention King David. That changed in the summer of 1993 at Tel Dan, an ancient city near the springs of the Jordan River in far northern Israel.",
+  "## A discovery in a wall",
+  "Archaeologist Avraham Biran had been excavating Dan for decades. In July 1993, surveyor Gila Cook noticed a piece of basalt with writing on it, reused as a building stone in a later wall near the city gate. Two smaller fragments of the same monument turned up in 1994. Together they form part of a stele, an upright stone monument a king set up to celebrate his victories.",
+  "The inscription is written in Old Aramaic, the language of the kingdom of Aram based in Damascus. The king's name is missing from the surviving pieces, but the inscription is generally attributed to Hazael of Damascus, who ruled in the second half of the ninth century BC. The Bible mentions Hazael several times as an enemy of Israel (2 Kings 8:7–15; 10:32; 13:3).",
+  "## The key words",
+  "The surviving text says the speaker killed a king of Israel and a king of the \"house of David.\" The phrase is written as bytdwd, meaning \"House of David,\" the way ancient people referred to a royal dynasty. The partly preserved royal names are usually restored as Jehoram (or Joram) son of Ahab, king of Israel, and Ahaziah, king of Judah.",
+  "This means that about 150 years after David's time, a foreign enemy king referred to the kingdom of Judah by the name of its founding dynasty. People do not name a royal house after someone who never existed. The stele does not prove every detail of David's life, but it is strong evidence that David was a real, historical king who founded a lasting dynasty, just as God promised in 2 Samuel 7:16.",
+  "## Comparing with 2 Kings",
+  "The stele was later smashed, probably when Israel retook Dan, and its pieces were reused as building material. That is how it survived for nearly three thousand years, waiting in a wall until 1993."
+ ],
+ "date": "2026-10-31",
+ "dek": "A broken victory monument from northern Israel contains the earliest known mention of King David's dynasty outside the Bible.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Fragments of a basalt victory inscription in Old Aramaic"
+  ],
+  [
+   "Dated",
+   "9th century BC (c. 840s BC)"
+  ],
+  [
+   "Found",
+   "Tel Dan, northern Israel, 1993–1994, by Avraham Biran's excavation team"
+  ],
+  [
+   "Now at",
+   "Israel Museum, Jerusalem"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 2,
+   "explain": "The inscription contains bytdwd, \"House of David,\" the earliest known reference to David's dynasty outside the Bible.",
+   "options": [
+    "\"Moses the servant\"",
+    "\"King Solomon\"",
+    "\"House of David\"",
+    "\"Temple of the Lord\""
+   ],
+   "q": "What important phrase appears on the Tel Dan Stele?"
+  },
+  {
+   "answer": 2,
+   "explain": "It is in Old Aramaic, the language of the Aramean kingdom of Damascus.",
+   "options": [
+    "Egyptian hieroglyphs",
+    "Greek",
+    "Old Aramaic",
+    "Hebrew"
+   ],
+   "q": "What language is the stele written in?"
+  },
+  {
+   "answer": 2,
+   "explain": "Hazael was a strong Aramean king in the 9th century BC and appears in 2 Kings as Israel's enemy.",
+   "options": [
+    "Nebuchadnezzar of Babylon",
+    "Ahab of Israel",
+    "Hazael of Damascus",
+    "Sennacherib of Assyria"
+   ],
+   "q": "Which king is the stele generally attributed to?"
+  },
+  {
+   "answer": 0,
+   "explain": "It had been broken up and reused as building material, which is how it survived.",
+   "options": [
+    "Reused as a stone in a later wall near Dan's gate",
+    "In the palace of Nineveh",
+    "In a tomb in Jerusalem",
+    "In a cave by the Dead Sea"
+   ],
+   "q": "Where was the main fragment found?"
+  },
+  {
+   "answer": 0,
+   "explain": "The Bible credits Jehu. The stele credits the Aramean king, possibly because Jehu acted as his ally or because kings claimed every victory.",
+   "options": [
+    "Jehu",
+    "David",
+    "Hazael",
+    "Elijah"
+   ],
+   "q": "In 2 Kings 9, who kills Joram of Israel and Ahaziah of Judah?"
+  }
+ ],
+ "readMinutes": 4,
+ "scholars": "A few scholars have suggested other readings of bytdwd, such as a place name, but the large majority accept \"House of David.\" Scholars also discuss whether the three fragments belong together in the order usually shown, and exactly how to restore the missing royal names.",
+ "scripture": "2 Samuel 7:16; 2 Kings 8:7–15; 2 Kings 9",
+ "sources": [
+  "Avraham Biran and Joseph Naveh, \"An Aramaic Stele Fragment from Tel Dan,\" Israel Exploration Journal 43 (1993) and 45 (1995)",
+  "Israel Museum, Jerusalem: Tel Dan inscription display",
+  "Lawrence J. Mykytiuk, Identifying Biblical Persons in Northwest Semitic Inscriptions (SBL, 2004)",
+  "K. A. Kitchen, On the Reliability of the Old Testament (Eerdmans, 2003)"
+ ],
+ "title": "The Tel Dan Stele and the House of David"
+}

@@ -1,0 +1,103 @@
+{
+ "body": [
+  "Late in 1946 or early in 1947, a young Bedouin shepherd named Muhammad edh-Dhib was searching for a lost animal in the cliffs above the northwest shore of the Dead Sea. He tossed a stone into a cave opening and heard pottery break. Inside were clay jars holding old leather scrolls wrapped in linen. Those first seven scrolls began one of the most important discoveries in the history of the Bible.",
+  "## What was found",
+  "Between 1947 and 1956, Bedouin searchers and archaeologists explored eleven caves near a ruined settlement called Khirbet Qumran. Together the caves held the remains of more than 900 manuscripts. Most survive only as fragments, some no bigger than a postage stamp. They were written mostly in Hebrew, with some in Aramaic and Greek, and they date from about the third century BC to the first century AD.",
+  "About a quarter of the manuscripts are copies of books of the Hebrew Bible, the Christian Old Testament. Fragments of every book have been identified except Esther. Psalms, Deuteronomy and Isaiah are the most common, which matches how often Jesus and the New Testament writers quote those same books. The rest of the collection includes commentaries on Scripture, hymns, community rules, and other Jewish writings from the period.",
+  "## The Great Isaiah Scroll",
+  "The most famous scroll is the Great Isaiah Scroll from Cave 1. It contains all 66 chapters of Isaiah on about 24 feet of stitched leather, and it is dated to around 125 BC. Before 1947, the oldest complete Hebrew manuscripts of the Old Testament were medieval copies, such as the Aleppo Codex (about AD 930) and the Leningrad Codex (AD 1008). The Isaiah scroll pushed the evidence back by roughly a thousand years.",
+  "When scholars compared it with the medieval text, they found the two agree closely. Most differences are spelling, small grammar changes, or copying slips. A few readings are more significant, and modern Bible translations sometimes use the Dead Sea Scrolls to clarify a difficult verse. For example, several translations of Isaiah 53:11 follow the Qumran reading that the servant will \"see light\" after his suffering.",
+  "## Why it matters",
+  "For readers of the Bible, the scrolls show how carefully Jewish scribes copied Scripture over many centuries. They also give a window into Jewish life and hope in the generations just before and during the time of Jesus, including expectations of a coming Messiah.",
+  "The scrolls were likely hidden in the caves before the Romans destroyed the Qumran settlement around AD 68, during the Jewish revolt against Rome. Whoever hid them treasured these writings enough to protect them in the desert. Isaiah 40:8 says the word of our God stands forever, and a copy of that very verse sat in a cave for about two thousand years."
+ ],
+ "date": "2026-10-29",
+ "dek": "How a shepherd's discovery in the Judean desert gave us Bible manuscripts a thousand years older than any known before.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Roughly 900+ manuscripts and fragments in Hebrew, Aramaic and Greek"
+  ],
+  [
+   "Dated",
+   "c. 250 BC – AD 68"
+  ],
+  [
+   "Found",
+   "Eleven caves near Qumran, by the Dead Sea, 1947–1956"
+  ],
+  [
+   "Now at",
+   "Israel Museum, Jerusalem (Shrine of the Book) and the Israel Antiquities Authority"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 1,
+   "explain": "Muhammad edh-Dhib, a young Bedouin shepherd, found the first cave while looking for a lost animal.",
+   "options": [
+    "A monk from a nearby monastery",
+    "A Bedouin shepherd",
+    "A British archaeologist",
+    "A Roman soldier"
+   ],
+   "q": "Who is traditionally credited with finding the first Dead Sea Scrolls?"
+  },
+  {
+   "answer": 1,
+   "explain": "Fragments of every book have been found except Esther.",
+   "options": [
+    "Psalms",
+    "Esther",
+    "Deuteronomy",
+    "Isaiah"
+   ],
+   "q": "Which book of the Hebrew Bible has NOT been identified among the scrolls?"
+  },
+  {
+   "answer": 1,
+   "explain": "It is dated to around 125 BC. AD 930 and 1008 are the dates of the medieval Aleppo and Leningrad codices.",
+   "options": [
+    "c. AD 300",
+    "c. 125 BC",
+    "c. AD 1008",
+    "c. AD 930"
+   ],
+   "q": "About how old is the Great Isaiah Scroll?"
+  },
+  {
+   "answer": 3,
+   "explain": "Most differences are spelling or small copying variations, showing careful transmission over about 1,000 years.",
+   "options": [
+    "Isaiah was originally written in Greek",
+    "The medieval copies added new chapters",
+    "The texts were completely different",
+    "The texts agree closely, with mostly minor differences"
+   ],
+   "q": "What did comparing the Isaiah scroll with medieval manuscripts show?"
+  },
+  {
+   "answer": 2,
+   "explain": "They were likely hidden before the Roman destruction of the settlement during the Jewish revolt.",
+   "options": [
+    "During the Crusades",
+    "During the Babylonian exile",
+    "Before the Romans destroyed Qumran around AD 68",
+    "In the 1800s"
+   ],
+   "q": "When were the scrolls probably hidden in the caves?"
+  }
+ ],
+ "readMinutes": 4,
+ "scholars": "Many scholars connect the scrolls with the Essenes, a Jewish group described by Josephus and Philo, who may have lived at Qumran. Others think the scrolls came from several groups, or were brought from Jerusalem for safekeeping. The exact date the first cave was found (late 1946 or 1947) is also reported differently.",
+ "scripture": "Isaiah 40:8; Isaiah 53",
+ "sources": [
+  "Israel Museum, Jerusalem: Shrine of the Book collection notes",
+  "Leon Levy Dead Sea Scrolls Digital Library (Israel Antiquities Authority)",
+  "James C. VanderKam, The Dead Sea Scrolls Today (Eerdmans, 2nd ed., 2010)",
+  "Emanuel Tov, Textual Criticism of the Hebrew Bible (Fortress, 3rd ed., 2012)"
+ ],
+ "title": "The Dead Sea Scrolls"
+}

@@ -1,0 +1,104 @@
+{
+ "body": [
+  "Pontius Pilate is one of the best-known names in history. Christians around the world say it in the Apostles' Creed: Jesus \"suffered under Pontius Pilate.\" Roman and Jewish writers mention him too, including the historian Tacitus, the Jewish historian Josephus, and the philosopher Philo of Alexandria. Yet until 1961, no inscription from Pilate's own time had been found bearing his name.",
+  "## Found in a theater",
+  "Caesarea Maritima was a grand port city on the Mediterranean coast built by Herod the Great. After Judea came under direct Roman rule in AD 6, Caesarea became the headquarters of the Roman governors. Acts 23 and 25 describe Paul being held there before governors Felix and Festus.",
+  "In 1961, Italian archaeologists led by Antonio Frova were excavating the city's Roman theater. They found a limestone block that had been reused, centuries later, as a step during a rebuilding of the theater. One side had been trimmed, and part of the text was lost. But the remaining Latin letters were clear enough.",
+  "## What it says",
+  "The surviving words are usually read as: \"...Tiberieum ... [Pon]tius Pilatus ... [Praef]ectus Iuda[ea]e.\" In English: Pontius Pilate, Prefect of Judea, dedicated a Tiberieum. A Tiberieum was probably a building or structure honoring the emperor Tiberius, who reigned AD 14–37. Luke 3:1 dates the start of John the Baptist's ministry to the fifteenth year of Tiberius, \"Pontius Pilate being governor of Judea.\" The stone fits that setting exactly.",
+  "## Prefect, not procurator",
+  "The inscription also settled a small historical question. Tacitus, writing decades later, called Pilate a \"procurator.\" The stone shows that his official title was \"prefect,\" a military title used for governors of Judea in that period. The title of procurator became standard for later governors. The Gospels use a general Greek word for governor, which fits either title.",
+  "## Who Pilate was",
+  "Pilate governed Judea for about ten years, from AD 26 to 36. Josephus and Philo describe him as stubborn and harsh. He once brought military standards with the emperor's image into Jerusalem, angering the Jewish people, and he used temple funds to build an aqueduct. Luke 13:1 mentions Galileans whose blood Pilate mixed with their sacrifices. He was eventually recalled to Rome after his troops attacked a group of Samaritans.",
+  "The Gospels show Pilate at his most important moment: questioning Jesus, finding no guilt in him, yet giving in to pressure and handing him over to be crucified. The stone from Caesarea reminds us that this trial happened in real history, under a real Roman official."
+ ],
+ "date": "2026-11-07",
+ "dek": "A reused block from a Roman theater carries the name of the governor who sentenced Jesus.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Limestone block with a Latin dedication, about 82 x 65 cm"
+  ],
+  [
+   "Dated",
+   "AD 26–36, Pilate's term in Judea"
+  ],
+  [
+   "Found",
+   "Caesarea Maritima, Israel, 1961, by an Italian team led by Antonio Frova"
+  ],
+  [
+   "Now at",
+   "Israel Museum, Jerusalem (a replica stands at Caesarea)"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 1,
+   "explain": "It was found in 1961 in the Roman theater at Caesarea, the governors' headquarters.",
+   "options": [
+    "Rome",
+    "Caesarea Maritima",
+    "Nazareth",
+    "Jerusalem"
+   ],
+   "q": "Where was the Pilate Stone found?"
+  },
+  {
+   "answer": 3,
+   "explain": "It reads Praefectus Iudaeae, Prefect of Judea, correcting the later title procurator used by Tacitus.",
+   "options": [
+    "King",
+    "Procurator",
+    "Senator",
+    "Prefect"
+   ],
+   "q": "What official title does the inscription give Pilate?"
+  },
+  {
+   "answer": 3,
+   "explain": "Tiberius reigned AD 14–37, during Jesus' ministry (Luke 3:1).",
+   "options": [
+    "Claudius",
+    "Augustus",
+    "Nero",
+    "Tiberius"
+   ],
+   "q": "Which emperor is honored by the \"Tiberieum\"?"
+  },
+  {
+   "answer": 1,
+   "explain": "Centuries later, the block was cut down and reused in a rebuilding of the theater.",
+   "options": [
+    "It was burned",
+    "The block was trimmed and reused as a theater step",
+    "Soldiers erased it",
+    "It was underwater"
+   ],
+   "q": "Why was part of the inscription lost?"
+  },
+  {
+   "answer": 2,
+   "explain": "Pilate served from about AD 26 to 36, when he was recalled to Rome.",
+   "options": [
+    "1 year",
+    "25 years",
+    "About 10 years (AD 26–36)",
+    "40 years"
+   ],
+   "q": "About how long did Pilate govern Judea?"
+  }
+ ],
+ "readMinutes": 3,
+ "scholars": "Scholars debate what a \"Tiberieum\" was. Suggestions include a temple for emperor worship, a colonnade, or a lighthouse or harbor structure honoring Tiberius. Some also discuss whether the first line's letters should be restored as a reference to the people of Caesarea.",
+ "scripture": "Matthew 27:11–26; Luke 3:1; John 18:28–19:16",
+ "sources": [
+  "Israel Museum, Jerusalem: Pilate inscription display",
+  "Antonio Frova, \"L'iscrizione di Ponzio Pilato a Cesarea,\" Rendiconti dell'Istituto Lombardo 95 (1961)",
+  "Helen K. Bond, Pontius Pilate in History and Interpretation (Cambridge University Press, 1998)",
+  "Josephus, Antiquities 18.55–89; Philo, Embassy to Gaius 299–305; Tacitus, Annals 15.44"
+ ],
+ "title": "The Pilate Stone"
+}

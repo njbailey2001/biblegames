@@ -1,0 +1,105 @@
+{
+ "body": [
+  "In late 1990, workers building a water park and road in Jerusalem's Peace Forest, south of the Old City, accidentally broke through the roof of an ancient burial cave. Archaeologist Zvi Greenhut of the Israel Antiquities Authority was called in. Inside the cave were twelve ossuaries, stone boxes used to hold bones.",
+  "## Jewish burial in Jesus' time",
+  "In the first century, many Jewish families in Jerusalem buried in two stages. First, the body was laid on a shelf or in a niche in a family cave tomb. About a year later, after the flesh had decayed, relatives gathered the bones and placed them in an ossuary, often carved from local limestone. Names were sometimes scratched on the outside. This practice was common from about the late first century BC until around AD 70, the very period of the Gospels.",
+  "## A name on the box",
+  "One ossuary in the cave stood out. It was beautifully decorated with carved rosettes, suggesting a wealthy family. On it, scratched in Aramaic, was the name \"Yehosef bar Qayafa,\" meaning \"Joseph, son of Caiaphas.\" A shorter form, \"Qafa,\" also appeared. Inside were the bones of several people, including a man about sixty years old.",
+  "The Gospels call the high priest Caiaphas. The Jewish historian Josephus gives his full name as Joseph, called Caiaphas. The name on this ossuary, Joseph son of Caiaphas, matches that name.",
+  "## Who was Caiaphas?",
+  "Caiaphas served as high priest from about AD 18 to 36, an unusually long term. He was appointed by the Roman governor Valerius Gratus and kept his position through all of Pilate's time in office, which suggests he worked closely with the Romans. John 18:13 says he was the son-in-law of Annas, an earlier high priest who was still very influential.",
+  "## His role in the Gospels",
+  "After Jesus raised Lazarus, the council met in alarm. John 11:49–50 records Caiaphas saying it was better for one man to die for the people than for the whole nation to perish. John notes that, without realizing it, Caiaphas was prophesying that Jesus would die for the nation and to gather God's scattered children (John 11:51–52).",
+  "After Jesus' arrest, he was taken to Caiaphas's house, where the council questioned him. When Jesus affirmed that he was the Christ, the Son of God, and spoke of the Son of Man coming on the clouds, Caiaphas tore his robes and accused him of blasphemy (Matthew 26:63–66). Later Caiaphas appears again questioning Peter and John in Acts 4:6.",
+  "The find shows the kind of wealthy priestly family the Gospels describe, buried in the manner of first-century Jerusalem."
+ ],
+ "date": "2026-11-08",
+ "dek": "Road workers in Jerusalem broke into a family tomb. Inside was a bone box that may have held the high priest who questioned Jesus.",
+ "kind": "Archaeology",
+ "label": [
+  [
+   "What",
+   "Decorated limestone ossuary (bone box) inscribed in Aramaic"
+  ],
+  [
+   "Dated",
+   "1st century AD"
+  ],
+  [
+   "Found",
+   "Burial cave south of Jerusalem's Old City, November 1990"
+  ],
+  [
+   "Now at",
+   "Israel Museum, Jerusalem"
+  ]
+ ],
+ "labelTitle": "Object file",
+ "quiz": [
+  {
+   "answer": 2,
+   "explain": "In first-century Jerusalem, bones were gathered about a year after death and placed in an ossuary.",
+   "options": [
+    "A coin purse",
+    "A scroll jar",
+    "A stone box used to hold bones",
+    "A clay oil lamp"
+   ],
+   "q": "What is an ossuary?"
+  },
+  {
+   "answer": 0,
+   "explain": "Workers broke through the cave roof in 1990 during construction.",
+   "options": [
+    "Accidentally, by workers building in Jerusalem's Peace Forest",
+    "Through a map found in a scroll",
+    "By a shepherd",
+    "By treasure hunters"
+   ],
+   "q": "How was the Caiaphas tomb discovered?"
+  },
+  {
+   "answer": 3,
+   "explain": "\"Joseph son of Caiaphas.\" Josephus gives the high priest's full name as Joseph, called Caiaphas.",
+   "options": [
+    "Shimon bar Yonah",
+    "Yeshua bar Yosef",
+    "Hanan bar Seth",
+    "Yehosef bar Qayafa"
+   ],
+   "q": "What name was inscribed on the decorated ossuary?"
+  },
+  {
+   "answer": 3,
+   "explain": "Annas was a former high priest who remained very influential.",
+   "options": [
+    "Gamaliel",
+    "Nicodemus",
+    "Herod",
+    "Annas"
+   ],
+   "q": "Who was Caiaphas's father-in-law, according to John 18:13?"
+  },
+  {
+   "answer": 0,
+   "explain": "John says Caiaphas unknowingly prophesied that Jesus would die for the nation.",
+   "options": [
+    "It was better for one man to die for the people than for the nation to perish",
+    "\"I find no guilt in him\"",
+    "\"Let him come down from the cross\"",
+    "\"Release Barabbas\""
+   ],
+   "q": "What did Caiaphas say in John 11:50?"
+  }
+ ],
+ "readMinutes": 3,
+ "scholars": "Most scholars accept the identification with the high priest's family, but some question it. They point to the spelling of the name, the modest size of the tomb for such an important family, and the fact that the inscription does not say \"high priest.\" The bones were reburied according to Jewish law after study.",
+ "scripture": "Matthew 26:57–68; John 11:47–53; John 18:12–24",
+ "sources": [
+  "Israel Museum, Jerusalem: Caiaphas ossuary display",
+  "Zvi Greenhut, \"Burial Cave of the Caiaphas Family,\" Biblical Archaeology Review 18:5 (1992)",
+  "Ronny Reich, \"Caiaphas Name Inscribed on Bone Boxes,\" Biblical Archaeology Review 18:5 (1992)",
+  "Josephus, Antiquities 18.35, 18.95"
+ ],
+ "title": "The Caiaphas Ossuary"
+}
