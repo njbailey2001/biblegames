@@ -5,7 +5,8 @@ import {
   KEYS, ROUND_SECONDS, seededRandom, newSeed, total, validStats, cleanSettings, cleanSide,
   resolveRound, resolveBattle, score, unusedKeys, randomPick,
   makeChallenge, readChallenge, makeResult, readResult,
-  commitPick, checkReveal, randomSalt, roomCode
+  commitPick, checkReveal, randomSalt, roomCode,
+  HISTORY_PREFIX, finishedRecord, tally, validRecord
 } from "./battle-core.js";
 
 const BAF = window.BAF;
@@ -81,6 +82,21 @@ css.textContent = `
 @media (max-width:560px){.order-slots{grid-template-columns:repeat(4,1fr)}}
 .order-slot{border:1px dashed var(--line);border-radius:2px;padding:6px;font-size:12px;text-align:center;min-height:44px;color:#96897a}
 .order-slot b{display:block;font-family:'Cinzel',serif;font-size:11px;color:var(--paper)}
+.h-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.h-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel-raised);border:1px solid var(--line);border-radius:2px;padding:12px 14px;text-align:left;color:var(--paper);font-family:'EB Garamond',serif;letter-spacing:0;width:100%}
+.h-done{cursor:pointer;flex-wrap:nowrap}
+.h-done:hover{border-color:var(--gold)}
+.h-main{flex:1 1 180px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.h-title{font-family:'Cinzel',serif;font-weight:700;font-size:14px;letter-spacing:.02em}
+.h-sub{font-size:14px;color:#96897a;font-style:italic}
+.h-acts{display:flex;gap:8px;flex-wrap:wrap}
+.h-acts button{padding:9px 14px;font-size:11.5px}
+.h-badge{font-family:'Cinzel',serif;font-weight:900;font-size:11px;letter-spacing:.08em;padding:6px 8px;border-radius:2px;min-width:52px;text-align:center;flex:none}
+.h-badge.win{background:var(--gold);color:#15110d}
+.h-badge.loss{background:var(--maroon);color:#f4efe4}
+.h-badge.draw{border:1px solid var(--line);color:var(--paper)}
+.h-score{font-family:'Cinzel',serif;font-weight:900;font-size:20px;font-variant-numeric:tabular-nums;flex:none}
+.h-new{font-size:10px;background:var(--gold);color:#15110d;padding:2px 6px;border-radius:2px;letter-spacing:.06em;vertical-align:2px}
 .order-slot.filled{border-style:solid;border-color:var(--c);color:var(--c);font-family:'Cinzel',serif;font-weight:700;font-size:10.5px}
 `;
 document.head.appendChild(css);
@@ -98,6 +114,30 @@ const pageUrl = () => location.origin + location.pathname;
 
 function store(k, v) { try { if (v === undefined) return JSON.parse(localStorage.getItem(k)); localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } }
 const savedName = () => store("baf-name") || "";
+
+// ---------- battle history (baf-b-<id>, synced with accounts) ----------
+function getRec(id) { const r = store(HISTORY_PREFIX + id); return validRecord(r) ? r : null; }
+function putRec(rec) {
+  const now = Date.now();
+  store(HISTORY_PREFIX + rec.id, { v: 1, created: now, ...rec, updated: now, played: rec.status === "done" ? 1 : 0 });
+}
+function allRecs() {
+  const out = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(HISTORY_PREFIX)) { const r = store(k); if (validRecord(r)) out.push(r); }
+    }
+  } catch (e) {}
+  return out.sort((a, b) => (b.updated || 0) - (a.updated || 0));
+}
+function removeRec(id) { try { localStorage.removeItem(HISTORY_PREFIX + id); } catch (e) {} }
+// Save a pending record, but never turn a finished battle back into a pending one.
+function pendingRec(rec) {
+  const old = getRec(rec.id);
+  if (old && old.status === "done") return;
+  putRec({ ...(old || {}), ...rec, status: "pending" });
+}
 
 function showBuilder(on) {
   BAF.board.style.display = on ? "" : "none";
@@ -286,7 +326,9 @@ function linkHost(settings, name) {
       const id = roomCode();
       const code = makeChallenge({ name, stats: build.stats, figs: build.figs, order }, settings, id);
       const url = `${pageUrl()}#c=${code}`;
-      card(`<p>Your challenge is ready. Text the link to a friend. When they finish, they'll get a link to send back so you can see how the battle went.</p>`);
+      pendingRec({ id: "sent-" + id, kind: "sent", chId: id, myName: name, opp: null, link: url, settings });
+      registerChallenge(id, name);
+      card(`<p>Your challenge is ready. Text the link to a friend. When they finish, the result shows up in <strong>My battles</strong>, and they can also text you a result link.</p>`);
       arena.innerHTML = `<h2>Challenge ready</h2>
         <p class="lead">${esc(settingsText(settings))}. Your battle order is locked in the link.</p>
         ${shareBox(url, `${name} challenged you to a Build-a-Figure battle on Bible Games Daily!`)}
@@ -305,12 +347,19 @@ function linkGuest(code) {
   nameScreen(`<p><strong>${esc(ch.a.name)}</strong> challenged you to a Build-a-Figure battle! ${esc(settingsText(ch.settings))}.</p>
     <p>Build your figure, set the order you'll play your categories in, and the seven rounds are revealed against ${esc(ch.a.name)}'s figure.</p>`,
     "START BUILDING", (name) => {
+      const recId = "play-" + ch.id;
+      pendingRec({ id: recId, kind: "played", chId: ch.id, myName: name, opp: ch.a.name, link: location.href, settings: ch.settings });
       buildFigure(ch.settings, (build) => {
         orderPicker(build, (order) => {
           const me = cleanSide({ name, stats: build.stats, figs: build.figs, order }, "Player");
           const resCode = makeResult(ch, me);
           store(doneKey, resCode);
-          showGuestResult(ch, readResult(resCode), resCode, false);
+          const res = readResult(resCode);
+          const b = resolveBattle(res.b.stats, res.b.order, res.a.stats, res.a.order);
+          putRec(finishedRecord({ ...(getRec(recId) || {}), id: recId, kind: "played", chId: ch.id, myName: name, settings: ch.settings,
+            resultLink: `${pageUrl()}#r=${resCode}`, link: null }, res.b, res.a, b.rounds));
+          reportChallenge(ch.id, resCode, name);
+          showGuestResult(ch, res, resCode, false);
         });
       });
     });
@@ -324,7 +373,7 @@ function showGuestResult(ch, res, resCode, already) {
   playReveal({
     nameA: res.b.name, nameB: res.a.name, figsA: res.b.figs, figsB: res.a.figs, battle, youAreA: true,
     after: (box) => {
-      card(`<p>${already ? "You've already played this challenge, so here's how it went." : "Battle over!"} Send the result to ${esc(res.a.name)} so they can see it too.</p>`);
+      card(`<p>${already ? "You've already played this challenge, so here's how it went." : "Battle over!"} ${esc(res.a.name)} will see the result in their battles. You can also text them the result link.</p>`);
       box.innerHTML = `<p class="field-label" style="margin:0 0 6px">SEND THE RESULT TO ${esc(res.a.name.toUpperCase())}</p>
         ${shareBox(url, `I took your Build-a-Figure challenge! See how it went:`)}
         <div class="btn-row" style="margin-top:14px"><button class="btn-ghost" id="gNew">START YOUR OWN BATTLE</button></div>`;
@@ -336,6 +385,7 @@ function showGuestResult(ch, res, resCode, already) {
 function resultView(code) {
   const res = readResult(code);
   if (!res) return problem("This result link looks broken or incomplete.");
+  sentChallengeDone(res, code, false);
   clearScreens();
   const battle = resolveBattle(res.a.stats, res.a.order, res.b.stats, res.b.order);
   battle.statsA = res.a.stats; battle.statsB = res.b.stats;
@@ -421,6 +471,8 @@ async function enterRoom(sess, code, role) {
   try { myDoc = (await F.getDoc(myRef)).data(); } catch (e) { return problem("Couldn't load your side of the battle.", e); }
   if (!myDoc) { try { await F.setDoc(myRef, blankPlayer(savedName() || "Player")); myDoc = blankPlayer(savedName() || "Player"); } catch (e) { return problem("Couldn't join the battle.", e); } }
   L.myName = myDoc.name;
+  L.recId = "live-" + code;
+  pendingRec({ id: L.recId, kind: "live", code, role, myName: L.myName, opp: (getRec(L.recId) || {}).opp || null, link });
 
   const unRoom = F.onSnapshot(roomRef, (s) => {
     if (!L || L.code !== code) return;
@@ -482,6 +534,11 @@ function renderStatus() {
 function onLiveChange() {
   if (!L) return;
   renderStatus();
+  if (L.oppUid && L.recOpp !== oppName()) {
+    L.recOpp = oppName();
+    const settings = L.room ? cleanSettings(L.room.settings) : undefined;
+    pendingRec({ id: L.recId, opp: L.recOpp, ...(settings ? { settings } : {}) });
+  }
   if (L.phase === "waiting") {
     if (L.opp && L.opp.ready && validStats(L.opp.stats)) return startLiveBattle();
     arena.innerHTML = `<h2>Ready for battle</h2>
@@ -618,6 +675,8 @@ function renderBattle(justScored) {
 
 function finishLive() {
   L.phase = "over";
+  putRec(finishedRecord({ ...(getRec(L.recId) || {}), id: L.recId, kind: "live", link: null, unseen: false },
+    { name: L.myName, ...L.mine }, { name: oppName(), ...L.oppBuild }, L.results));
   const s = score(L.results, L.mine.stats, L.oppBuild.stats);
   card(`<p>Battle over!</p>`);
   arena.innerHTML = `${verdictHtml(s, "You", oppName(), true)}
@@ -625,6 +684,133 @@ function finishLive() {
     <div class="rounds">${L.results.map((x, i) => roundRow(x, i, L.mine.figs, L.oppBuild.figs, false)).join("")}</div>
     <div class="btn-row" style="margin-top:20px"><button class="btn-spin" id="lvNew">NEW BATTLE</button></div>`;
   $("lvNew").onclick = () => leave(true);
+}
+
+// ---------- challenge results reporting back (Firestore challenges/{id}) ----------
+async function registerChallenge(id, name) {
+  try {
+    const { db, F, user } = await session();
+    await F.setDoc(F.doc(db, "challenges", id), { owner: user.uid, ownerName: name, createdAt: Date.now(), result: null });
+    const r = getRec("sent-" + id); if (r && r.status === "pending") putRec({ ...r, registered: true });
+  } catch (e) { console.warn("Challenge couldn't be registered; the result link still works.", e); }
+}
+async function reportChallenge(id, resCode, name) {
+  try {
+    const { db, F } = await session();
+    const ref = F.doc(db, "challenges", id);
+    const snap = await F.getDoc(ref);
+    if (!snap.exists() || snap.data().result) return;
+    await F.updateDoc(ref, { result: resCode, responderName: name, resultAt: Date.now() });
+  } catch (e) { console.warn("Couldn't report the result automatically; the result link still works.", e); }
+}
+// A result for one of my sent challenges arrived (automatically or by link).
+function sentChallengeDone(res, code, unseen) {
+  const rec = getRec("sent-" + res.id);
+  if (!rec || rec.status === "done") return false;
+  const b = resolveBattle(res.a.stats, res.a.order, res.b.stats, res.b.order);
+  putRec(finishedRecord({ ...rec, link: null, resultLink: `${pageUrl()}#r=${code}`, unseen }, res.a, res.b, b.rounds));
+  return true;
+}
+let checking = null;
+function checkSentChallenges() {
+  if (checking) return checking;
+  const pending = allRecs().filter((r) => r.kind === "sent" && r.status === "pending" && r.chId).slice(0, 25);
+  if (!pending.length || !account.state.enabled) return Promise.resolve(0);
+  checking = (async () => {
+    let found = 0;
+    try {
+      const { db, F } = await session();
+      await Promise.all(pending.map(async (r) => {
+        try {
+          const snap = await F.getDoc(F.doc(db, "challenges", r.chId));
+          const d = snap.exists() ? snap.data() : null;
+          const res = d && typeof d.result === "string" ? readResult(d.result) : null;
+          if (res && res.id === r.chId && sentChallengeDone(res, d.result, true)) found++;
+        } catch (e) {}
+      }));
+    } catch (e) {}
+    checking = null;
+    decorateMenu();
+    return found;
+  })();
+  return checking;
+}
+
+// ---------- My battles ----------
+const KIND = { live: "Live battle", sent: "Challenge you sent", played: "Challenge you took" };
+function when(t) {
+  if (!t) return "";
+  const d = new Date(t), now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  return sameDay ? d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : d.toLocaleDateString([], { month: "short", day: "numeric" });
+}
+function decorateMenu() {
+  const btn = document.querySelector('[data-style="history"] .mode-title');
+  if (!btn) return;
+  const n = allRecs().filter((r) => r.unseen).length;
+  btn.textContent = n ? `MY BATTLES · ${n} NEW` : "MY BATTLES";
+}
+
+function historyScreen() {
+  stopAll(); clearScreens(); showBuilder(false);
+  if (location.search || location.hash) history.replaceState(null, "", pageUrl());
+  const draw = () => {
+    const recs = allRecs();
+    const t = tally(recs);
+    const pending = recs.filter((r) => r.status === "pending");
+    const done = recs.filter((r) => r.status === "done");
+    card(`<p><strong>My battles.</strong> ${t.played ? `Your record: <strong>${t.wins}</strong> win${t.wins === 1 ? "" : "s"}, <strong>${t.losses}</strong> loss${t.losses === 1 ? "" : "es"}, <strong>${t.draws}</strong> draw${t.draws === 1 ? "" : "s"}.` : "Finished battles and ones still going show up here."}</p>
+      <p class="skip-note">${account.state.user ? "Your battles are saved to your account, so they show on all your devices." : 'Saved on this device. <a href="/account.html" style="color:var(--gold)">Sign in</a> to keep them on all your devices.'}</p>`);
+    const pendingRow = (r) => {
+      let title, sub, action;
+      if (r.kind === "sent") { title = "Challenge sent"; sub = "Waiting for your friend to play it"; action = `<button class="btn-ghost" data-act="copy" data-id="${esc(r.id)}">COPY LINK</button>`; }
+      else if (r.kind === "played") { title = `${esc(r.opp || "A friend")}'s challenge`; sub = "You haven't finished it yet"; action = `<button class="btn-spin" data-act="open" data-id="${esc(r.id)}">CONTINUE</button>`; }
+      else { title = r.opp ? `Live battle with ${esc(r.opp)}` : "Live battle"; sub = r.opp ? "Not finished" : "Your friend hasn't joined yet"; action = `<button class="btn-spin" data-act="open" data-id="${esc(r.id)}">REJOIN</button>`; }
+      return `<div class="h-row"><div class="h-main"><div class="h-title">${title}</div><div class="h-sub">${sub} · ${esc(when(r.created))}</div></div>
+        <div class="h-acts">${action}<button class="btn-ghost h-x" data-act="remove" data-id="${esc(r.id)}" aria-label="Remove">REMOVE</button></div></div>`;
+    };
+    const doneRow = (r) => `<button class="h-row h-done" data-act="view" data-id="${esc(r.id)}">
+        <span class="h-badge ${r.outcome}">${r.outcome === "win" ? "WIN" : r.outcome === "loss" ? "LOSS" : "DRAW"}</span>
+        <span class="h-main"><span class="h-title">vs ${esc(r.opp || "Friend")}${r.unseen ? ' <span class="h-new">NEW</span>' : ""}</span>
+        <span class="h-sub">${KIND[r.kind]} · ${esc(when(r.updated))}${r.decidedBy === "total" ? " · decided on total stats" : ""}</span></span>
+        <span class="h-score">${r.wins}–${r.losses}</span></button>`;
+    arena.innerHTML = `
+      <h2>Pending</h2>
+      ${pending.length ? `<div class="h-list">${pending.map(pendingRow).join("")}</div>` : `<p class="note" style="margin:0 0 6px">Nothing waiting. Start a live battle or send a challenge link.</p>`}
+      <h2 style="margin-top:26px">Results</h2>
+      ${done.length ? `<div class="h-list">${done.map(doneRow).join("")}</div>` : `<p class="note" style="margin:0">No finished battles yet.</p>`}
+      <div class="btn-row" style="margin-top:22px"><button class="btn-ghost" id="hBack">BACK</button><span class="note" id="hMsg" style="margin:0;align-self:center"></span></div>`;
+    $("hBack").onclick = () => leave(true);
+    arena.querySelectorAll("[data-act]").forEach((b) => (b.onclick = async (e) => {
+      e.stopPropagation();
+      const r = getRec(b.dataset.id); if (!r) return draw();
+      const act = b.dataset.act;
+      if (act === "remove") { removeRec(r.id); return draw(); }
+      if (act === "copy") { const res = await copyLink(r.link); $("hMsg").textContent = res === "copied" ? "Link copied." : r.link; return; }
+      if (act === "open" && r.link) { location.href = r.link; return; }
+      if (act === "view") {
+        if (r.unseen) putRec({ ...r, unseen: false });
+        replayRecord(getRec(r.id));
+      }
+    }));
+  };
+  draw();
+  checkSentChallenges().then((n) => { if (n && !L && arena.querySelector("#hBack")) draw(); });
+}
+
+function replayRecord(r) {
+  clearScreens();
+  const battle = { rounds: r.rounds, statsA: r.me.stats, statsB: r.them.stats };
+  playReveal({
+    nameA: "You", nameB: r.opp || "Friend", figsA: r.me.figs, figsB: r.them.figs, battle, youAreA: true,
+    after: (box) => {
+      card(`<p>${KIND[r.kind]} with <strong>${esc(r.opp || "your friend")}</strong>, ${esc(when(r.updated))}.${r.settings ? " " + esc(settingsText(cleanSettings(r.settings))) + "." : ""}</p>`);
+      box.innerHTML = `<div class="btn-row"><button class="btn-spin" id="rpBack">BACK TO MY BATTLES</button>
+        ${r.kind === "played" && r.resultLink ? `<button class="btn-ghost" id="rpSend">COPY RESULT LINK</button>` : ""}</div><p class="note" id="rpMsg"></p>`;
+      $("rpBack").onclick = historyScreen;
+      const s = $("rpSend"); if (s) s.onclick = async () => { const x = await copyLink(r.resultLink); $("rpMsg").textContent = x === "copied" ? "Link copied." : r.resultLink; };
+    }
+  });
 }
 
 // ---------- entry points ----------
@@ -655,11 +841,12 @@ function leave(toMenu) {
 
 function start(kind) {
   stopAll();
+  if (kind === "history") return historyScreen();
   if (kind === "live") settingsForm("live", liveHost);
   else settingsForm("link", linkHost);
 }
 
-window.BAFBattle = { start, leave: () => leave(false), seededRandom };
+window.BAFBattle = { start, leave: () => leave(false), seededRandom, decorateMenu };
 window.dispatchEvent(new Event("baf-battle-ready"));
 
 // Opened from a link?
@@ -668,5 +855,6 @@ const hash = location.hash.slice(1);
 if (params.get("live")) liveJoin(params.get("live").replace(/[^a-z0-9]/gi, "").slice(0, 16));
 else if (hash.startsWith("c=")) linkGuest(hash.slice(2));
 else if (hash.startsWith("r=")) resultView(hash.slice(2));
+else { decorateMenu(); setTimeout(checkSentChallenges, 1500); }
 // A challenge or result link opened in a tab that already has the game open only changes the #part, so reload for it.
 window.addEventListener("hashchange", () => { if (/^#(c|r)=/.test(location.hash)) location.reload(); });

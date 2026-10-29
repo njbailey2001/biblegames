@@ -2,7 +2,7 @@
    Loaded as a plain script in <head>, before any game code runs.
    It only notes the time of each save; it never changes what the games store. */
 (function () {
-  var PATTERN = /^(vu-|versle-|ss-)/;
+  var PATTERN = /^(vu-|versle-|ss-|baf-b-)/;
   var META = "bgd-sync-times";
   var ls;
   try { ls = window.localStorage; } catch (e) { return; }

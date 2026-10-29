@@ -484,12 +484,14 @@ function renderPlayStyle(){
   const styles = [
     {key:"build", label:"BUILD & SCORE", desc:"Fuse the strongest figure you can. Play solo, or pass one device around."},
     {key:"live", label:"LIVE BATTLE", desc:"Text a friend a link. Build at the same time, then battle round by round."},
-    {key:"link", label:"CHALLENGE LINK", desc:"Build and set your battle order, then text the link. Your friend plays whenever."}
+    {key:"link", label:"CHALLENGE LINK", desc:"Build and set your battle order, then text the link. Your friend plays whenever."},
+    {key:"history", label:"MY BATTLES", desc:"Your results, and battles that are still waiting on a friend."}
   ];
   const container = document.getElementById("styleOptions");
   styles.forEach(s => {
     const btn = document.createElement("button");
     btn.className = "btn-mode-option";
+    btn.dataset.style = s.key;
     btn.innerHTML = `<span class="mode-title">${s.label}</span><span class="mode-desc">${s.desc}</span>`;
     btn.addEventListener("click", () => {
       if(s.key === "build") renderModeSetup();
@@ -497,6 +499,7 @@ function renderPlayStyle(){
     });
     container.appendChild(btn);
   });
+  if(window.BAFBattle) window.BAFBattle.decorateMenu();
 }
 
 function openBattle(kind){

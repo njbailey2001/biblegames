@@ -150,3 +150,34 @@ export function roomCode(rand = Math.random) {
   let s = ""; for (let i = 0; i < 10; i++) s += chars[Math.floor(rand() * chars.length)];
   return s;
 }
+
+// ---- battle history ----
+// Each battle is saved under its own key (baf-b-<id>) so accounts can sync them one by one.
+export const HISTORY_PREFIX = "baf-b-";
+
+// Build the "done" part of a history record from finished rounds, seen from my side (side "a" = me).
+export function finishedRecord(rec, me, them, rounds) {
+  const s = score(rounds, me.stats, them.stats);
+  const outcome = s.winner === "a" ? "win" : s.winner === "b" ? "loss" : "draw";
+  return {
+    ...rec, status: "done", played: 1, outcome,
+    wins: s.winsA, losses: s.winsB, ties: s.ties, decidedBy: s.decidedBy, totalMe: s.totalA, totalOpp: s.totalB,
+    me: { name: me.name, stats: me.stats, figs: me.figs }, them: { name: them.name, stats: them.stats, figs: them.figs },
+    opp: them.name,
+    rounds: rounds.map((r) => ({ a: { key: r.a.key, value: r.a.value }, b: { key: r.b.key, value: r.b.value }, winner: r.winner }))
+  };
+}
+
+export function tally(records) {
+  const t = { played: 0, wins: 0, losses: 0, draws: 0 };
+  for (const r of records) {
+    if (!r || r.status !== "done") continue;
+    t.played++;
+    if (r.outcome === "win") t.wins++; else if (r.outcome === "loss") t.losses++; else t.draws++;
+  }
+  return t;
+}
+
+export function validRecord(r) {
+  return !!r && typeof r.id === "string" && ["sent", "played", "live"].includes(r.kind) && ["pending", "done"].includes(r.status);
+}

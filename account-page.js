@@ -149,6 +149,17 @@ function renderStats() {
     const k = localStorage.key(i);
     if (/^ss-\d{4}-\d{2}-\d{2}$/.test(k)) { const s = read(k); if (s && s.total) { ssDone++; ssPts += s.score; ssTot += s.total; } }
   }
+  let bPlayed = 0, bWins = 0, bLosses = 0, bDraws = 0, bPending = 0;
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!/^baf-b-/.test(k)) continue;
+    const r = read(k); if (!r) continue;
+    if (r.status === "pending") { bPending++; continue; }
+    if (r.status !== "done") continue;
+    bPlayed++;
+    if (r.outcome === "win") bWins++; else if (r.outcome === "loss") bLosses++; else bDraws++;
+  }
+  out.push(`<section class="game-stats"><h3>Build-a-Figure battles</h3><div class="stats">${statRow("Battles", bPlayed)}${statRow("Wins", bWins)}${statRow("Losses", bLosses)}${statRow("Draws", bDraws)}${statRow("Pending", bPending)}</div></section>`);
   out.push(`<section class="game-stats"><h3>Stones &amp; Scripture</h3><div class="stats">${statRow("Readings quizzed", ssDone)}${statRow("Average score", ssTot ? Math.round((ssPts / ssTot) * 100) + "%" : "–")}</div></section>`);
   $("stats").innerHTML = out.join("");
 }

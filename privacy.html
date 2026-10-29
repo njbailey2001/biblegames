@@ -139,7 +139,8 @@ footer a{color:var(--muted)} footer a:hover{color:var(--lapis)}
     <h2>Build-a-Figure battles</h2>
     <ul>
       <li><b>Live battles:</b> to connect two players, we give each device a temporary guest sign-in through Google Firebase. It has no email address or password. A battle stores the name each player types (it can be anything, such as a first name or nickname), the figure they built and the categories they play, so the two players can see each other's moves. Only the two players in a battle can see their picks.</li>
-      <li><b>Challenge links:</b> the name you type, your figure and your battle order are stored inside the link itself, after the # sign, and are not sent to us. Anyone you share the link with can see them.</li>
+      <li><b>Challenge links:</b> the name you type, your figure and your battle order are stored inside the link itself, after the # sign. Anyone you share the link with can see them. When your friend finishes, the result (both names, both figures and the rounds) is stored on Firebase so it can reach you, using the same temporary guest sign-in.</li>
+      <li><b>Battle history:</b> your past and pending battles are saved in your browser. If you're signed in to an account, they're also saved to your account so they show on all your devices, and deleting your account deletes them.</li>
     </ul>
 
     <h2>Game progress saved on your device</h2>
