@@ -47,34 +47,34 @@
    "q": "What did Jesus tell the blind man to do?"
   },
   {
-   "answer": 2,
+   "answer": 1,
    "explain": "John 9:7 explains that Siloam means \"Sent.\"",
    "options": [
-    "Light",
     "Peace",
     "Sent",
-    "Living water"
+    "Living water",
+    "Light"
    ],
    "q": "What does \"Siloam\" mean, according to John?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "Workers uncovered ancient steps while fixing a sewer pipe.",
    "options": [
-    "From a map in the Dead Sea Scrolls",
+    "During repairs to a sewer pipe",
     "By a farmer plowing",
-    "By satellite",
-    "During repairs to a sewer pipe"
+    "From a map in the Dead Sea Scrolls",
+    "By satellite"
    ],
    "q": "How was the first-century pool discovered in 2004?"
   },
   {
-   "answer": 2,
+   "answer": 1,
    "explain": "Coins of Alexander Jannaeus and of the Jewish revolt showed the pool was in use in Jesus' time.",
    "options": [
-    "Roman military records",
     "Carbon dating of fish bones",
     "Coins found in its plaster and later layers",
+    "Roman military records",
     "A carved date on the steps"
    ],
    "q": "What helped archaeologists date the pool?"
@@ -84,8 +84,8 @@
    "explain": "Water flowed from the Gihon Spring through Hezekiah's Tunnel to the pool.",
    "options": [
     "The Gihon Spring, through Hezekiah's Tunnel",
-    "The Jordan River",
     "The Mediterranean Sea",
+    "The Jordan River",
     "Rainwater only"
    ],
    "q": "Where did the pool's water come from?"

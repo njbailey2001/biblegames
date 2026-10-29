@@ -37,35 +37,35 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 2,
+   "answer": 0,
    "explain": "Cyrus conquered Babylon in 539 BC. 586 BC is when Babylon destroyed Jerusalem.",
    "options": [
-    "70 AD",
-    "586 BC",
     "539 BC",
-    "722 BC"
+    "586 BC",
+    "722 BC",
+    "70 AD"
    ],
    "q": "In what year did Cyrus take Babylon?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "Cyrus says he returned images of gods to their sanctuaries and people to their homes.",
    "options": [
-    "Forcing all peoples to worship Persian gods",
+    "Moving everyone to Persia",
     "Destroying local temples",
-    "Returning displaced peoples and their gods to their homelands",
-    "Moving everyone to Persia"
+    "Forcing all peoples to worship Persian gods",
+    "Returning displaced peoples and their gods to their homelands"
    ],
    "q": "What policy does the Cyrus Cylinder describe?"
   },
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "It doesn't name the Jews, but its policy fits the decree in Ezra 1.",
    "options": [
-    "It mentions only Moses",
     "Yes, once",
-    "Yes, several times",
-    "No, it focuses on Mesopotamian cities"
+    "It mentions only Moses",
+    "No, it focuses on Mesopotamian cities",
+    "Yes, several times"
    ],
    "q": "Does the Cyrus Cylinder mention the Jews or Jerusalem by name?"
   },
@@ -75,8 +75,8 @@
    "options": [
     "Marduk",
     "Ra",
-    "The Lord (Yahweh)",
-    "Zeus"
+    "Zeus",
+    "The Lord (Yahweh)"
    ],
    "q": "Which god does Cyrus credit on the cylinder?"
   },

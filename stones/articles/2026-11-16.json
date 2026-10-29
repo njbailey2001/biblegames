@@ -1,0 +1,103 @@
+{
+ "date": "2026-11-16",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Silver Scrolls of Ketef Hinnom",
+ "dek": "Two tiny rolled-up silver amulets hold the oldest known words of Scripture, the priestly blessing from Numbers 6.",
+ "scripture": "Numbers 6:22–27",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "Two small silver amulets inscribed in ancient Hebrew"
+  ],
+  [
+   "Dated",
+   "About 600 BC"
+  ],
+  [
+   "Found",
+   "A burial cave at Ketef Hinnom, Jerusalem, 1979"
+  ],
+  [
+   "Now at",
+   "The Israel Museum, Jerusalem"
+  ]
+ ],
+ "body": [
+  "Ketef Hinnom means \"shoulder of Hinnom.\" It is a rocky ridge on the west side of the Hinnom Valley in Jerusalem, across from Mount Zion. In 1979, a team led by archaeologist Gabriel Barkay was excavating a group of burial caves cut into the rock there.",
+  "## A lucky find",
+  "Most of the caves had been robbed long ago. In one chamber, part of the ceiling had collapsed at some point, sealing a small storage area beneath the rock. When the team cleared it, they found more than a thousand objects: pottery, arrowheads, jewelry, and other items. Among them were two tiny rolled-up pieces of silver.",
+  "The larger one, when unrolled, measures less than four inches long and about an inch wide. The smaller one is even narrower. They were made to be worn, probably on a string around the neck, as protective amulets. The silver was so fragile that it took about three years of careful work to unroll them without destroying them.",
+  "## What they say",
+  "When the scrolls were finally opened, they were found to be covered in tiny letters written in the ancient Hebrew script used before the Babylonian exile. Both contain words from the priestly blessing that God gave to Aaron and his sons in Numbers 6:24–26:",
+  "\"The Lord bless thee, and keep thee: The Lord make his face shine upon thee, and be gracious unto thee: The Lord lift up his countenance upon thee, and give thee peace.\"",
+  "The scrolls use the personal name of God, YHWH, which English Bibles usually write as \"the Lord.\"",
+  "## The oldest words of Scripture",
+  "Based on the style of the letters and the other objects found with them, the scrolls are dated to around 600 BC, near the end of the time of the kings of Judah, in the days of the prophet Jeremiah. That makes them the oldest known copies of any text from the Bible. They are about 400 years older than the oldest of the Dead Sea Scrolls.",
+  "## Why it matters",
+  "The amulets show that people in Jerusalem knew and treasured this blessing during the time of the First Temple. Someone wanted these words close to them, even in death. Today the same blessing is still spoken in synagogues and churches around the world, more than 2,600 years after these scrolls were made."
+ ],
+ "sources": [
+  "The Israel Museum, Jerusalem: Silver Amulets from Ketef Hinnom",
+  "Gabriel Barkay et al., \"The Amulets from Ketef Hinnom: A New Edition and Evaluation,\" Bulletin of the American Schools of Oriental Research 334 (2004)",
+  "Gabriel Barkay, \"The Riches of Ketef Hinnom,\" Biblical Archaeology Review 35:4 (2009)"
+ ],
+ "quiz": [
+  {
+   "q": "What Bible passage is written on the silver scrolls?",
+   "options": [
+    "Psalm 23",
+    "The Lord's Prayer",
+    "The Ten Commandments",
+    "The priestly blessing from Numbers 6"
+   ],
+   "answer": 3,
+   "explain": "Both amulets contain words from Numbers 6:24–26."
+  },
+  {
+   "q": "In what city were the scrolls found?",
+   "options": [
+    "Babylon",
+    "Jericho",
+    "Jerusalem",
+    "Qumran"
+   ],
+   "answer": 2,
+   "explain": "They were found in a burial cave at Ketef Hinnom in Jerusalem."
+  },
+  {
+   "q": "About how old are the scrolls?",
+   "options": [
+    "From around 2000 BC",
+    "From around AD 500",
+    "About 100 years old",
+    "From around 600 BC"
+   ],
+   "answer": 3,
+   "explain": "They are dated to around 600 BC, in the time of Jeremiah."
+  },
+  {
+   "q": "Why did it take years to read them?",
+   "options": [
+    "They were lost after being found",
+    "They were written in code",
+    "The rolled silver was very fragile to unroll",
+    "They were buried under a building"
+   ],
+   "answer": 2,
+   "explain": "The thin silver had to be unrolled very carefully, which took about three years."
+  },
+  {
+   "q": "How do they compare in age with the Dead Sea Scrolls?",
+   "options": [
+    "The same age",
+    "About 400 years older",
+    "About 1,000 years younger",
+    "About 400 years younger"
+   ],
+   "answer": 1,
+   "explain": "They are about four centuries older than the oldest Dead Sea Scrolls."
+  }
+ ]
+}

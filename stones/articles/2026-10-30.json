@@ -35,35 +35,35 @@
  "labelTitle": "Book at a glance",
  "quiz": [
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "Ruth 1:1 says there was a famine in the land, so the family went to Moab.",
    "options": [
-    "To find wives for their sons",
-    "Because they were exiled",
     "To escape a war",
-    "Because of a famine in Bethlehem"
+    "To find wives for their sons",
+    "Because of a famine in Bethlehem",
+    "Because they were exiled"
    ],
    "q": "Why did Elimelech's family move to Moab?"
   },
   {
-   "answer": 0,
+   "answer": 3,
    "explain": "Mara means \"bitter.\" Naomi felt the Lord had dealt bitterly with her.",
    "options": [
-    "Mara",
-    "Dinah",
     "Rachel",
-    "Hannah"
+    "Hannah",
+    "Dinah",
+    "Mara"
    ],
    "q": "What name did Naomi ask to be called when she returned to Bethlehem?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "The Law told farmers to leave the edges and dropped grain for the poor and foreigners (Leviticus 19:9–10).",
    "options": [
+    "Gathering leftover grain the harvesters left behind",
     "Paying a tithe of the harvest",
     "Threshing grain at night",
-    "Buying family land",
-    "Gathering leftover grain the harvesters left behind"
+    "Buying family land"
    ],
    "q": "What is gleaning?"
   },

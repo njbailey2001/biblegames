@@ -36,24 +36,24 @@
  "labelTitle": "Site file",
  "quiz": [
   {
-   "answer": 1,
+   "answer": 3,
    "explain": "It carried water from the spring outside the walls to the Pool of Siloam inside the city.",
    "options": [
-    "To serve as an escape route for the king",
-    "To bring water from the Gihon Spring into the city",
     "To store grain during famine",
-    "To connect the temple to the palace"
+    "To serve as an escape route for the king",
+    "To connect the temple to the palace",
+    "To bring water from the Gihon Spring into the city"
    ],
    "q": "What was the purpose of Hezekiah's Tunnel?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "It runs about 533 meters (1,750 feet) in a winding S-shape.",
    "options": [
     "50 meters",
     "10 kilometers",
-    "533 meters",
-    "3 kilometers"
+    "3 kilometers",
+    "533 meters"
    ],
    "q": "About how long is the tunnel?"
   },
@@ -69,24 +69,24 @@
    "q": "Which empire was Hezekiah preparing to resist?"
   },
   {
-   "answer": 3,
+   "answer": 1,
    "explain": "The inscription says a man's voice was heard calling to his fellow when three cubits remained.",
    "options": [
     "A prophet told them where to dig",
+    "They heard a man's voice calling through the rock",
     "They saw a lamp through a crack",
-    "They measured with ropes",
-    "They heard a man's voice calling through the rock"
+    "They measured with ropes"
    ],
    "q": "According to the Siloam Inscription, how did the crews know they were close?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "It was removed in 1891 and taken to Istanbul, then the Ottoman capital.",
    "options": [
-    "Cairo",
     "London",
-    "Istanbul",
-    "Jerusalem"
+    "Cairo",
+    "Jerusalem",
+    "Istanbul"
    ],
    "q": "Where is the Siloam Inscription today?"
   }

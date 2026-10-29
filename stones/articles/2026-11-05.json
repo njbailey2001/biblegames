@@ -35,24 +35,24 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 0,
+   "answer": 2,
    "explain": "Dated around 1208 BC, it is the oldest known extra-biblical reference to Israel.",
    "options": [
-    "It contains the earliest known mention of Israel outside the Bible",
-    "It names King David",
+    "It describes the Exodus",
     "It shows a picture of Moses",
-    "It describes the Exodus"
+    "It contains the earliest known mention of Israel outside the Bible",
+    "It names King David"
    ],
    "q": "Why is the Merneptah Stele famous?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "Merneptah succeeded his father, Ramesses II.",
    "options": [
+    "Thutmose III",
     "Tutankhamun",
     "Akhenaten",
-    "Ramesses II",
-    "Thutmose III"
+    "Ramesses II"
    ],
    "q": "Which famous pharaoh was Merneptah's father?"
   },
@@ -60,32 +60,32 @@
    "answer": 1,
    "explain": "Israel is marked with the sign for a people, unlike the city-states listed with it.",
    "options": [
-    "It was part of Egypt",
-    "It was a people, not yet a fixed kingdom or territory",
     "It was an island",
+    "It was a people, not yet a fixed kingdom or territory",
+    "It was part of Egypt",
     "It was a large city"
    ],
    "q": "What does the Egyptian determinative tell us about Israel?"
   },
   {
-   "answer": 0,
+   "answer": 1,
    "explain": "In the days of the judges, Israel was a group of tribes in Canaan without a king.",
    "options": [
+    "The time of Jesus",
     "The time of the judges",
-    "The reign of Solomon",
     "The Babylonian exile",
-    "The time of Jesus"
+    "The reign of Solomon"
    ],
    "q": "Which biblical period best fits the stele's picture of Israel?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "Flinders Petrie found it in Merneptah's funerary temple at Thebes.",
    "options": [
+    "Flinders Petrie",
     "Howard Carter",
     "Austen Henry Layard",
-    "Hormuzd Rassam",
-    "Flinders Petrie"
+    "Hormuzd Rassam"
    ],
    "q": "Who discovered the stele in 1896?"
   }

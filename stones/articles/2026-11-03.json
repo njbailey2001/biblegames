@@ -38,13 +38,13 @@
  "labelTitle": "Chapter at a glance",
  "quiz": [
   {
-   "answer": 1,
+   "answer": 3,
    "explain": "He drank from the holy temple vessels while praising idols.",
    "options": [
-    "Bread from the temple",
-    "Gold and silver cups taken from the Jerusalem temple",
     "The Ark of the Covenant",
-    "Idols from Egypt"
+    "Bread from the temple",
+    "Idols from Egypt",
+    "Gold and silver cups taken from the Jerusalem temple"
    ],
    "q": "What did Belshazzar use at his feast that offended God?"
   },
@@ -54,41 +54,41 @@
    "options": [
     "His wife was second",
     "His father Nabonidus was first and Belshazzar was second",
-    "The Persians ruled half",
-    "Daniel was already second"
+    "Daniel was already second",
+    "The Persians ruled half"
    ],
    "q": "Why could Belshazzar only offer \"third ruler\" in the kingdom?"
   },
   {
-   "answer": 1,
+   "answer": 0,
    "explain": "TEKEL: weighed on the scales and found lacking (Daniel 5:27).",
    "options": [
-    "Your days are numbered",
     "You have been weighed and found lacking",
     "Your kingdom is divided",
-    "You will be forgiven"
+    "You will be forgiven",
+    "Your days are numbered"
    ],
    "q": "What does TEKEL mean in Daniel's interpretation?"
   },
   {
-   "answer": 1,
+   "answer": 2,
    "explain": "The Nabonidus Cylinders were found at Ur in the mid-1800s.",
    "options": [
-    "Nineveh",
-    "Ur",
+    "Jerusalem",
     "Rome",
-    "Jerusalem"
+    "Ur",
+    "Nineveh"
    ],
    "q": "Where were cylinders naming Belshazzar as Nabonidus's son found?"
   },
   {
-   "answer": 2,
+   "answer": 1,
    "explain": "PERES: your kingdom is divided and given to the Medes and Persians.",
    "options": [
-    "The Greeks",
     "The Egyptians",
     "The Medes and Persians",
-    "The Assyrians"
+    "The Assyrians",
+    "The Greeks"
    ],
    "q": "To whom was the kingdom given, according to Daniel's message?"
   }

@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-12",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Moabite Stone",
+ "dek": "A king of Moab carved his side of a war that the Bible also records in 2 Kings 3.",
+ "scripture": "2 Kings 3:4–27; Numbers 21:29",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "A black basalt victory stone with 34 lines in the Moabite language"
+  ],
+  [
+   "Dated",
+   "About 840 BC"
+  ],
+  [
+   "Found",
+   "Dhiban (biblical Dibon), Jordan, 1868"
+  ],
+  [
+   "Now at",
+   "The Louvre, Paris"
+  ]
+ ],
+ "body": [
+  "In 1868, an Anglican missionary named Frederick Augustus Klein was traveling east of the Dead Sea when local Bedouin showed him a large black stone near the town of Dhiban. It stood nearly four feet tall and was covered in writing. Klein had found one of the most important inscriptions ever connected to the Bible.",
+  "## A stone in pieces",
+  "Several European groups wanted to buy the stone. Before a deal could be made, the stone was heated in a fire and broken apart with cold water, and the pieces were scattered. Fortunately, a French scholar named Charles Clermont-Ganneau had already arranged for a paper impression of the text to be made, called a squeeze. Using the squeeze and the recovered fragments, the stone was pieced back together. It has been in the Louvre in Paris since the 1870s.",
+  "## Who wrote it",
+  "The inscription is written by Mesha, king of Moab, the land east of the Dead Sea. It is often called the Mesha Stele. Mesha describes how Moab had been under the control of Israel and how he threw off that control. In his words, \"Omri was king of Israel, and he oppressed Moab many days.\" Mesha then lists towns he captured or rebuilt and credits his victories to Chemosh, the god of Moab.",
+  "## The same king in the Bible",
+  "Mesha is named in the Bible. 2 Kings 3:4 says that \"Mesha king of Moab was a sheepmaster,\" and that he paid Israel a yearly tribute of 100,000 lambs and the wool of 100,000 rams. The next verse says that after Ahab died, Mesha rebelled against the king of Israel. Ahab was Omri's son, so the stone and the Bible describe the same period of Israel's control over Moab and the same revolt.",
+  "2 Kings 3 goes on to describe a campaign by the kings of Israel, Judah and Edom against Moab. The Moabite Stone tells the story from Mesha's side and does not mention that campaign. Together, the two give a fuller picture of the time.",
+  "## Why it matters",
+  "The Moabite Stone is the longest inscription ever found from ancient Moab. It names Omri, king of Israel, and it contains one of the earliest known references outside the Bible to YHWH, the name of the God of Israel. It also mentions many places that appear in the Bible, including Dibon, Medeba, Nebo and Aroer.",
+  "Its language and alphabet are very close to ancient Hebrew. For students of the Bible, it shows how neighboring kings wrote about their wars and their gods in the same era as the kings of Israel and Judah."
+ ],
+ "sources": [
+  "Louvre Museum: Stele of Mesha, King of Moab (AO 5066)",
+  "James B. Pritchard, ed., Ancient Near Eastern Texts Relating to the Old Testament (Princeton, 3rd ed., 1969)",
+  "Andrew Dearman, ed., Studies in the Mesha Inscription and Moab (Scholars Press, 1989)"
+ ],
+ "quiz": [
+  {
+   "q": "Where was the Moabite Stone found?",
+   "options": [
+    "Nineveh",
+    "Jerusalem",
+    "Egypt",
+    "Dhiban, east of the Dead Sea"
+   ],
+   "answer": 3,
+   "explain": "It was found at Dhiban, the biblical town of Dibon, in what is now Jordan."
+  },
+  {
+   "q": "Which king of Israel does the stone name?",
+   "options": [
+    "Jeroboam",
+    "Hezekiah",
+    "Omri",
+    "David"
+   ],
+   "answer": 2,
+   "explain": "Mesha writes that Omri, king of Israel, oppressed Moab many days."
+  },
+  {
+   "q": "According to 2 Kings 3, what was Mesha's occupation besides king?",
+   "options": [
+    "Merchant",
+    "Fisherman",
+    "Sheep breeder",
+    "Priest"
+   ],
+   "answer": 2,
+   "explain": "2 Kings 3:4 calls him a sheepmaster who paid tribute in lambs and wool."
+  },
+  {
+   "q": "How was the text saved after the stone was broken?",
+   "options": [
+    "It had been photographed",
+    "A paper impression, called a squeeze, had been made",
+    "It was never broken",
+    "A monk had copied it by hand"
+   ],
+   "answer": 1,
+   "explain": "Charles Clermont-Ganneau had a paper squeeze made before the stone was broken."
+  },
+  {
+   "q": "Where is the Moabite Stone kept today?",
+   "options": [
+    "The British Museum",
+    "The Israel Museum",
+    "The Louvre in Paris",
+    "The Vatican"
+   ],
+   "answer": 2,
+   "explain": "The reassembled stone has been in the Louvre since the 1870s."
+  }
+ ]
+}

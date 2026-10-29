@@ -1,0 +1,105 @@
+{
+ "date": "2026-11-17",
+ "kind": "Book summary",
+ "readMinutes": 4,
+ "title": "The Book of Nehemiah",
+ "dek": "A Persian king's cupbearer leads the rebuilding of Jerusalem's walls in just 52 days.",
+ "scripture": "Nehemiah 1–13",
+ "labelTitle": "Book at a glance",
+ "label": [
+  [
+   "Setting",
+   "Susa and Jerusalem, about 445 BC"
+  ],
+  [
+   "King",
+   "Artaxerxes I of Persia"
+  ],
+  [
+   "Main people",
+   "Nehemiah, Ezra, Sanballat, Tobiah"
+  ],
+  [
+   "Time to rebuild the wall",
+   "52 days (Nehemiah 6:15)"
+  ]
+ ],
+ "body": [
+  "Nehemiah was a Jew living in Susa, a royal city of Persia. He served as cupbearer to King Artaxerxes I. A cupbearer tasted the king's wine and was trusted to be near him, so it was a position of great responsibility.",
+  "## Bad news from Jerusalem",
+  "In the king's twentieth year, about 445 BC, Nehemiah heard that the people who had returned to Jerusalem were in great trouble. The city wall was broken down and its gates burned. Nehemiah wept, fasted and prayed for days (Nehemiah 1). He confessed the sins of his people and asked God to give him favor with the king.",
+  "Months later, the king noticed Nehemiah's sad face and asked what was wrong. Nehemiah \"prayed to the God of heaven\" and then asked to be sent to rebuild the city (Nehemiah 2:4–5). The king agreed and gave him letters for safe travel and for timber from the royal forest.",
+  "## Rebuilding the wall",
+  "In Jerusalem, Nehemiah inspected the walls at night. Then he called the people to rebuild. Chapter 3 lists the families, priests, merchants and goldsmiths who each repaired a section, often the part near their own homes.",
+  "Not everyone was pleased. Sanballat, Tobiah and Geshem mocked the work, then plotted to attack. Nehemiah set guards, and the builders worked with tools in one hand and weapons close by (Nehemiah 4:17). His enemies tried to lure him away and to frighten him with rumors, but he refused to stop. \"I am doing a great work, so that I cannot come down,\" he answered (Nehemiah 6:3).",
+  "The wall was finished in 52 days (Nehemiah 6:15). Even the surrounding nations recognized that the work had been done with the help of God.",
+  "## Renewing the people",
+  "With the walls rebuilt, Nehemiah turned to the people. In chapter 8, Ezra the scribe reads the Law of Moses aloud from morning until midday while the people stand and listen. Levites explain the meaning so that everyone can understand. The people weep, then celebrate the Feast of Tabernacles. In chapters 9 and 10, they confess their sins and make a written promise to follow God's law.",
+  "## A name outside the Bible",
+  "Sanballat is also known from outside the Bible. Letters written around 407 BC by a Jewish community at Elephantine in Egypt mention \"Sanballat, governor of Samaria,\" and his sons.",
+  "## What the book shows",
+  "Nehemiah is a book of prayer and hard work together. Again and again, Nehemiah prays short prayers in the middle of action, then gets back to work. His story has encouraged many people facing a large task."
+ ],
+ "sources": [
+  "Derek Kidner, Ezra and Nehemiah (Tyndale OT Commentaries, IVP, 1979)",
+  "Bezalel Porten, Archives from Elephantine (University of California Press, 1968)",
+  "H. G. M. Williamson, Ezra, Nehemiah (Word Biblical Commentary, 1985)"
+ ],
+ "quiz": [
+  {
+   "q": "What was Nehemiah's job in Persia?",
+   "options": [
+    "Scribe",
+    "Soldier",
+    "Cupbearer to the king",
+    "Governor"
+   ],
+   "answer": 2,
+   "explain": "Nehemiah served as cupbearer to King Artaxerxes I."
+  },
+  {
+   "q": "How long did it take to rebuild Jerusalem's wall?",
+   "options": [
+    "40 days",
+    "7 days",
+    "52 days",
+    "3 years"
+   ],
+   "answer": 2,
+   "explain": "Nehemiah 6:15 says the wall was finished in 52 days."
+  },
+  {
+   "q": "How did the builders guard against attack?",
+   "options": [
+    "They hired Persian soldiers",
+    "They kept weapons close while they worked",
+    "They worked only at night",
+    "They stopped building"
+   ],
+   "answer": 1,
+   "explain": "They worked with tools in one hand and weapons close by."
+  },
+  {
+   "q": "Who read the Law aloud to the people in chapter 8?",
+   "options": [
+    "Moses",
+    "Ezra",
+    "Mordecai",
+    "Nehemiah"
+   ],
+   "answer": 1,
+   "explain": "Ezra the scribe read the Law from morning until midday."
+  },
+  {
+   "q": "Which of Nehemiah's opponents is also named in letters from Elephantine?",
+   "options": [
+    "Goliath",
+    "Sanballat",
+    "Haman",
+    "Pharaoh"
+   ],
+   "answer": 1,
+   "explain": "The Elephantine papyri mention Sanballat, governor of Samaria."
+  }
+ ]
+}

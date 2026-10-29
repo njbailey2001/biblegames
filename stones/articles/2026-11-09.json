@@ -40,54 +40,54 @@
    "answer": 2,
    "explain": "Acts 17:6 records the crowd's accusation.",
    "options": [
-    "Stolen from the synagogue",
     "Insulted Caesar's statue",
+    "Stolen from the synagogue",
     "\"Turned the world upside down\"",
     "Burned the temple"
    ],
    "q": "What did Paul's opponents in Thessalonica say he and his companions had done?"
   },
   {
-   "answer": 1,
+   "answer": 2,
    "explain": "Acts 17:11 says they received the word eagerly and searched the Scriptures daily.",
    "options": [
-    "They built Paul a house",
-    "They examined the Scriptures daily to check Paul's message",
+    "They gave large offerings",
     "They defeated the Thessalonians",
-    "They gave large offerings"
+    "They examined the Scriptures daily to check Paul's message",
+    "They built Paul a house"
    ],
    "q": "Why are the Bereans praised?"
   },
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "Dozens of inscriptions, many from Thessalonica, use this title.",
    "options": [
     "Luke invented the word",
     "It means \"priest\"",
-    "It was a Roman army rank",
-    "Luke used the correct local title for Thessalonica's officials, confirmed by inscriptions"
+    "Luke used the correct local title for Thessalonica's officials, confirmed by inscriptions",
+    "It was a Roman army rank"
    ],
    "q": "What does the word \"politarch\" show about Luke's writing?"
   },
   {
-   "answer": 1,
+   "answer": 3,
    "explain": "Paul used the altar \"To an unknown god\" to introduce the true God.",
    "options": [
+    "\"To the emperor\"",
     "\"To Zeus the Savior\"",
-    "\"To an unknown god\"",
     "\"To Athena the wise\"",
-    "\"To the emperor\""
+    "\"To an unknown god\""
    ],
    "q": "What inscription did Paul mention in Athens?"
   },
   {
-   "answer": 1,
+   "answer": 3,
    "explain": "Acts 17:32–34 records all three responses, including Dionysius and Damaris believing.",
    "options": [
+    "They made him a citizen",
     "All left",
-    "Some mocked, some wanted to hear more, and a few believed",
     "All believed",
-    "They made him a citizen"
+    "Some mocked, some wanted to hear more, and a few believed"
    ],
    "q": "How did the Athenians respond when Paul mentioned the resurrection?"
   }

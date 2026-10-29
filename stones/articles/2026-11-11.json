@@ -36,46 +36,46 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "Herod the Great started the project, which continued for decades.",
    "options": [
     "Zerubbabel",
     "Solomon",
-    "Pontius Pilate",
-    "Herod the Great"
+    "Herod the Great",
+    "Pontius Pilate"
    ],
    "q": "Who began the major rebuilding of the temple around 20/19 BC?"
   },
   {
-   "answer": 0,
+   "answer": 3,
    "explain": "It warned that any foreigner going beyond the barrier would be responsible for his own death.",
    "options": [
-    "Foreigners going past the barrier into the inner courts",
+    "Women entering the temple",
     "Selling animals in the temple",
     "Bringing coins into the temple",
-    "Women entering the temple"
+    "Foreigners going past the barrier into the inner courts"
    ],
    "q": "What did the warning inscription forbid?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "The complete stone is in Greek. Josephus says markers were in Greek and Latin.",
    "options": [
+    "Greek",
     "Hebrew",
-    "Aramaic",
     "Latin",
-    "Greek"
+    "Aramaic"
    ],
    "q": "In what language is the complete inscription written?"
   },
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "They assumed Paul had taken Trophimus of Ephesus past the barrier.",
    "options": [
-    "He insulted the high priest",
-    "He refused to pay a tax",
     "He healed on the Sabbath",
-    "They thought he had brought a Gentile, Trophimus, into the temple"
+    "He refused to pay a tax",
+    "They thought he had brought a Gentile, Trophimus, into the temple",
+    "He insulted the high priest"
    ],
    "q": "Why did a crowd attack Paul in Acts 21?"
   },
@@ -85,8 +85,8 @@
    "options": [
     "Ephesians 2:14, \"the dividing wall of hostility\"",
     "John 3:16",
-    "Psalm 23:1",
-    "Romans 8:28"
+    "Romans 8:28",
+    "Psalm 23:1"
    ],
    "q": "Which verse may refer to this barrier?"
   }

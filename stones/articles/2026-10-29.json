@@ -35,24 +35,24 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 1,
+   "answer": 2,
    "explain": "Muhammad edh-Dhib, a young Bedouin shepherd, found the first cave while looking for a lost animal.",
    "options": [
-    "A monk from a nearby monastery",
-    "A Bedouin shepherd",
     "A British archaeologist",
-    "A Roman soldier"
+    "A Roman soldier",
+    "A Bedouin shepherd",
+    "A monk from a nearby monastery"
    ],
    "q": "Who is traditionally credited with finding the first Dead Sea Scrolls?"
   },
   {
-   "answer": 1,
+   "answer": 0,
    "explain": "Fragments of every book have been found except Esther.",
    "options": [
-    "Psalms",
     "Esther",
     "Deuteronomy",
-    "Isaiah"
+    "Isaiah",
+    "Psalms"
    ],
    "q": "Which book of the Hebrew Bible has NOT been identified among the scrolls?"
   },
@@ -68,24 +68,24 @@
    "q": "About how old is the Great Isaiah Scroll?"
   },
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "Most differences are spelling or small copying variations, showing careful transmission over about 1,000 years.",
    "options": [
     "Isaiah was originally written in Greek",
     "The medieval copies added new chapters",
-    "The texts were completely different",
-    "The texts agree closely, with mostly minor differences"
+    "The texts agree closely, with mostly minor differences",
+    "The texts were completely different"
    ],
    "q": "What did comparing the Isaiah scroll with medieval manuscripts show?"
   },
   {
-   "answer": 2,
+   "answer": 0,
    "explain": "They were likely hidden before the Roman destruction of the settlement during the Jewish revolt.",
    "options": [
-    "During the Crusades",
-    "During the Babylonian exile",
     "Before the Romans destroyed Qumran around AD 68",
-    "In the 1800s"
+    "In the 1800s",
+    "During the Babylonian exile",
+    "During the Crusades"
    ],
    "q": "When were the scrolls probably hidden in the caves?"
   }

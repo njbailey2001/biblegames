@@ -37,24 +37,24 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "In first-century Jerusalem, bones were gathered about a year after death and placed in an ossuary.",
    "options": [
     "A coin purse",
+    "A clay oil lamp",
     "A scroll jar",
-    "A stone box used to hold bones",
-    "A clay oil lamp"
+    "A stone box used to hold bones"
    ],
    "q": "What is an ossuary?"
   },
   {
-   "answer": 0,
+   "answer": 1,
    "explain": "Workers broke through the cave roof in 1990 during construction.",
    "options": [
-    "Accidentally, by workers building in Jerusalem's Peace Forest",
     "Through a map found in a scroll",
-    "By a shepherd",
-    "By treasure hunters"
+    "Accidentally, by workers building in Jerusalem's Peace Forest",
+    "By treasure hunters",
+    "By a shepherd"
    ],
    "q": "How was the Caiaphas tomb discovered?"
   },
@@ -62,31 +62,31 @@
    "answer": 3,
    "explain": "\"Joseph son of Caiaphas.\" Josephus gives the high priest's full name as Joseph, called Caiaphas.",
    "options": [
-    "Shimon bar Yonah",
     "Yeshua bar Yosef",
     "Hanan bar Seth",
+    "Shimon bar Yonah",
     "Yehosef bar Qayafa"
    ],
    "q": "What name was inscribed on the decorated ossuary?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "Annas was a former high priest who remained very influential.",
    "options": [
-    "Gamaliel",
+    "Annas",
     "Nicodemus",
-    "Herod",
-    "Annas"
+    "Gamaliel",
+    "Herod"
    ],
    "q": "Who was Caiaphas's father-in-law, according to John 18:13?"
   },
   {
-   "answer": 0,
+   "answer": 2,
    "explain": "John says Caiaphas unknowingly prophesied that Jesus would die for the nation.",
    "options": [
-    "It was better for one man to die for the people than for the nation to perish",
     "\"I find no guilt in him\"",
     "\"Let him come down from the cross\"",
+    "It was better for one man to die for the people than for the nation to perish",
     "\"Release Barabbas\""
    ],
    "q": "What did Caiaphas say in John 11:50?"

@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-22",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Gallio Inscription",
+ "dek": "A letter from Emperor Claudius carved at Delphi names Gallio, the Roman governor Paul stood before in Corinth.",
+ "scripture": "Acts 18:1–17",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "Fragments of a letter from Emperor Claudius carved in stone, in Greek"
+  ],
+  [
+   "Dated",
+   "AD 52"
+  ],
+  [
+   "Found",
+   "Delphi, Greece; first published in 1905"
+  ],
+  [
+   "Now at",
+   "The Delphi Archaeological Museum"
+  ]
+ ],
+ "body": [
+  "Delphi, in central Greece, was famous in the ancient world for its temple of Apollo and its oracle. Cities and rulers often set up inscriptions there. When French archaeologists excavated Delphi, they found fragments of a stone carved with a letter from the Roman emperor Claudius to the people of Delphi.",
+  "## Gallio, proconsul of Achaia",
+  "The letter is broken into several pieces, and parts are missing. But one line is clear. In it, Claudius refers to \"Junius Gallio, my friend and proconsul.\" A proconsul was the Roman governor of a province. Gallio governed Achaia, the province of southern Greece, whose capital was Corinth.",
+  "Gallio is known from other ancient writers too. He was the older brother of the famous Roman philosopher Seneca, who tutored the young Nero.",
+  "## Dating the letter",
+  "Claudius's letter includes his royal titles, including a number that counts how many times he had been acclaimed as emperor after military victories. Other Roman inscriptions show when he received each acclamation. This places the letter in AD 52. Roman proconsuls of senatorial provinces normally served one-year terms, which places Gallio's time in Corinth around AD 51 to 52.",
+  "## Gallio in the book of Acts",
+  "Acts 18 tells about Paul's stay in Corinth. He worked as a tentmaker with Aquila and Priscilla, taught in the synagogue, and stayed a year and a half. Then, \"when Gallio was the deputy of Achaia,\" some of Paul's opponents brought him before the governor's judgment seat, accusing him of persuading people to worship God contrary to the law (Acts 18:12–13).",
+  "Before Paul could even speak, Gallio dismissed the case. He said that if it were a matter of wrongdoing or crime he would hear it, but since it was about words, names and their own law, they should settle it themselves. \"I will be no judge of such matters,\" he said, and drove them from the judgment seat (Acts 18:14–16). The judgment seat, called the bema, still stands in the forum of ancient Corinth.",
+  "## Why it matters",
+  "The Gallio inscription is one of the most helpful finds for dating the life of Paul. Because it fixes when Gallio was governor, it places Paul's time in Corinth around AD 50 to 52. From there, many other events in Acts and in Paul's letters can be placed in order. Luke used the correct title for Gallio, proconsul, and named the right man in the right place."
+ ],
+ "sources": [
+  "Jerome Murphy-O'Connor, St. Paul's Corinth: Texts and Archaeology (Liturgical Press, 3rd ed., 2002)",
+  "F. F. Bruce, Paul: Apostle of the Heart Set Free (Eerdmans, 1977)",
+  "Delphi Archaeological Museum, Ephorate of Antiquities of Phocis"
+ ],
+ "quiz": [
+  {
+   "q": "Who wrote the letter carved in the Gallio inscription?",
+   "options": [
+    "Paul",
+    "Emperor Claudius",
+    "Seneca",
+    "Emperor Nero"
+   ],
+   "answer": 1,
+   "explain": "The inscription is a letter from Emperor Claudius to Delphi."
+  },
+  {
+   "q": "What title does the letter give Gallio?",
+   "options": [
+    "Proconsul",
+    "High priest",
+    "King",
+    "Centurion"
+   ],
+   "answer": 0,
+   "explain": "Claudius calls him \"my friend and proconsul.\""
+  },
+  {
+   "q": "Which famous philosopher was Gallio's brother?",
+   "options": [
+    "Plato",
+    "Aristotle",
+    "Socrates",
+    "Seneca"
+   ],
+   "answer": 3,
+   "explain": "Gallio was the older brother of the philosopher Seneca."
+  },
+  {
+   "q": "What did Gallio do with the case against Paul?",
+   "options": [
+    "Sent Paul to Rome",
+    "Refused to judge it and dismissed it",
+    "Put Paul in prison",
+    "Had Paul beaten"
+   ],
+   "answer": 1,
+   "explain": "Gallio said he would be no judge of such matters and dismissed the case."
+  },
+  {
+   "q": "Why is the inscription so useful?",
+   "options": [
+    "It is the oldest Bible manuscript",
+    "It shows a picture of Paul",
+    "It was written by Luke",
+    "It helps date Paul's time in Corinth"
+   ],
+   "answer": 3,
+   "explain": "It fixes Gallio's term and places Paul in Corinth around AD 50 to 52."
+  }
+ ]
+}

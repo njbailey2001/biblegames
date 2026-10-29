@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-18",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Black Obelisk of Shalmaneser III",
+ "dek": "An Assyrian monument shows tribute brought from Jehu, king of Israel, the earliest known picture connected to an Israelite king.",
+ "scripture": "2 Kings 9–10",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "A black limestone pillar about 6.5 feet tall with carved panels and writing"
+  ],
+  [
+   "Dated",
+   "About 825 BC"
+  ],
+  [
+   "Found",
+   "Nimrud (ancient Kalhu), Iraq, by Austen Henry Layard in 1846"
+  ],
+  [
+   "Now at",
+   "The British Museum, London"
+  ]
+ ],
+ "body": [
+  "In 1846, the explorer Austen Henry Layard was digging at Nimrud, the site of the ancient Assyrian city of Kalhu in northern Iraq. His workers uncovered a tall black stone pillar lying on its side. It was carved on all four sides, with pictures and long lines of cuneiform writing.",
+  "## A king's record",
+  "The pillar is now called the Black Obelisk. It was made for Shalmaneser III, who ruled Assyria from 858 to 824 BC. The inscription lists his military campaigns year by year. Around the top are five rows of carved panels. Each row shows a different ruler or region bringing tribute to the Assyrian king: precious metals, animals such as camels and monkeys, and other goods.",
+  "## Jehu, king of Israel",
+  "The second row of panels is the most famous for readers of the Bible. It shows a man kneeling with his face to the ground before Shalmaneser. Behind him, servants carry gifts. The caption above reads, \"The tribute of Jehu, son of Omri.\" It lists silver, gold, a golden bowl, golden vessels, golden buckets, tin, and a staff for the king's hand.",
+  "Jehu was a commander in Israel's army who became king about 841 BC. 2 Kings 9 and 10 tell how he was anointed by a messenger of the prophet Elisha and took the throne. Jehu was not actually a descendant of Omri. The Assyrians commonly referred to the kingdom of Israel as the \"house of Omri,\" after the powerful king who had founded Samaria as Israel's capital.",
+  "## A unique picture",
+  "The Black Obelisk is the earliest known picture connected to a king of Israel. No other carving from ancient times shows an Israelite king or his representative by name. It also helps fix the timeline of the period, because Assyrian records can be dated precisely, and Shalmaneser's records place Jehu's tribute in 841 BC.",
+  "## What the Bible says",
+  "The Bible does not mention Jehu paying tribute to Assyria, but it does say that Israel faced growing pressure from foreign powers in his days. 2 Kings 10:32 says that \"in those days the Lord began to cut Israel short,\" as Hazael of Aram took territory east of the Jordan.",
+  "The Black Obelisk stands in the British Museum today, near the Lachish reliefs. Together they show how the kings of Israel and Judah lived in the shadow of the great Assyrian Empire."
+ ],
+ "sources": [
+  "British Museum: The Black Obelisk of Shalmaneser III (Room 6)",
+  "James B. Pritchard, ed., Ancient Near Eastern Texts Relating to the Old Testament (Princeton, 3rd ed., 1969)",
+  "Austen Henry Layard, Nineveh and Its Remains (London, 1849)"
+ ],
+ "quiz": [
+  {
+   "q": "Which Assyrian king had the Black Obelisk made?",
+   "options": [
+    "Tiglath-Pileser III",
+    "Shalmaneser III",
+    "Sennacherib",
+    "Ashurbanipal"
+   ],
+   "answer": 1,
+   "explain": "It records the reign and campaigns of Shalmaneser III."
+  },
+  {
+   "q": "Which king of Israel is named on the obelisk?",
+   "options": [
+    "David",
+    "Jehu",
+    "Hezekiah",
+    "Ahab"
+   ],
+   "answer": 1,
+   "explain": "The caption reads, \"The tribute of Jehu, son of Omri.\""
+  },
+  {
+   "q": "Why does the obelisk call Jehu \"son of Omri\"?",
+   "options": [
+    "Omri was his teacher",
+    "He was Omri's grandson",
+    "Assyrians called Israel the \"house of Omri\"",
+    "It is a spelling mistake"
+   ],
+   "answer": 2,
+   "explain": "The Assyrians commonly named the kingdom of Israel after Omri."
+  },
+  {
+   "q": "Where was the Black Obelisk found?",
+   "options": [
+    "Nimrud in Iraq",
+    "Cairo",
+    "Damascus",
+    "Jerusalem"
+   ],
+   "answer": 0,
+   "explain": "Austen Henry Layard found it at Nimrud, ancient Kalhu, in 1846."
+  },
+  {
+   "q": "What makes the Black Obelisk unique?",
+   "options": [
+    "It was written in Hebrew",
+    "It was found in a tomb",
+    "It is the largest Assyrian monument",
+    "It has the earliest known picture connected to a king of Israel"
+   ],
+   "answer": 3,
+   "explain": "No earlier carving shows an Israelite king or his representative by name."
+  }
+ ]
+}

@@ -36,13 +36,13 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 2,
+   "answer": 1,
    "explain": "The prism says he shut Hezekiah up in Jerusalem like a bird in a cage.",
    "options": [
-    "\"Like a lion in a den\"",
-    "\"Like a fish in a net\"",
+    "\"Like a sheep in a pen\"",
     "\"Like a bird in a cage\"",
-    "\"Like a sheep in a pen\""
+    "\"Like a fish in a net\"",
+    "\"Like a lion in a den\""
    ],
    "q": "How did Sennacherib describe trapping Hezekiah in Jerusalem?"
   },
@@ -50,8 +50,8 @@
    "answer": 3,
    "explain": "He claims 46 strong walled cities plus many small villages.",
    "options": [
-    "12",
     "7",
+    "12",
     "100",
     "46"
    ],
@@ -62,31 +62,31 @@
    "explain": "Both give 30 talents of gold. The silver amounts differ (300 in 2 Kings, 800 on the prism).",
    "options": [
     "1,000 horses",
-    "800 talents of silver",
+    "300 talents of silver",
     "30 talents of gold",
-    "300 talents of silver"
+    "800 talents of silver"
    ],
    "q": "Which amount of tribute matches exactly between 2 Kings and the prism?"
   },
   {
-   "answer": 0,
+   "answer": 3,
    "explain": "Sennacherib never claims to have captured the city, which fits the Bible's account that Jerusalem was spared.",
    "options": [
-    "That Sennacherib captured Jerusalem",
+    "That Hezekiah paid tribute",
     "That Sennacherib besieged Jerusalem",
     "That he took many captives",
-    "That Hezekiah paid tribute"
+    "That Sennacherib captured Jerusalem"
    ],
    "q": "What does the prism NOT claim?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "The Lachish reliefs, now in the British Museum, show the siege in detail.",
    "options": [
     "Samaria",
+    "Hebron",
     "Bethlehem",
-    "Lachish",
-    "Hebron"
+    "Lachish"
    ],
    "q": "Which Judean city's siege is shown on the reliefs in Sennacherib's palace?"
   }

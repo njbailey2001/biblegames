@@ -38,46 +38,46 @@
  "labelTitle": "Book at a glance",
  "quiz": [
   {
-   "answer": 2,
+   "answer": 0,
    "explain": "He boarded a ship at Joppa bound for Tarshish, far to the west.",
    "options": [
-    "Egypt",
-    "Babylon",
     "Tarshish",
-    "Damascus"
+    "Damascus",
+    "Babylon",
+    "Egypt"
    ],
    "q": "Where did Jonah try to flee instead of going to Nineveh?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "Nineveh belonged to Assyria, a brutal enemy empire.",
    "options": [
+    "It was a city of Assyria, Israel's dangerous enemy",
     "It spoke Hebrew",
     "It had no king",
-    "It was too far to walk",
-    "It was a city of Assyria, Israel's dangerous enemy"
+    "It was too far to walk"
    ],
    "q": "Why was Nineveh a hard assignment for an Israelite prophet?"
   },
   {
-   "answer": 3,
+   "answer": 1,
    "explain": "Jonah 3:4 records this short warning.",
    "options": [
     "\"Pay tribute to Israel\"",
-    "\"Return to Egypt\"",
+    "\"Yet forty days, and Nineveh shall be overthrown\"",
     "\"Build an ark\"",
-    "\"Yet forty days, and Nineveh shall be overthrown\""
+    "\"Return to Egypt\""
    ],
    "q": "What was Jonah's message to Nineveh?"
   },
   {
-   "answer": 3,
+   "answer": 0,
    "explain": "He knew God was gracious and merciful and did not want Nineveh spared.",
    "options": [
+    "God spared Nineveh after it repented",
     "The king ignored him",
-    "He lost his money",
     "The fish hurt him",
-    "God spared Nineveh after it repented"
+    "He lost his money"
    ],
    "q": "Why was Jonah angry in chapter 4?"
   },

@@ -1,0 +1,103 @@
+{
+ "date": "2026-11-21",
+ "kind": "Book summary",
+ "readMinutes": 4,
+ "title": "The Book of Philemon",
+ "dek": "Paul's shortest letter: a personal appeal on behalf of a runaway slave who has become a brother in Christ.",
+ "scripture": "Philemon 1–25; Colossians 4:7–9",
+ "labelTitle": "Book at a glance",
+ "label": [
+  [
+   "Written by",
+   "Paul, while in prison"
+  ],
+  [
+   "Written to",
+   "Philemon, a believer at Colossae, and the church in his house"
+  ],
+  [
+   "Main people",
+   "Paul, Philemon, Onesimus"
+  ],
+  [
+   "Length",
+   "25 verses, one chapter"
+  ]
+ ],
+ "body": [
+  "Philemon is the shortest of Paul's letters in the New Testament. It is only 25 verses long. Unlike most of Paul's letters, which were written to whole churches, this one is a personal letter to a friend about one particular situation.",
+  "## The people in the letter",
+  "Philemon was a believer who lived in Colossae, a city in what is now western Turkey. A church met in his house (Philemon 2). Paul calls him a \"dearly beloved\" fellow worker, and says that the hearts of the believers had been refreshed through him.",
+  "Onesimus had been Philemon's slave. He had left Philemon's household and somehow came into contact with Paul, who was in prison. Through Paul, Onesimus became a believer. Paul calls him \"my son Onesimus, whom I have begotten in my bonds\" (Philemon 10).",
+  "## Paul's appeal",
+  "Paul writes that he could command Philemon to do the right thing, but he would rather appeal to him in love (Philemon 8–9). He is sending Onesimus back, and asks Philemon to receive him \"not now as a servant, but above a servant, a brother beloved\" (Philemon 16).",
+  "Paul plays on Onesimus's name, which means \"useful\" in Greek. He writes that Onesimus was once \"unprofitable\" to Philemon but now is \"profitable\" to both of them (Philemon 11).",
+  "Paul also offers to pay any debt himself: \"If he hath wronged thee, or oweth thee ought, put that on mine account\" (Philemon 18). He writes this part in his own handwriting, as a personal promise. He adds that he is confident Philemon will do even more than he asks, and he asks Philemon to prepare a guest room for him, hoping to be released and visit soon.",
+  "## A companion letter",
+  "Paul's letter to the Colossians was likely carried at the same time. In Colossians 4:9, Paul says he is sending Onesimus, \"a faithful and beloved brother, who is one of you,\" along with Tychicus. Both letters greet many of the same people, including Archippus, Epaphras, Mark, Luke and Demas.",
+  "## Why it matters",
+  "Philemon shows Paul acting as a peacemaker between two believers. He does not simply give orders. He reminds Philemon that both he and Onesimus now belong to Christ, and he asks Philemon to welcome Onesimus as he would welcome Paul himself (Philemon 17). The short letter gives a close-up look at how the gospel changed relationships in the earliest churches."
+ ],
+ "sources": [
+  "N. T. Wright, Colossians and Philemon (Tyndale NT Commentaries, IVP, 1986)",
+  "F. F. Bruce, The Epistles to the Colossians, to Philemon, and to the Ephesians (NICNT, Eerdmans, 1984)",
+  "The Holy Bible, King James Version"
+ ],
+ "quiz": [
+  {
+   "q": "How long is the letter to Philemon?",
+   "options": [
+    "Four chapters",
+    "Thirteen chapters",
+    "One chapter of 25 verses",
+    "Six chapters"
+   ],
+   "answer": 2,
+   "explain": "It is Paul's shortest letter, a single chapter of 25 verses."
+  },
+  {
+   "q": "What does the name Onesimus mean?",
+   "options": [
+    "Faithful",
+    "Brother",
+    "Useful",
+    "Free"
+   ],
+   "answer": 2,
+   "explain": "Paul plays on the meaning \"useful\" in Philemon 11."
+  },
+  {
+   "q": "In which city did Philemon live?",
+   "options": [
+    "Rome",
+    "Jerusalem",
+    "Colossae",
+    "Corinth"
+   ],
+   "answer": 2,
+   "explain": "Philemon lived in Colossae, and a church met in his house."
+  },
+  {
+   "q": "What did Paul offer to do if Onesimus owed Philemon anything?",
+   "options": [
+    "Ask the church to pay",
+    "Pay it himself",
+    "Send him to prison",
+    "Forgive it on Philemon's behalf"
+   ],
+   "answer": 1,
+   "explain": "\"Put that on mine account,\" Paul wrote in his own hand."
+  },
+  {
+   "q": "How did Paul ask Philemon to receive Onesimus?",
+   "options": [
+    "As a servant only",
+    "As a soldier",
+    "As a brother beloved",
+    "As a stranger"
+   ],
+   "answer": 2,
+   "explain": "Paul asks him to receive Onesimus \"above a servant, a brother beloved.\""
+  }
+ ]
+}

@@ -36,13 +36,13 @@
  "labelTitle": "Object file",
  "quiz": [
   {
-   "answer": 1,
+   "answer": 3,
    "explain": "It was found in 1961 in the Roman theater at Caesarea, the governors' headquarters.",
    "options": [
-    "Rome",
-    "Caesarea Maritima",
     "Nazareth",
-    "Jerusalem"
+    "Rome",
+    "Jerusalem",
+    "Caesarea Maritima"
    ],
    "q": "Where was the Pilate Stone found?"
   },
@@ -50,21 +50,21 @@
    "answer": 3,
    "explain": "It reads Praefectus Iudaeae, Prefect of Judea, correcting the later title procurator used by Tacitus.",
    "options": [
-    "King",
     "Procurator",
+    "King",
     "Senator",
     "Prefect"
    ],
    "q": "What official title does the inscription give Pilate?"
   },
   {
-   "answer": 3,
+   "answer": 2,
    "explain": "Tiberius reigned AD 14–37, during Jesus' ministry (Luke 3:1).",
    "options": [
-    "Claudius",
     "Augustus",
-    "Nero",
-    "Tiberius"
+    "Claudius",
+    "Tiberius",
+    "Nero"
    ],
    "q": "Which emperor is honored by the \"Tiberieum\"?"
   },
@@ -74,19 +74,19 @@
    "options": [
     "It was burned",
     "The block was trimmed and reused as a theater step",
-    "Soldiers erased it",
-    "It was underwater"
+    "It was underwater",
+    "Soldiers erased it"
    ],
    "q": "Why was part of the inscription lost?"
   },
   {
-   "answer": 2,
+   "answer": 0,
    "explain": "Pilate served from about AD 26 to 36, when he was recalled to Rome.",
    "options": [
-    "1 year",
-    "25 years",
     "About 10 years (AD 26–36)",
-    "40 years"
+    "25 years",
+    "40 years",
+    "1 year"
    ],
    "q": "About how long did Pilate govern Judea?"
   }

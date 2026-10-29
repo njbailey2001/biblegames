@@ -37,43 +37,43 @@
    "answer": 2,
    "explain": "The inscription contains bytdwd, \"House of David,\" the earliest known reference to David's dynasty outside the Bible.",
    "options": [
-    "\"Moses the servant\"",
     "\"King Solomon\"",
+    "\"Temple of the Lord\"",
     "\"House of David\"",
-    "\"Temple of the Lord\""
+    "\"Moses the servant\""
    ],
    "q": "What important phrase appears on the Tel Dan Stele?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "It is in Old Aramaic, the language of the Aramean kingdom of Damascus.",
    "options": [
-    "Egyptian hieroglyphs",
     "Greek",
-    "Old Aramaic",
-    "Hebrew"
+    "Hebrew",
+    "Egyptian hieroglyphs",
+    "Old Aramaic"
    ],
    "q": "What language is the stele written in?"
   },
   {
-   "answer": 2,
+   "answer": 3,
    "explain": "Hazael was a strong Aramean king in the 9th century BC and appears in 2 Kings as Israel's enemy.",
    "options": [
     "Nebuchadnezzar of Babylon",
     "Ahab of Israel",
-    "Hazael of Damascus",
-    "Sennacherib of Assyria"
+    "Sennacherib of Assyria",
+    "Hazael of Damascus"
    ],
    "q": "Which king is the stele generally attributed to?"
   },
   {
-   "answer": 0,
+   "answer": 2,
    "explain": "It had been broken up and reused as building material, which is how it survived.",
    "options": [
-    "Reused as a stone in a later wall near Dan's gate",
-    "In the palace of Nineveh",
     "In a tomb in Jerusalem",
-    "In a cave by the Dead Sea"
+    "In a cave by the Dead Sea",
+    "Reused as a stone in a later wall near Dan's gate",
+    "In the palace of Nineveh"
    ],
    "q": "Where was the main fragment found?"
   },
@@ -83,8 +83,8 @@
    "options": [
     "Jehu",
     "David",
-    "Hazael",
-    "Elijah"
+    "Elijah",
+    "Hazael"
    ],
    "q": "In 2 Kings 9, who kills Joram of Israel and Ahaziah of Judah?"
   }

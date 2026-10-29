@@ -1,0 +1,103 @@
+{
+ "date": "2026-11-24",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Place of Trumpeting Stone",
+ "dek": "A stone that fell from the top of the Temple Mount in AD 70 marks where a priest blew the trumpet to start the Sabbath.",
+ "scripture": "Numbers 10:10; Luke 4:9; Mark 13:1–2",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "A large carved stone with a Hebrew inscription"
+  ],
+  [
+   "Dated",
+   "First century BC to first century AD"
+  ],
+  [
+   "Found",
+   "Southwest corner of the Temple Mount, Jerusalem, 1968–69"
+  ],
+  [
+   "Now at",
+   "The Israel Museum (a copy remains at the site)"
+  ]
+ ],
+ "body": [
+  "After 1967, archaeologist Benjamin Mazar began large excavations along the southern and western walls of the Temple Mount in Jerusalem. At the southwest corner, his team uncovered a first-century street paved with large stones, and on top of it, a huge pile of fallen building stones.",
+  "## Stones that fell in AD 70",
+  "In AD 70, the Roman army under Titus captured Jerusalem and destroyed the temple. The stones the archaeologists found had been thrown down from the top of the Temple Mount walls onto the street below. They had lain there for nearly two thousand years. Jesus had told his disciples, as they admired the temple's great stones, \"There shall not be left one stone upon another, that shall not be thrown down\" (Mark 13:2).",
+  "## The inscription",
+  "One of the fallen stones was a large block cut with a corner shape. It had come from the very top of the southwest corner of the Temple Mount. Carved on it in Hebrew were the words \"to the place of trumpeting,\" followed by a word that is only partly preserved. It is often understood as \"to announce\" or \"to distinguish.\"",
+  "## A priest with a trumpet",
+  "The Jewish historian Josephus, who lived through the destruction of Jerusalem, describes this exact custom. In his book The Jewish War, he writes about a tower at the corner above the temple's outer court, \"where one of the priests stood\" and gave a signal with a trumpet at the beginning of every seventh day, in the evening, and again at its end the next evening. This told the people when to stop work and when they could begin again.",
+  "The stone fits his description well. From the high southwest corner, a trumpet blast could be heard across the city below, including the busy streets and markets.",
+  "## The pinnacle of the temple",
+  "The corners of the Temple Mount were its highest points. In the Gospels, Satan takes Jesus to \"a pinnacle of the temple\" and tempts him to throw himself down (Luke 4:9; Matthew 4:5). The southwest corner, above the busy street, was one of these high places.",
+  "## Why it matters",
+  "The Place of Trumpeting stone connects several sources at once: the Bible's descriptions of the temple, Josephus's account of the Sabbath trumpet, and the physical remains of the Roman destruction. The original stone is displayed in the Israel Museum in Jerusalem. Visitors to the southern wall excavations can still walk on the first-century street and see the fallen stones where they landed in AD 70."
+ ],
+ "sources": [
+  "Benjamin Mazar, The Mountain of the Lord (Doubleday, 1975)",
+  "Flavius Josephus, The Jewish War, Book 4, section 582",
+  "The Israel Museum, Jerusalem: \"To the Place of Trumpeting\" inscription"
+ ],
+ "quiz": [
+  {
+   "q": "What do the Hebrew words on the stone say?",
+   "options": [
+    "House of David",
+    "To the place of trumpeting",
+    "No foreigner may enter",
+    "Holy to the Lord"
+   ],
+   "answer": 1,
+   "explain": "The inscription reads \"to the place of trumpeting.\""
+  },
+  {
+   "q": "Why was the trumpet blown from this spot?",
+   "options": [
+    "To open the city gates",
+    "To mark the start and end of the Sabbath",
+    "To announce the king",
+    "To call soldiers to battle"
+   ],
+   "answer": 1,
+   "explain": "Josephus says a priest blew the trumpet to mark the beginning and end of each Sabbath."
+  },
+  {
+   "q": "Who led the excavations that found the stone?",
+   "options": [
+    "Howard Carter",
+    "Austen Henry Layard",
+    "Benjamin Mazar",
+    "Charles Warren"
+   ],
+   "answer": 2,
+   "explain": "Benjamin Mazar's team excavated along the southern and western walls."
+  },
+  {
+   "q": "How did the stone end up on the street below?",
+   "options": [
+    "The Romans threw it down when they destroyed the temple in AD 70",
+    "An earthquake in 1927",
+    "It fell during a storm",
+    "It was moved by builders"
+   ],
+   "answer": 0,
+   "explain": "Roman soldiers threw stones down from the Temple Mount during the destruction of AD 70."
+  },
+  {
+   "q": "Which ancient historian describes the trumpet custom?",
+   "options": [
+    "Tacitus",
+    "Josephus",
+    "Pliny",
+    "Herodotus"
+   ],
+   "answer": 1,
+   "explain": "Josephus describes it in The Jewish War."
+  }
+ ]
+}

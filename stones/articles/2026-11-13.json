@@ -1,0 +1,104 @@
+{
+ "date": "2026-11-13",
+ "kind": "Book summary",
+ "readMinutes": 4,
+ "title": "The Book of Esther",
+ "dek": "A young Jewish woman in the Persian palace, a plot against her people, and the beginning of Purim.",
+ "scripture": "Esther 1–10",
+ "labelTitle": "Book at a glance",
+ "label": [
+  [
+   "Setting",
+   "Susa, a royal city of the Persian Empire"
+  ],
+  [
+   "King",
+   "Ahasuerus, known in Greek as Xerxes I (486–465 BC)"
+  ],
+  [
+   "Main people",
+   "Esther, Mordecai, Haman"
+  ],
+  [
+   "Remembered at",
+   "The Jewish festival of Purim"
+  ]
+ ],
+ "body": [
+  "The book of Esther takes place in Susa, one of the royal cities of the Persian Empire. Many Jews still lived in Persia at this time, decades after some had returned to Jerusalem under Cyrus. The story follows a young Jewish woman who becomes queen and risks her life to save her people.",
+  "## A new queen",
+  "King Ahasuerus holds a great feast. When Queen Vashti refuses his command to appear before his guests, he removes her as queen. A search is made for a new queen, and Esther, an orphan raised by her cousin Mordecai, is chosen. On Mordecai's advice, she does not reveal that she is Jewish.",
+  "Mordecai later overhears a plot by two of the king's officials to kill the king. He tells Esther, she tells the king, and the plotters are punished. Mordecai's good deed is written down in the royal records.",
+  "## Haman's plot",
+  "The king promotes an official named Haman above all the other nobles. Everyone bows to Haman except Mordecai. Furious, Haman decides to destroy not only Mordecai but all the Jews in the empire. He casts lots, called pur, to choose the day, and persuades the king to sign a decree.",
+  "## For such a time as this",
+  "Mordecai urges Esther to go to the king. Anyone who approached the king without being summoned could be put to death. Mordecai tells her, \"Who knoweth whether thou art come to the kingdom for such a time as this?\" (Esther 4:14). Esther asks the Jews of Susa to fast for her for three days, and says, \"If I perish, I perish.\"",
+  "The king welcomes Esther. She invites the king and Haman to two banquets. Between them, the king cannot sleep, has the royal records read to him, and learns that Mordecai was never rewarded for saving his life. The next day Haman is ordered to honor Mordecai publicly. At the second banquet, Esther reveals that she is Jewish and that Haman has plotted to destroy her people. Haman is executed, and Mordecai is given his position.",
+  "## A new decree and a feast",
+  "Persian law said a royal decree could not be canceled, so the king issues a second decree allowing the Jews to defend themselves. On the day chosen for their destruction, they are delivered. Mordecai and Esther establish the feast of Purim, named after the lots Haman cast, to remember it every year (Esther 9:26–28). Jewish communities still celebrate Purim today, reading the book of Esther aloud.",
+  "## A notable feature",
+  "Esther is one of the books of the Bible that never mentions the name of God. Yet readers have long seen God's care for his people in the way the events unfold, from Esther's rise to the king's sleepless night."
+ ],
+ "sources": [
+  "Joyce G. Baldwin, Esther (Tyndale OT Commentaries, IVP, 1984)",
+  "Karen H. Jobes, Esther (NIV Application Commentary, Zondervan, 1999)",
+  "Encyclopaedia Britannica: Purim"
+ ],
+ "quiz": [
+  {
+   "q": "In which city does the story of Esther take place?",
+   "options": [
+    "Jerusalem",
+    "Susa",
+    "Nineveh",
+    "Babylon"
+   ],
+   "answer": 1,
+   "explain": "The book is set in Susa, a royal city of the Persian Empire."
+  },
+  {
+   "q": "Who raised Esther?",
+   "options": [
+    "A priest in Jerusalem",
+    "Her cousin Mordecai",
+    "Haman",
+    "Queen Vashti"
+   ],
+   "answer": 1,
+   "explain": "Esther was an orphan raised by her cousin Mordecai."
+  },
+  {
+   "q": "What does the word pur mean?",
+   "options": [
+    "Decree",
+    "Feast",
+    "Queen",
+    "Lot"
+   ],
+   "answer": 3,
+   "explain": "Haman cast pur, or lots, to choose the day. Purim is named after them."
+  },
+  {
+   "q": "What did the king learn on his sleepless night?",
+   "options": [
+    "That Esther was Jewish",
+    "That Mordecai had saved his life and was never rewarded",
+    "That Haman was a thief",
+    "That Vashti wanted to return"
+   ],
+   "answer": 1,
+   "explain": "The royal records reminded him that Mordecai had exposed a plot against him."
+  },
+  {
+   "q": "What is unusual about the book of Esther?",
+   "options": [
+    "It has only one chapter",
+    "It is written in Greek",
+    "It takes place in Egypt",
+    "It never mentions the name of God"
+   ],
+   "answer": 3,
+   "explain": "God is never named in Esther, though his care can be seen in how events unfold."
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-14",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Lachish Reliefs",
+ "dek": "An Assyrian king decorated his palace with the siege of a city of Judah, the same siege mentioned in 2 Kings 18.",
+ "scripture": "2 Kings 18:13–17; 2 Chronicles 32:9; Isaiah 36:1–2",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "Carved stone wall panels showing the siege of Lachish"
+  ],
+  [
+   "Dated",
+   "About 700 BC"
+  ],
+  [
+   "Found",
+   "Sennacherib's palace at Nineveh, Iraq, excavated by Austen Henry Layard in the 1840s"
+  ],
+  [
+   "Now at",
+   "The British Museum, London"
+  ]
+ ],
+ "body": [
+  "In 701 BC, the Assyrian king Sennacherib invaded Judah. The Bible says he \"came up against all the fenced cities of Judah, and took them\" (2 Kings 18:13). One of the most important of those cities was Lachish, about 25 miles southwest of Jerusalem. While Sennacherib was camped there, King Hezekiah sent him a message and a large payment (2 Kings 18:14).",
+  "## A palace wall of war",
+  "When Sennacherib returned home, he built a grand palace at Nineveh, his capital, in what is now northern Iraq. One room was lined with carved stone panels showing the siege and capture of Lachish. The panels ran around the walls of the room, telling the story from the attack to the surrender.",
+  "In the 1840s, the British explorer Austen Henry Layard excavated the palace and uncovered the reliefs. A carved caption names the city. It says that Sennacherib sat on his throne and reviewed the spoil taken from Lachish. The panels were shipped to London, and they are on display in the British Museum today.",
+  "## What the panels show",
+  "The reliefs are full of detail. Assyrian soldiers push battering rams up ramps toward the city walls. Archers and slingers attack while defenders on the towers fire back and throw torches down. Captives leave the city carrying their belongings, with families and carts heading into exile. Sennacherib himself sits on a throne outside the city while officials bring prisoners and spoil before him.",
+  "## The city itself",
+  "Lachish has also been excavated. Archaeologists working at Tel Lachish in Israel uncovered a large siege ramp built by the Assyrians against the city wall, along with arrowheads, sling stones and armor scales from the battle. The ramp is the oldest siege ramp known from the ancient world.",
+  "## Why it matters",
+  "The Bible, Sennacherib's own records, the carved reliefs in his palace, and the remains at Lachish all point to the same event. Visitors to the British Museum can stand in front of the panels and see, in an Assyrian artist's work, a moment from the time of Hezekiah and the prophet Isaiah.",
+  "The Bible also tells what happened next. Sennacherib sent officials from Lachish to Jerusalem to demand Hezekiah's surrender (Isaiah 36:2), but Jerusalem was not taken. Sennacherib's own records boast of shutting Hezekiah up in Jerusalem \"like a bird in a cage,\" but they do not claim to have captured the city."
+ ],
+ "sources": [
+  "British Museum: The Lachish Reliefs (Room 10b)",
+  "David Ussishkin, The Conquest of Lachish by Sennacherib (Tel Aviv University, 1982)",
+  "Austen Henry Layard, Discoveries in the Ruins of Nineveh and Babylon (London, 1853)"
+ ],
+ "quiz": [
+  {
+   "q": "Which Assyrian king besieged Lachish?",
+   "options": [
+    "Cyrus",
+    "Nebuchadnezzar",
+    "Sennacherib",
+    "Shalmaneser III"
+   ],
+   "answer": 2,
+   "explain": "Sennacherib invaded Judah in 701 BC and captured Lachish."
+  },
+  {
+   "q": "Where were the reliefs displayed in ancient times?",
+   "options": [
+    "In Hezekiah's palace",
+    "In the temple at Jerusalem",
+    "On the walls of Sennacherib's palace at Nineveh",
+    "On the walls of Lachish"
+   ],
+   "answer": 2,
+   "explain": "Sennacherib lined a room of his palace at Nineveh with carved panels of the siege."
+  },
+  {
+   "q": "Who excavated the reliefs in the 1840s?",
+   "options": [
+    "Charles Warren",
+    "Howard Carter",
+    "Gabriel Barkay",
+    "Austen Henry Layard"
+   ],
+   "answer": 3,
+   "explain": "Austen Henry Layard uncovered the palace and its reliefs."
+  },
+  {
+   "q": "What did archaeologists find at Tel Lachish?",
+   "options": [
+    "The Ark of the Covenant",
+    "An Assyrian siege ramp",
+    "A temple to Baal",
+    "A royal tomb"
+   ],
+   "answer": 1,
+   "explain": "The Assyrian siege ramp at Lachish is the oldest known from the ancient world."
+  },
+  {
+   "q": "According to 2 Kings 18:14, where was Sennacherib when Hezekiah sent him a message?",
+   "options": [
+    "Lachish",
+    "Babylon",
+    "Nineveh",
+    "Damascus"
+   ],
+   "answer": 0,
+   "explain": "Hezekiah sent word to the king of Assyria at Lachish."
+  }
+ ]
+}

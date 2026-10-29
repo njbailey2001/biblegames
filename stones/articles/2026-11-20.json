@@ -1,0 +1,102 @@
+{
+ "date": "2026-11-20",
+ "kind": "Archaeology",
+ "readMinutes": 4,
+ "title": "The Erastus Inscription",
+ "dek": "A pavement in ancient Corinth carries the name of a city official named Erastus, a name Paul mentions in Romans.",
+ "scripture": "Romans 16:23; Acts 19:22; 2 Timothy 4:20",
+ "labelTitle": "Object file",
+ "label": [
+  [
+   "What",
+   "A Latin inscription set into a stone pavement"
+  ],
+  [
+   "Dated",
+   "First century AD"
+  ],
+  [
+   "Found",
+   "Near the theater at Corinth, Greece, 1929"
+  ],
+  [
+   "Still at",
+   "Ancient Corinth, where visitors can see it in place"
+  ]
+ ],
+ "body": [
+  "Corinth was one of the great cities of Roman Greece. It sat on the narrow strip of land between mainland Greece and the Peloponnese, with a harbor on each side, and it grew rich from trade. In the first century, it was the capital of the Roman province of Achaia. The apostle Paul lived there for a year and a half (Acts 18:11), and two of his letters in the New Testament are addressed to the church at Corinth.",
+  "## A name in the pavement",
+  "In 1929, archaeologists from the American School of Classical Studies at Athens were excavating near Corinth's theater. They uncovered a paved plaza made of limestone blocks. One of the blocks carries a Latin inscription. Its letters were once filled with bronze, which has since been removed, leaving the carved shapes behind.",
+  "The inscription reads, in Latin, ERASTVS PRO AEDILITATE S P STRAVIT. In English, it says, \"Erastus, in return for his aedileship, laid this pavement at his own expense.\"",
+  "An aedile was an elected city official in a Roman colony. Aediles looked after public buildings, streets, markets and public games. It was common for officials to thank the city for their office by paying for a public project, and to have their name recorded on it.",
+  "## Erastus in the New Testament",
+  "Paul wrote his letter to the Romans while he was in Corinth. Near the end, he passes on greetings from several believers there, including \"Erastus the chamberlain of the city\" (Romans 16:23). Many modern translations render the title as \"the city treasurer\" or \"the city's director of public works.\"",
+  "The name Erastus also appears twice more in the New Testament. Acts 19:22 mentions an Erastus who helped Paul and was sent ahead with Timothy into Macedonia. In 2 Timothy 4:20, Paul writes, \"Erastus abode at Corinth.\"",
+  "## What the inscription shows",
+  "The inscription shows that a man named Erastus held public office in Corinth in the first century and was wealthy enough to pay for a public pavement. That fits the picture in Romans 16, where Paul names Erastus as a city official in the church at Corinth.",
+  "It also reminds readers that the early church included people from many walks of life. Paul's letters mention slaves and free people, poor and wealthy, and here, a man who served in the government of one of the empire's great cities."
+ ],
+ "sources": [
+  "John Harvey Kent, Corinth VIII.3: The Inscriptions 1926–1950 (American School of Classical Studies at Athens, 1966)",
+  "Jerome Murphy-O'Connor, St. Paul's Corinth: Texts and Archaeology (Liturgical Press, 3rd ed., 2002)",
+  "American School of Classical Studies at Athens: Corinth Excavations"
+ ],
+ "quiz": [
+  {
+   "q": "In what language is the Erastus inscription written?",
+   "options": [
+    "Latin",
+    "Greek",
+    "Aramaic",
+    "Hebrew"
+   ],
+   "answer": 0,
+   "explain": "Corinth was a Roman colony, and the inscription is in Latin."
+  },
+  {
+   "q": "What did Erastus pay for, according to the inscription?",
+   "options": [
+    "A statue",
+    "A pavement",
+    "A city gate",
+    "A temple"
+   ],
+   "answer": 1,
+   "explain": "He laid the pavement at his own expense in return for his office."
+  },
+  {
+   "q": "What was an aedile?",
+   "options": [
+    "A sailor",
+    "An elected city official",
+    "A priest",
+    "A soldier"
+   ],
+   "answer": 1,
+   "explain": "Aediles looked after public buildings, streets, markets and games."
+  },
+  {
+   "q": "In which letter does Paul send greetings from Erastus the city official?",
+   "options": [
+    "Philippians",
+    "1 Peter",
+    "Romans",
+    "Galatians"
+   ],
+   "answer": 2,
+   "explain": "Romans 16:23 mentions \"Erastus the chamberlain of the city.\""
+  },
+  {
+   "q": "How long did Paul stay in Corinth according to Acts 18:11?",
+   "options": [
+    "A year and a half",
+    "Ten years",
+    "Three months",
+    "Three days"
+   ],
+   "answer": 0,
+   "explain": "Paul stayed in Corinth a year and six months."
+  }
+ ]
+}
